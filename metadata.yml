@@ -1,0 +1,57 @@
+# Metadata
+title: The document title
+subtitle: with RxJS
+keywords:
+  - reactive programming
+  - debugging
+  - empirical software engineering
+  - human interaction design
+
+# Abstract
+abstract: |
+  This is a very nice paper.
+
+# Common Configuration
+link-citations: true
+lang: en-US
+csl: templates/transactions-on-programming-languages-and-systems
+reference-section-title: References
+bibliography: bibliography.bib
+
+# Latex config
+documentclass: templates/acmart
+
+# acmart Configuration
+classoption:
+  - nonacm # Hide ACM publication specifics
+  - review # Show Review Marks
+  # - authordraft # Watermark
+
+author:
+  - name: Manuel Alabor
+    email: manuel.alabor@ost.ch
+    affiliation:
+      institution: Eastern Switzerland University of Applied Sciences
+      city: Rapperswil
+      country: Switzerland
+  # - name: Markus Stolze
+  #   email: markus.stolze@ost.ch
+  #   affiliation:
+  #     institution: Eastern Switzerland University of Applied Sciences
+  #     city: Rapperswil
+  #     country: Switzerland
+
+# copyright: acmlicensed
+# acmPrice: "15.00"
+# acmDOI: 10.1145/3427763.3428313
+# acmYear: "2020"
+# copyrightyear: "2020"
+# acmSubmissionID: splashws20reblsmain-p3-p
+# acmISBN: 978-1-4503-8188-8/20/11
+# acmConference:
+#   short: REBLS '20
+#   publication: Proceedings of the 7th ACM SIGPLAN International Workshop on Reactive and Event-Based Languages and Systems
+#   date: November 16, 2020
+#   location: Virtual, USA
+# acmBooktitle: Proceedings of the 7th ACM SIGPLAN International Workshop on Reactive and Event-Based Languages and Systems (REBLS '20), November 16, 2020, Virtual, USA
+
