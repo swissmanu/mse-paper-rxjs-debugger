@@ -9,17 +9,17 @@ keywords:
 
 # Abstract
 abstract: |
-  This is a very nice paper.
+  tbd.
 
 # Common Configuration
-link-citations: true
 lang: en-US
+link-citations: true
 csl: templates/transactions-on-programming-languages-and-systems
 reference-section-title: References
 bibliography: bibliography.bib
 
 # Latex config
-documentclass: templates/acmart
+documentclass: acmart
 
 # acmart Configuration
 classoption:

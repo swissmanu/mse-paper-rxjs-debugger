@@ -37,7 +37,7 @@
 %%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{acmart}
-[2021/02/21 v1.76 Typesetting articles for the Association for Computing Machinery]
+[2021/05/01 v1.78 Typesetting articles for the Association for Computing Machinery]
 \def\@classname{acmart}
 \InputIfFileExists{acmart-preload-hook.tex}{%
   \ClassWarning{\@classname}{%
@@ -1484,8 +1484,11 @@
   \fi}{\ClassError{\@classname}{The option printacmref can be either true or false}}
 \AtEndDocument{\if@ACM@nonacm\else\if@ACM@printacmref\else
   \ifnum\getrefnumber{TotPages}>1\relax
-  \ClassWarningNoLine{\@classname}{ACM reference format is mandatory
-    for papers over one page}%
+  \ClassWarningNoLine{\@classname}{%
+    ACM reference format is mandatory \MessageBreak
+    for papers over one page. \MessageBreak
+    Please add printacmref=true to the \MessageBreak
+    \string\settopmatter\space command.}%
   \fi\fi\fi}
 \define@boolkey+{@ACM@topmatter@}[@ACM@]{printfolios}[true]{%
   \if@ACM@printfolios
@@ -1934,6 +1937,8 @@
   \@afterheading
 }
 \def\@specialsection#1{%
+  \let\@vspace\@vspace@orig
+  \let\@vspacer\@vspacer@orig
   \ifcase\ACM@format@nr
   \relax % manuscript
     \par\medskip\small\noindent#1: %
@@ -1954,12 +1959,26 @@
   \or % sigchi-a
     \section*{#1}%
     \fi
+  \let\@vspace\@vspace@acm
+  \let\@vspacer\@vspacer@acm
 }
 \def\@printtopmatter{%
   \ifx\@startPage\@empty
      \gdef\@startPage{1}%
   \else
      \setcounter{page}{\@startPage}%
+  \fi
+  \@tempdima=\ht\mktitle@bx
+  \advance\@tempdima by \dp\mktitle@bx
+  \ifdim\@tempdima>0.9\textheight
+    \loop
+      \setbox\@tempboxa=\vsplit \mktitle@bx to 0.9\textheight
+      \thispagestyle{firstpagestyle}%
+      \noindent\unvbox\@tempboxa
+      \clearpage
+      \@tempdima=\ht\mktitle@bx
+      \advance\@tempdima by \dp\mktitle@bx
+    \ifdim\@tempdima>0.9\textheight\repeat
   \fi
   \thispagestyle{firstpagestyle}%
   \noindent
@@ -2263,7 +2282,7 @@
       \fi
     \fi
      \global\let\and\@typeset@author@line}%
-  \global\setbox\mktitle@bx=\vbox{\noindent\box\mktitle@bx\par\medskip
+  \global\setbox\mktitle@bx=\vbox{\noindent\unvbox\mktitle@bx\par\medskip
     \noindent\addresses\@typeset@author@line
    \par\medskip}%
 }
@@ -2329,7 +2348,7 @@
 }%
   \hsize=\textwidth
   \global\setbox\mktitle@bx=\vbox{\noindent
-    \box\mktitle@bx\par\medskip\leavevmode
+    \unvbox\mktitle@bx\par\medskip\leavevmode
     \lineskip=1pc\relax\centering\hspace*{-1em}%
     \addresses\let\and\@typeset@author@bx\and\par\bigskip}}
 \def\@mkauthors@iv{%
@@ -2384,12 +2403,13 @@
   \def\streetaddress##1{\unskip, ##1}%
   \def\postcode##1{\unskip, ##1}%
   \def\position##1{\unskip\ignorespaces}%
-  \def\institution##1{\unskip, ##1}%
+  \gdef\@ACM@institution@separator{, }%
+  \def\institution##1{\unskip\@ACM@institution@separator ##1\gdef\@ACM@institution@separator{ and }}%
   \def\city##1{\unskip, ##1}%
   \def\state##1{\unskip, ##1}%
   \renewcommand\department[2][0]{\unskip\@addpunct, ##2}%
   \def\country##1{\unskip, ##1}%
-  \def\and{\unskip; }%
+  \def\and{\unskip; \gdef\@ACM@institution@separator{, }}%
   \def\@author##1{##1}%
   \def\email##1##2{\unskip, \nolinkurl{##2}}%
   \addresses
@@ -2406,7 +2426,7 @@
   \ifx\@teaserfigures\@empty\else
     \def\@teaser##1{\par\bigskip\bgroup
       \captionsetup{type=figure}##1\egroup\par}
-    \global\setbox\mktitle@bx=\vbox{\noindent\box\mktitle@bx\par
+    \global\setbox\mktitle@bx=\vbox{\noindent\unvbox\mktitle@bx\par
       \noindent\@Description@presentfalse
       \@teaserfigures\par\if@Description@present\else
          \global\@undescribed@imagestrue
