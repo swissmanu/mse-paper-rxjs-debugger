@@ -1,20 +1,17 @@
 sections = $(wildcard sections/*/*.md)
 filename = paper
 
-.PHONY: default clean clean_diagrams clean_build build build_pdf force
+.PHONY: default clean build build_docker
 
+default: clean build
 
-default: clean_build build
-
-
-clean_build:
+clean:
 	@echo "Remove and Recreate out/"
 	@rm -rf ./out
 	@mkdir ./out
 
 
 build: build_pdf
-
 
 build_pdf:
 	@echo "Build out/${filename}.pdf"
