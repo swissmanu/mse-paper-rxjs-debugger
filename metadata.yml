@@ -1,6 +1,6 @@
 # Metadata
-title: The document title
-subtitle: with RxJS
+title: Live Debugging for RxJS Applications
+subtitle: Never, ever use console.log again.
 keywords:
   - reactive programming
   - debugging
@@ -34,22 +34,22 @@ author:
       institution: Eastern Switzerland University of Applied Sciences
       city: Rapperswil
       country: Switzerland
-  # - name: Markus Stolze
-  #   email: markus.stolze@ost.ch
-  #   affiliation:
-  #     institution: Eastern Switzerland University of Applied Sciences
-  #     city: Rapperswil
-  #     country: Switzerland
+  - name: Markus Stolze
+    email: markus.stolze@ost.ch
+    affiliation:
+      institution: Eastern Switzerland University of Applied Sciences
+      city: Rapperswil
+      country: Switzerland
 
 # copyright: acmlicensed
 # acmPrice: "15.00"
 # acmDOI: 10.1145/3427763.3428313
-# acmYear: "2020"
-# copyrightyear: "2020"
+# acmYear: "2021"
+# copyrightyear: "2021"
 # acmSubmissionID: splashws20reblsmain-p3-p
 # acmISBN: 978-1-4503-8188-8/20/11
 # acmConference:
-#   short: REBLS '20
+#   short: LIVE '21
 #   publication: Proceedings of the 7th ACM SIGPLAN International Workshop on Reactive and Event-Based Languages and Systems
 #   date: November 16, 2020
 #   location: Virtual, USA

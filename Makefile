@@ -1,4 +1,5 @@
-sections = $(wildcard sections/*/*.md)
+# sections = $(wildcard content/*/*.md)
+sections = content/content.md
 filename = paper
 
 .PHONY: default clean build build_pdf
