@@ -4,12 +4,12 @@ The basic mental model of a computer program describes a black box producing out
 
 Before the raise of specific debugger utilities, software engineers had a limited set of tools available to reconstruct and analyze a programs execution behavior. Beside memory dumps and alike, print statements are known to engineers up until today: Manually added, the provide concise insight on (i) the runtime control flow of a program ("Transparency of Semantics" [@Tanimoto_2015]) as well as the (ii) internal program state ("Transparency of Data" [@Tanimoto_2015]) during its execution. This invasive method is time consuming [@CITE!] and requires clean up afterwards [@Alabor_Stolze_2020]. Modern debuggers for imperative programming environments make print statements obsolete: Step controls and stack frame inspection/manipulation allow software engineers to interact with program source code at runtime without actually modifying it; at least not for the sole reason of debug instrumentation.
 
-Various previous work [@Salvaneschi_Mezini_2016] [@Banken_Meijer_Gousios_2018] [@CITE LIVE TUNING SALVANESCHI] showed that the paradigm of reactive programming (RP) bears its own challenges at debugging time: Imperative debugger tools are not aware of RP runtime semantics at program execution, thus their step controls cannot operate on the declarative data-flow graph nor can stack frame inspection replicate the correct context on interruption on a breakpoint [@Alabor_Stolze_2020]. As for others, this holds true for RxJS[^https://rxjs.dev], an RP runtime for JavaScript (e.g. used in Angular[@Angular_RxJS]) as well. We could show in an earlier study that software engineers using RxJS fall back to the practice of manual print statements, once in need of a debugger tool [@Alabor_Stolze_2020].
+Various previous work [@Salvaneschi_Mezini_2016] [@Banken_Meijer_Gousios_2018] [@CITE LIVE TUNING SALVANESCHI] showed that the paradigm of reactive programming (RP) bears its own challenges at debugging time: Imperative debugger tools are not aware of RP runtime semantics at program execution, thus their step controls cannot operate on the declarative data-flow graph nor can stack frame inspection replicate the correct context on interruption on a breakpoint [@Alabor_Stolze_2020]. As for others, this holds true for RxJS[^https://rxjs.dev], an RP runtime for JavaScript (e.g. used in Angular [@Angular_RxJS]) as well. We could show in an earlier study that software engineers using RxJS fall back to the practice of manual print statements, once in need of a debugger tool [@Alabor_Stolze_2020].
 
 In this paper, we present a reactive debugging solution for RxJS, integrated with Microsoft Visual Studio Code[^https://code.visualstudio.com]. We will uncover the influences of live programming and other predecessor work in Section {@sec:related_work} and show how a usability test study led to the first release of the debugging extension in Section {@sec:study} and {@sec:implementation}. Before we come to our conclusion in Section {@sec:conclusion}, we summarize possible future work in Section {@sec:future_work}.
 
 
-# Related Work{#sec:related_work}
+# Related Work {#sec:related_work}
 
 - Types of debuggers (imperative, reactive [@Salvaneschi_Mezini_2016], omniscient [@Pothier_Tanter_2009] [@OCallahan_Jones_Froyd_Huey_Noll_Partush_2017])
 - Affordances in live programming environments [@Tanimoto_2013]
@@ -21,7 +21,7 @@ In this paper, we present a reactive debugging solution for RxJS, integrated wit
 - *Optional: RxFiddle [@Banken_Meijer_Gousios_2018]*
 - *Optional: rxjs-playground https://github.com/hediet/rxjs-playground*
 
-# Research{#sec:research}
+# Research {#sec:research}
 
 - Previous Work [@Alabor_Stolze_2020]
   - Interviews
@@ -31,14 +31,14 @@ In this paper, we present a reactive debugging solution for RxJS, integrated wit
 	- UX Testing of Prototype [@Alabor_2020]
 	- The Result: An extension for Visual Studio Code, as described in the next section:
 
-# Implementation{#sec:implementation}
+# Implementation {#sec:implementation}
 
 - Demonstrate/describe Extension
   - Log Points -> Relate with probes/traces [@McDirmid_2013]
 - Categorize Extension in terms of "Levels of Live" [@Tanimoto_2013]
 - *Idea: Can we demonstrate somehow an example with hot code reloading, so we have a better "live" experience?*
 
-# Future Work{#sec:future_work}
+# Future Work {#sec:future_work}
 
 - Features:
 	- Support for Browser-based Applications (Selling point: Angular)
@@ -49,7 +49,7 @@ In this paper, we present a reactive debugging solution for RxJS, integrated wit
 	- Verify effectiveness of extension for professionals (re-execute previous observational study)
   - More Usability Testing
 
-# Conclusion{#sec:conclusion}
+# Conclusion {#sec:conclusion}
 
 - Wrap things up
 
