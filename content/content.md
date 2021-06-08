@@ -6,15 +6,15 @@ Software engineers had a limited set of tools available to reconstruct and analy
 
 Various previous work [@Salvaneschi_Mezini_2016] [@Banken_Meijer_Gousios_2018] [@CITE LIVE TUNING SALVANESCHI] showed that the paradigm of reactive programming (RP) bears its own challenges at debugging time: Imperative debugger tools are not aware of RP runtime semantics, thus their step controls cannot operate on the declarative data-flow graph nor can stack frame inspection replicate the correct context on interruption on a breakpoint [@Alabor_Stolze_2020]. As for others, this holds true for RxJS^[https://rxjs.dev], an RP runtime for JavaScript (e.g. used in Angular [@Angular_RxJS]) as well. We could show in an earlier study that software engineers using RxJS mostly fall back to the practice of adding manual print statements, once in need of a debugger tool [@Alabor_Stolze_2020].
 
-```{caption="A basic data flow of five integers implemented with RxJS. Line 6 and 8 examplify print statements for debugging reasons." .Typescript}
+```{caption="A basic data flow of five integers implemented with RxJS and TypeScript. Line 6 and 8 examplify print statements for debugging reasons." .Typescript}
 import { of } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 
 of(0, 1, 2, 3, 4).pipe( // Flow of integers 0..4
-	filter(i => i < 4),   // Omit 4
-	tap(console.log),     // Print statement
-	map(i => i * 2),      // Multiply with 2
-	tap(console.log)      // Print statement
+  filter(i => i < 4),   // Omit 4
+  tap(console.log),     // Print statement
+  map(i => i * 2),      // Multiply with 2
+  tap(console.log)      // Print statement
 ).subscribe()
 ```
 
