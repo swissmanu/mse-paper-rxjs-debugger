@@ -18,12 +18,22 @@ of(0, 1, 2, 3, 4).pipe( // Flow of integers 0..4
 ).subscribe()
 ```
 
-In this paper, we present a reactive debugging solution for RxJS, integrated with Microsoft Visual Studio Code^[https://code.visualstudio.com]. We will explore the influences of live programming and other predecessor work in Section [2](#sec:related_work) and show how a usability test study led to the first release of the debugging extension in Section [3](#sec:study) and [4](#sec:implementation). Before we come to our conclusion in Section [6](#sec:conclusion), we summarize possible future work in Section [5](#sec:future_work).
+In this paper, we present a reactive debugging solution for RxJS, integrated with Microsoft Visual Studio Code^[https://code.visualstudio.com]. We will explore the influences of live programming (LP) and other predecessor work in Section [2](#sec:related_work) and show how a usability test study led to the first release of the debugging extension in Section [3](#sec:study) and [4](#sec:implementation). Before we come to our conclusion in Section [6](#sec:conclusion), we summarize possible future work in Section [5](#sec:future_work).
 
 
 # Related Work {#sec:related_work}
 
-Live programming and debugging share the same fundamental intention: Provide insight 
+## Debugging and Live Programming
+
+Tanimoto describes LP in his "Fundamental Notion of Liveness"[@Tanimoto_2013] as a descendant of debugging: Engineers go through the "edit, compile, link and run" cycle over and over again to analyze how their changes might influence the program they debug. This time-consuming loop is hidden-away in a LP environment: Once the software engineer updates the programs source code, the changes are propagated, optimally, immediately, and the program is reexecuted.
+
+Contemporary IDEs provide sophisticated debuggers for imperative-style programming languages. All of them boil down to consist of the following two essential components[@CITE TRADITIONAL DEBUGGER] though: (i) Execution controls can pause a program at any given point and allow to step through code statements manually. While doing so, a (ii) value inspector tracks the values assigned to variables of currently active stack frames. Tanimoto calls this semantic and data transparency in his paper [@Tanimoto_2013]: The control flow as well as the data processed by a program is "transparent" to the engineer.
+
+A LP environment continuously (re-)executes a program. Hence, interrupting this execution flow would be counter intuitive [@CITE??]. Instead, LP environments can make use of probes and traces, as suggested  by McDirmid [@McDirmid_2013]. Figure [1](#fig:swift-playground) shows a minimalistic Swift program running in Apples Swift Playgrounds^[https://developer.apple.com/swift-playgrounds/] LP environment.
+
+![Apple Swift Playgrounds showing probes for variable assignments in the right-side pane of the editor window.](./swift-playground.png){#fig:swift-playgrounds}
+
+## Reactive Debugging
 
 
 
