@@ -4,9 +4,10 @@ The basic mental model of a computer program describes a black box producing out
 
 Software engineers had a limited set of tools available to reconstruct and analyze a programs execution behavior before the raise of specilized debugger utilities. Beside memory dumps and alike, print statements are known to engineers up until today: Manually added, the provide concise insight on (i) the runtime control flow of a program ("Transparency of Semantics" [@Tanimoto_2015]) as well as the (ii) internal program state ("Transparency of Data" [@Tanimoto_2015]) when executed. This invasive method is time consuming [@CITE!] and requires clean up afterwards [@Alabor_Stolze_2020]. Modern debuggers for imperative programming environments make print statements obsolete: Step controls and stack frame inspection/manipulation allow software engineers to interact with program source code at runtime without actually modifying it; at least not for the sole reason of debug instrumentation.
 
-Various previous work [@Salvaneschi_Mezini_2016] [@Banken_Meijer_Gousios_2018] [@CITE LIVE TUNING SALVANESCHI] showed that the paradigm of reactive programming (RP) bears its own challenges at debugging time: Imperative debugger tools are not aware of RP runtime semantics, thus their step controls cannot operate on the declarative data-flow graph nor can stack frame inspection replicate the correct context on interruption on a breakpoint [@Alabor_Stolze_2020]. As for others, this holds true for RxJS^[https://rxjs.dev], an RP runtime for JavaScript (e.g. used in Angular [@Angular_RxJS]) as well. We could show in an earlier study that software engineers using RxJS mostly fall back to the practice of adding manual print statements, once in need of a debugger tool [@Alabor_Stolze_2020].
+Various previous work [@Salvaneschi_Mezini_2016] [@Banken_Meijer_Gousios_2018] [@CITE LIVE TUNING SALVANESCHI] [@Alabor_Stolze_2020] showed that the paradigm of reactive programming (RP) bears its own challenges at debugging time: Imperative debugger tools are not aware of RP runtime semantics, thus their step controls cannot operate on the declarative data-flow graph nor can stack frame inspection replicate the correct context on interruption on a breakpoint [@Alabor_Stolze_2020]. As for others, this holds true for RxJS^[https://rxjs.dev], an RP runtime for JavaScript and TypeScript^[https://www.typescriptlang.org] (e.g. used in Angular [@Angular_RxJS]) as well. We could show in an earlier study that software engineers using RxJS mostly fall back to the practice of adding manual print statements, once in need of a debugger tool [@Alabor_Stolze_2020].
 
-```{caption="A basic data flow of five integers implemented with RxJS and TypeScript. Line 6 and 8 examplify print statements for debugging reasons." .Typescript}
+{#lst:rxjs-example}
+```{caption="A basic data-flow of five integers, implemented with RxJS in TypeScript. Line 6 and 8 exemplify manually added  print statements for debugging reasons." .Typescript}
 import { of } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
@@ -35,15 +36,10 @@ A LP environment continuously (re-)executes a program. Hence, interrupting this 
 
 ## Reactive Debugging
 
+Salvaneschi et al. coined the term "Reactive Debugging" in their paper about their debugging solution for REScala^[https://www.rescala-lang.com] [@Salvaneschi_Mezini_2016]. Later research [@Banken_Meijer_Gousios_2018] [@Alabor_Stolze_2020] verified that traditional, imperative-focused debuggers are an insufficient tool to debug programs implemented using the RP paradigm: The execution controls cannot operate on the data-flow graph abstraction of RP and with that, cannot operate on this level of abstraction. E.g., when interrupting program execution upon reaching the `filter` predicate on Line 5 in Listing [1](#lst:rxjs-example), "stepping over" to the next statement will not continue execution on Line 6. Instead, the debugger leads the user to internal implementation details of RxJS' RP runtime environment. Following our argumentation up to this point, this circumstance might not be surprising. After all, a traditional debugger is meant to work on stack frames. Our previous study showed that software engineers try to debug RxJS applications using traditional debuggers nonetheless [@Alabor_Stolze_2020].
 
+## RxJS Debugging
 
-- Types of debuggers (imperative, reactive [@Salvaneschi_Mezini_2016], omniscient [@Pothier_Tanter_2009] [@OCallahan_Jones_Froyd_Huey_Noll_Partush_2017])
-- Affordances in live programming environments [@Tanimoto_2013]
-- Scala Worksheets, Swift Playground, Wallaby.js
-- RxJS
-	- Software engineers working in the field of web frontend applications RxJS^[https://rxjs.dev] is a prominent library to implement TypeScript/JavaScript-based applications using RP used by Angular [@Angular_RxJS] and others. 
-- Reactive Inspector [@Salvaneschi_Mezini_2016_Inspector] for REScala (Visualization! <3)
-	-  Salvaneschi et al. [@Salvaneschi_Mezini_2016_Inspector] showed with *Reactive Inspector* an implementation of a reactive debugger for REScala^[https://www.rescala-lang.com]. This tool solves the RP-specific these challenges for this particular RP runtime environment.
 - *Optional: RxFiddle [@Banken_Meijer_Gousios_2018]*
 - *Optional: rxjs-playground https://github.com/hediet/rxjs-playground*
 
@@ -53,7 +49,7 @@ A LP environment continuously (re-)executes a program. Hence, interrupting this 
   - Interviews
   - Observational Study
 - New work:
-	- Prototype
+	- Prototyp
 	- UX Testing of Prototype [@Alabor_2020]
 	- The Result: An extension for Visual Studio Code, as described in the next section:
 
