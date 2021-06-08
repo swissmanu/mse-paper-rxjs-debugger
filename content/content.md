@@ -13,9 +13,9 @@ import { filter, map, tap } from 'rxjs/operators';
 
 of(0, 1, 2, 3, 4).pipe( // Flow of integers 0..4
   filter(i => i < 4),   // Omit 4
-  tap(console.log),     // Print statement
+  tap(console.log),     // <-- Print statement
   map(i => i * 2),      // Multiply with 2
-  tap(console.log)      // Print statement
+  tap(console.log)      // <-- Print statement
 ).subscribe()
 ```
 
@@ -36,12 +36,13 @@ A LP environment continuously (re-)executes a program. Hence, interrupting this 
 
 ## Reactive Debugging
 
-Salvaneschi et al. coined the term "Reactive Debugging" in their paper about their debugging solution for REScala^[https://www.rescala-lang.com] [@Salvaneschi_Mezini_2016]. Later research [@Banken_Meijer_Gousios_2018] [@Alabor_Stolze_2020] verified that traditional, imperative-focused debuggers are an insufficient tool to debug programs implemented using the RP paradigm: The execution controls cannot operate on the data-flow graph abstraction of RP and with that, cannot operate on this level of abstraction. E.g., when interrupting program execution upon reaching the `filter` predicate on Line 5 in Listing [1](#lst:rxjs-example), "stepping over" to the next statement will not continue execution on Line 6. Instead, the debugger leads the user to internal implementation details of RxJS' RP runtime environment. Following our argumentation up to this point, this circumstance might not be surprising. After all, a traditional debugger is meant to work on stack frames. Our previous study showed that software engineers try to debug RxJS applications using traditional debuggers nonetheless [@Alabor_Stolze_2020].
+Salvaneschi et al. coined the term *Reactive Debugging* in their paper about their debugging solution *Reactive Inspector* for REScala^[https://www.rescala-lang.com] [@Salvaneschi_Mezini_2016]. Later research [@Banken_Meijer_Gousios_2018] [@Alabor_Stolze_2020] verified that traditional, imperative-focused debuggers are an insufficient tool to debug programs implemented using the RP paradigm: The execution controls cannot operate on the data-flow graph abstraction of RP and with that, cannot operate on this level of abstraction. E.g., when interrupting program execution upon reaching the filter predicate on Line 5 in Listing [1](#lst:rxjs-example), "stepping over" to the next statement will not continue execution on Line 6. Instead, the debugger leads the user to internal implementation details of RxJS' RP runtime environment. Following our argumentation up to this point, this circumstance might not be surprising. After all, a traditional debugger is meant to work on stack frames. Our previous study showed that software engineers try to debug RxJS applications using traditional debuggers nonetheless [@Alabor_Stolze_2020].
 
 ## RxJS Debugging
 
-- *Optional: RxFiddle [@Banken_Meijer_Gousios_2018]*
-- *Optional: rxjs-playground https://github.com/hediet/rxjs-playground*
+Software engineers debug RxJS-based applications using manual print statements or rarely with a few, less known utilities [@Alabor_Stolze_2020]. We categorize later utilities into following two groups: (i) Sandboxed environments visualize behavior of a specific piece of code (e.g. RxFiddle [@Banken_Meijer_Gousios_2018], rxjs-playground^[https://github.com/hediet/rxjs-playground], or RxViz^[https://rxviz.com/]) whereas (ii) specialized logging libraries, manually added to a programs source code, provide improved event logging the the console (rxjs-spy^[https://cartant.github.io/rxjs-spy/]).
+
+There are now fully integrated, reactive debugging solutions for RxJS available to our current knowledge.
 
 # Research {#sec:research}
 
