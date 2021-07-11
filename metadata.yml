@@ -1,5 +1,5 @@
 # Metadata
-title: Live Debugging for RxJS Applications
+title: About Making RxJS Debugging Efficient
 subtitle: Never, ever use console.log again.
 keywords:
   - reactive programming
@@ -27,20 +27,19 @@ classoption:
   - review # Show Review Marks
   # - authordraft # Watermark
 
-author:
-  - name: Manuel Alabor
-    email: manuel.alabor@ost.ch
-    affiliation:
-      institution: Eastern Switzerland University of Applied Sciences
-      city: Rapperswil
-      country: Switzerland
-  - name: Markus Stolze
-    email: markus.stolze@ost.ch
-    affiliation:
-      institution: Eastern Switzerland University of Applied Sciences
-      city: Rapperswil
-      country: Switzerland
-
+# author:
+#   - name: Manuel Alabor
+#     email: manuel.alabor@ost.ch
+#     affiliation:
+#       institution: Eastern Switzerland University of Applied Sciences
+#       city: Rapperswil
+#       country: Switzerland
+#   - name: Markus Stolze
+#     email: markus.stolze@ost.ch
+#     affiliation:
+#       institution: Eastern Switzerland University of Applied Sciences
+#       city: Rapperswil
+#       country: Switzerland
 # copyright: acmlicensed
 # acmPrice: "15.00"
 # acmDOI: 10.1145/3427763.3428313

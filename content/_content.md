@@ -1,0 +1,77 @@
+# Introduction
+
+A computer program is the description of input/output data and a set of instructions how the program can generate one out of the other [@IEEE_Glossary]. The instructions of such a program are usually specified using a set of requirements. Software engineers build their mental model about the functionality of a program based on these requirements and the programs source code. Such a mental model proves to be inaccurate, once program output diverging from the requirement constraints is observed: A calculated value is negative instead of positive or a preemptive program exit caused by an unexpected error is often the beginning of a debugging session: A software engineer attempts to align their mental model of the program with its actual runtime behavior. The engineer repeatedly iterates three steps hereby: (i) Gather context to formulate and refine a hypothesis on the underlying problem, (ii) instrument the program in order to prove their hypothesis, and (iii) test the augmented program to see if the hypothesis is correct. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013]
+
+Software engineers had a limited set of tools available to reconstruct and analyze a programs execution behavior before the raise of specilized debugger utilities. Beside memory dumps and alike, print statements are known to engineers up until today: Manually added, the provide concise insight on (i) the runtime control flow of a program as well as the (ii) internal program state when executed. This invasive method is time consuming and requires clean up afterwards [@Alabor_Stolze_2020]. Modern debuggers for imperative programming environments make print statements obsolete: Step controls and stack frame inspection/manipulation allow software engineers to interact with program source code at runtime without actually modifying it; at least not for the sole reason of debug instrumentation.
+
+Various previous work [@Salvaneschi_Mezini_2016;@Banken_Meijer_Gousios_2018;@Mogk_Weisenburger_Haas_Richer_Salvaneschi_Mezini_2018;@Alabor_Stolze_2020] showed that the paradigm of reactive programming (RP) bears its own challenges at debugging time: Imperative debugger tools are not aware of RP runtime semantics, thus their step controls cannot operate on the declarative data-flow graph nor can stack frame inspection replicate the correct context on interruption on a breakpoint [@Alabor_Stolze_2020]. As for others, this holds true for RxJS^[https://rxjs.dev], an RP runtime for JavaScript and TypeScript^[https://www.typescriptlang.org] (e.g. used in Angular [@Angular_RxJS]) as well. We could show in an earlier study that software engineers using RxJS mostly fall back to the practice of adding manual print statements, once in need of a debugger tool [@Alabor_Stolze_2020].
+
+```{#lst:rxjs-example caption="A basic data-flow of five integers, implemented with RxJS in TypeScript. Line 6 and 8 exemplify manually added  print statements for debugging reasons." .Typescript}
+import { of } from 'rxjs';
+import { filter, map, tap } from 'rxjs/operators';
+
+of(0, 1, 2, 3, 4).pipe( // Flow of integers 0..4
+  filter(i => i < 4),   // Omit 4
+  tap(console.log),     // <-- Print statement
+  map(i => i * 2),      // Multiply with 2
+  tap(console.log)      // <-- Print statement
+).subscribe()
+```
+
+In this paper, we present a reactive debugging solution for RxJS, integrated with Microsoft Visual Studio Code^[https://code.visualstudio.com]. We will explore the influences of live programming (LP) and other predecessor work in Section [2](#sec:related_work) and show how a usability test study led to the first release of the debugging extension in Section [3](#sec:study) and [4](#sec:implementation). Before we come to our conclusion in Section [6](#sec:conclusion), we summarize possible future work in Section [5](#sec:future_work).
+
+
+# Related Work {#sec:related_work}
+
+## Debugging and Live Programming
+
+Tanimoto describes LP in his "Fundamental Notion of Liveness" [@Tanimoto_2013] as a descendant of debugging: Engineers go through the "edit, compile, link and run" cycle over and over again to analyze how their changes might influence the program they debug. This time-consuming loop is hidden-away in a LP environment: Once the software engineer updates the programs source code, the changes are propagated, optimally, immediately, and the program is reexecuted.
+
+Contemporary IDEs provide sophisticated debuggers for imperative-style programming languages. All of them boil down to consist of the following two essential components though: (i) Execution controls can pause a program at any given point and allow to step through code statements manually. While doing so, a (ii) value inspector tracks the values assigned to variables of currently active stack frames. Tanimoto calls this semantic and data transparency in his paper [@Tanimoto_2013]: The control flow as well as the data processed by a program is "transparent" to the engineer.
+
+A LP environment continuously (re-)executes a program. Instead of interrupting this flow, LP environments make use of probes and traces, as suggested by McDirmid [@McDirmid_2013]. Figure [1](#fig:swift-playground) shows a minimalistic Swift program running in Apples Swift Playgrounds^[https://developer.apple.com/swift-playgrounds/] LP environment.
+
+![Apple Swift Playgrounds showing probes for variable assignments in the right-side pane of the editor window.](./content/swift-playground.png)
+
+## Reactive Debugging
+
+Salvaneschi et al. coined the term *Reactive Debugging* in their paper about their debugging solution *Reactive Inspector* for REScala [@Salvaneschi_Mezini_2016]. Later research [@Banken_Meijer_Gousios_2018;@Alabor_Stolze_2020] verified that traditional, imperative-focused debuggers are an insufficient tool to debug programs implemented using the RP paradigm: The execution controls cannot operate on the data-flow graph abstraction of RP and with that, cannot operate on this level of abstraction. E.g., when interrupting program execution upon reaching the filter predicate on Line 5 in Listing [1](#lst:rxjs-example), "stepping over" to the next statement will not continue execution on Line 6. Instead, the debugger leads the user to internal implementation details of RxJS' RP runtime environment. Following our argumentation up to this point, this circumstance might not be surprising. After all, a traditional debugger is meant to work on stack frames. Our previous study showed that software engineers try to debug RxJS applications using traditional debuggers nonetheless [@Alabor_Stolze_2020].
+
+## RxJS Debugging
+
+Software engineers debug RxJS-based applications using manual print statements or rarely with a few, less known utilities [@Alabor_Stolze_2020]. We categorize later utilities into following two groups: (i) Sandboxed environments visualize behavior of a specific piece of code (e.g. RxFiddle [@Banken_Meijer_Gousios_2018], rxjs-playground^[https://github.com/hediet/rxjs-playground], or RxViz^[https://rxviz.com/]) whereas (ii) specialized logging libraries, manually added to a programs source code, provide improved event logging the the console (rxjs-spy^[https://cartant.github.io/rxjs-spy/]).
+
+There are now fully integrated, reactive debugging solutions for RxJS available to our current knowledge.
+
+# Research {#sec:research}
+
+- Previous Work [@Alabor_Stolze_2020]
+  - Interviews
+  - Observational Study
+- New work:
+	- Prototyp
+	- UX Testing of Prototype [@Alabor_2020]
+	- The Result: An extension for Visual Studio Code, as described in the next section:
+
+# Implementation {#sec:implementation}
+
+- Demonstrate/describe Extension
+  - Log Points -> Relate with probes/traces [@McDirmid_2013]
+- Categorize Extension in terms of "Levels of Live" [@Tanimoto_2013]
+- *Idea: Can we demonstrate somehow an example with hot code reloading, so we have a better "live" experience?*
+
+# Future Work {#sec:future_work}
+
+- Features:
+	- Support for Browser-based Applications (Selling point: Angular)
+	- Visualization of data flows
+	- Omniscient/time travel debugging for data flows
+- Research:
+	- Verify if extension helps beginners to get started with RxJS
+	- Verify effectiveness of extension for professionals (re-execute previous observational study)
+  - More Usability Testing
+
+# Conclusion {#sec:conclusion}
+
+- Wrap things up
+
