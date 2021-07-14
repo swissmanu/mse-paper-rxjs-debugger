@@ -1,6 +1,6 @@
 # Introduction
 
-Software development consists of two parts: The first part is about creating novel applications, about the creative process [CITE] of building solutions to specific problems [CITE]. The other part is about understanding the behavior, source code and composition of existing programs [CITE]. The second part is important in a variety of scenarios: ...
+Software development consists of two parts: The first part is about creating novel applications, about the creative process [CITE] of building solutions to specific problems [CITE]. The other part is about understanding the behavior, source code and composition of existing programs [CITE]. All software engineer begin to develop the second skill once they start improving their programming abilities: Right from the point where they read their first "Hello World" code example, they start to build an intuition on how a computer might interpret and execute a given piece of source code. Once things get more involved, simply "thinking" through source code might not suffice anymore: A common technique to trace the runtime behavior of a program is the manual introduction of print statements to the source code. Multiple statements at key turning points of a program generate extensive execution logs which help to reconstruct its actual runtime behavior.
 
 - Nice: Previous work showed its possible [@Salvaneschi_Mezini_2016_Inspector]
 - Why not for RxJS?
