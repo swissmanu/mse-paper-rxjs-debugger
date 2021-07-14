@@ -1,6 +1,6 @@
 # Introduction
 
-Software development consists mainly of two part: One part is about creating novel applications, the creative process [CITE] of building a solution to a specific problem [CITE]. The other part is about understanding the behavior, source code and composition of existing programs [CITE]. 
+Software development consists of two parts: The first part is about creating novel applications, about the creative process [CITE] of building solutions to specific problems [CITE]. The other part is about understanding the behavior, source code and composition of existing programs [CITE]. The second part is important in a variety of scenarios: ...
 
 - Nice: Previous work showed its possible [@Salvaneschi_Mezini_2016_Inspector]
 - Why not for RxJS?
