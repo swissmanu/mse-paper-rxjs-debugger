@@ -9,7 +9,7 @@ keywords:
 
 # Abstract
 abstract: |
-  tbd.
+  Very Early... Do not review abstract :-) Past research proved that debugging of reactive applications is a cumbersome, inefficient process and often lacks proper tool support in todays IDEs. These facts are valid for modern JavaScript applications as well: Software engineers debug RxJS applications by introducing manual print statements in their source code. In this paper, we are going to present a novel approach on how reactive data streams, implemented with RxJS, can be debugged: The demonstrated utility is tightly integrated in the engineers workflow and makes manual print statements and the analysis of the resulting logs obsolete. We further put this new solution in context with earlier efforts in the field and propose a set of topics where future research efforts could ......
 
 # Common Configuration
 lang: en-US

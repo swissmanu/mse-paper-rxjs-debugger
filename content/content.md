@@ -1,5 +1,7 @@
 # Introduction
 
+Software development consists mainly of two part: One part is about creating novel applications, the creative process [CITE] of building a solution to a specific problem [CITE]. The other part is about understanding the behavior, source code and composition of existing programs [CITE]. 
+
 - Nice: Previous work showed its possible [@Salvaneschi_Mezini_2016_Inspector]
 - Why not for RxJS?
 - Previous work tried: for visual debugging [@Banken_Meijer_Gousios_2018]
