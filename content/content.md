@@ -6,7 +6,11 @@ Debugging utilities integrated in todays IDEs have a strong focus on developong 
 
 We are going to present our solution to this problem in this paper: *RxJS Debugging for Visual Studio Code* is an extension for Microsoft Visual Studio Code and augments the IDE with RxJS-specific debugging capabilities. By doing so, it makes manual print statements a tool of the past.
 
-We will do a deep-dive on the extensions functionality in Section [3](#sec:implementation) and highlight related work which lead to our solution in Section [2](#sec:related_work) upfront. Before we come to our conclusion in Section [7](#sec:conclusion), we will discuss potential Threats to Validity in Section [5](#sec:threats_to_validity) and give an overview on potential follow-up topics, practical as well as research-wise, in Section [6](#sec:future_work).
+Before we do a deep-dive on the extensions functionality in Section [4](#sec:implementation), we will give an example for the main challenge of reactive debugging in Section [2](#sec:challenge) and discuss the related work which lead to our solution in Section [3](#sec:related_work). Before we come to our conclusion in Section [8](#sec:conclusion), we will discuss potential Threats to Validity in Section [6](#sec:threats_to_validity) and give an overview on potential follow-up topics, research-wise as well as practical, in Section [7](#sec:future_work).
+
+# Challenges of Reactive Debugging {#sec:challenge}
+
+- Necessary? Or is it enough that we referenced papers describing this problem sufficiently already?
 
 # Related Work {#sec:related_work}
 
