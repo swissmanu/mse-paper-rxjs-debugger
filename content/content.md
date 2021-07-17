@@ -1,28 +1,12 @@
 # Introduction
 
-Software development consists of two parts: The first part is about creating novel applications, about the creative process [CITE] of building solutions to specific problems [CITE]. The other part is about understanding the behavior, source code and composition of existing programs [CITE]. All software engineer begin to develop the second skill once they start improving their programming abilities: Right from the point where they read their first "Hello World" code example, they start to build an intuition on how a computer might interpret and execute a given piece of source code. Once things get more involved, simply "thinking" *(mentally exercising? other formulation?)* through source code might not suffice anymore: A common technique to trace the runtime behavior of a program is the manual introduction of print statements to the source code. Multiple such statements, placed at key turning points of the program, generate extensive execution logs allowing to reconstruct the programs runtime behavior. Analyzing large amounts of logs is tedious work. Specialized debugging utilities provide more sophisticated tools to inspect programs at runtime: A breakpoint on a statement interrupts program execution. Once halted, engineers can inspect and modify variables in a stack frame, step through successive source code statements and eventually even resume normal program execution.
+Software development consists of two parts: The first part is about creating novel applications, about the creative process [CITE] of building solutions to specific problems [CITE]. The other part is about understanding the behavior, source code and composition of existing programs [CITE]. All software engineer begin to develop the second skill once they start improving their programming abilities: Right from the point where they read their first "Hello World" code example, they start to build an intuition on how a computer might interpret and execute a given piece of source code. Once things get more involved, simply "thinking" through source code might not suffice anymore: A common technique to trace the runtime behavior of a program is the manual introduction of print statements to the source code. Multiple such statements, placed at key turning points of the program, generate extensive execution logs allowing to reconstruct the programs runtime behavior. Analyzing large amounts of logs is tedious work. Specialized debugging utilities provide more sophisticated tools to inspect programs at runtime: A breakpoint on a statement interrupts program execution. Once halted, engineers can inspect and modify variables in a stack frame, step through successive source code statements and eventually even resume normal program execution.
 
-Debugging utilities integrated in todays IDEs have a strong focus on developong applications using an imperative programming paradigm: Breakpoints as well as stackframe and variable inspection are a good match for debugging imperatively formulated programs [CITE?]. Such traditional debuggers face a new challenge when confronted with declarative programming paradigms, such as reactive programming (RP): Various previous research results in this field [@Salvaneschi_Mezini_2016_Inspector, @Banken_Meijer_Gousios_2018, @Alabor_Stolze_2020] highlighted
+Debugging utilities integrated in todays IDEs have a strong focus on developong applications using an imperative programming paradigm: Breakpoints as well as stackframe and variable inspection are a good match for debugging imperatively formulated programs [CITE?]. These traditional debuggers face a new challenge when confronted with declarative programming paradigms, such as reactive programming (RP): Traditional debuggers cannot interpret the data-flow and runtime semantics of RP, and with that, fail to proof the debugging hypothesis [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] formulated by the software engineer [@Salvaneschi_Mezini_2016_Inspector]  [@Alabor_Stolze_2020]. Salvaneschi et al. recognized this shortcoming of imperative debuggers and provided with *Reactive Inspector* [@Salvaneschi_Mezini_2016_Inspector] the first, fully IDE-integrated, RP-capable debugging solution for REScala, a RP runtime for the Scala programming language. Alabor et al. highlighted in their study [@Alabor_Stolze_2020] that other RP runtimes like RxJS did not benefit from the pioneering work by Salvaneschi et al. They could show that, due to the lack of fully integrated RP debugging solutions for RxJS, software engineers mostly fall back to the practice of using manual print statements when debugging RxJS-based programs.
 
-- Nice: Previous work showed its possible [@Salvaneschi_Mezini_2016_Inspector]
-- Why not for RxJS?
-- Previous work tried: for visual debugging [@Banken_Meijer_Gousios_2018]
-- Previous work showed that RxJS reactive debugging still sucks: [@Alabor_Stolze_2020]
-- State of The Art is: Debugging with console.log Statements
-- Our contribution:
-  - A (partial) answer to the third research question by [@Alabor_Stolze_2020]
-    - RQ2: How can the experience of software engineers dur-ing the debugging process of RxJS-based applications beimproved?
-    - RQ3: What is the impact of proposed solutions on thedebugging experience of software engineers?
-  - We have a solution: Integrated, reactive debugging
-  - Our contribution is an iteration on the topic of debugging for RxJS applications
-  - Debug without console.log
-  - Integration of reactive debugging in an IDE: Visual Studio Code
-- Content of this paper:
-  - Related work
-  - Our work on the topic
-  - Feature Demonstration
-  - Future Work
+We are going to present our solution to this problem in this paper: *RxJS Debugging for Visual Studio Code* is an extension for Microsoft Visual Studio Code and augments the IDE with RxJS-specific debugging capabilities. By doing so, it makes manual print statements a tool of the past.
 
+We will do a deep-dive on the extensions functionality in Section [3](#sec:implementation) and highlight related work which lead to our solution in Section [2](#sec:related_work) upfront. Before we come to our conclusion in Section [7](#sec:conclusion), we will discuss potential Threats to Validity in Section [5](#sec:threats_to_validity) and give an overview on potential follow-up topics, practical as well as research-wise, in Section [6](#sec:future_work).
 
 # Related Work {#sec:related_work}
 
@@ -32,19 +16,24 @@ Debugging utilities integrated in todays IDEs have a strong focus on developong 
   - Interviews
   - Observational Study
 
-# Research {#sec:research}
+# Extension {#sec:implementation}
 
 - New work:
 	- Prototyp
 	  - Describe how it relates to the debugging process [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013]
-	- UX Testing of Prototype [@Alabor_2020]
+	- UX Testing of Prototype. DONT CITE [@Alabor_2020], because not peer reviewed
 	- The Result: An extension for Visual Studio Code, as described in the next section:
-
-# Implementation {#sec:implementation}
-
 - Demonstrate/describe Extension
   - Log Points -> Relate with probes/traces [@McDirmid_2013]
-- *Idea: Can we demonstrate somehow an example with hot code reloading, so we have a better "live" experience?*
+
+# Discussion {#sec:discussion}
+
+- *See if necessary as distinct section or if it can be integrated within previous section instead*
+
+# Threats to Validity {#sec:threats_to_validity}
+
+- Usability study scope
+- "only" based on [@Alabor_Stolze_2020]
 
 # Future Work {#sec:future_work}
 
