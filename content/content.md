@@ -32,7 +32,7 @@ One of the main characteristics of RP is the paradigm shift away from imperative
 
 *TODO reference for listings*
 
-```{caption="Basic example of imperative-style/control-flow oriented programming in TypeScript: Multiply integers between 0 and 4 for for every value that is smaller than 4 and call consumer with the result." .Typescript}
+```{caption="Basic example of imperative-style/control-flow oriented programming in TypeScript: Multiply integers between 0 and 4 for for every value that is smaller than 4 and call consumer with the result." label=imperative .Typescript}
 import consumer from './consumer';
 
 for(let i = 0; i < 5; i++) {
@@ -44,7 +44,7 @@ for(let i = 0; i < 5; i++) {
 ```
 
 
-```{caption="Basic RP example implemented with RxJS in TypeScript: Generate a data-flow of integers from 0 to 4, skip values equal or larger then 4, multiply these values by 2 and call consumer with each resulting value." .Typescript}
+```{caption="Basic RP example implemented with RxJS in TypeScript: Generate a data-flow of integers from 0 to 4, skip values equal or larger then 4, multiply these values by 2 and call consumer with each resulting value." label=rp .Typescript}
 import consumer from './consumer';
 import { of } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
