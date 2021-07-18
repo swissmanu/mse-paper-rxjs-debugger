@@ -2,7 +2,7 @@
 
 Software development consists of two parts: The first part is about creating novel applications, about the creative process [CITE] of building solutions to specific problems [CITE]. The other part is about understanding the behavior, source code and composition of existing programs [CITE]. All software engineer begin to develop the second skill once they start improving their programming abilities: Right from the point where they read their first "Hello World" code example, they start to build an intuition on how a computer might interpret and execute a given piece of source code. Once things get more involved, simply "thinking" through source code might not suffice anymore: A common technique to trace the runtime behavior of a program is the manual introduction of print statements to the source code. Multiple such statements, placed at key turning points of the program, generate extensive execution logs allowing to reconstruct the programs runtime behavior. Analyzing large amounts of logs is tedious work. Specialized debugging utilities provide more sophisticated tools to inspect programs at runtime: A breakpoint on a statement interrupts program execution. Once halted, engineers can inspect and modify variables in a stack frame, step through successive source code statements and eventually even resume normal program execution.
 
-Debugging utilities integrated in todays IDEs have a strong focus on developong applications using an imperative programming paradigm: Breakpoints as well as stackframe and variable inspection are a good match for debugging imperatively formulated programs [CITE?]. These traditional debuggers face a new challenge when confronted with declarative programming paradigms, such as reactive programming (RP): Traditional debuggers cannot interpret the data-flow and runtime semantics of RP, and with that, fail to proof the debugging hypothesis [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] formulated by the software engineer [@Salvaneschi_Mezini_2016_Inspector]  [@Alabor_Stolze_2020]. Salvaneschi et al. recognized this shortcoming of imperative debuggers and provided with *Reactive Inspector* [@Salvaneschi_Mezini_2016_Inspector] the first, fully IDE-integrated, RP-capable debugging solution for REScala, a RP runtime for the Scala programming language. Alabor et al. highlighted in their study [@Alabor_Stolze_2020] that other RP runtimes like RxJS did not benefit from the pioneering work by Salvaneschi et al. They could show that, due to the lack of fully integrated RP debugging solutions for RxJS, software engineers mostly fall back to the practice of using manual print statements when debugging RxJS-based programs.
+Debugging utilities integrated in todays IDEs have a strong focus on developong applications using an imperative programming paradigm: Breakpoints as well as stackframe and variable inspection are a good match for debugging imperatively formulated programs. These traditional debuggers face a new challenge when confronted with declarative programming paradigms, such as reactive programming (RP): Traditional debuggers cannot interpret the data-flow and runtime semantics of RP, and with that, fail to proof the debugging hypothesis [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] formulated by the software engineer [@Salvaneschi_Mezini_2016_Inspector]  [@Alabor_Stolze_2020]. Salvaneschi et al. recognized this shortcoming of imperative debuggers and provided with *Reactive Inspector* [@Salvaneschi_Mezini_2016_Inspector] the first, fully IDE-integrated, RP-capable debugging solution for REScala [@Salvaneschi_Hintz_Mezini_2014], a RP runtime for the Scala programming language. Alabor et al. highlighted in their study [@Alabor_Stolze_2020] that other RP runtimes like RxJS^[https://rxjs.dev] did not benefit from the pioneering work by Salvaneschi et al. They could show that, due to the lack of fully integrated RP debugging solutions for RxJS, software engineers mostly fall back to the practice of using manual print statements when debugging RxJS-based programs.
 
 We are going to present our solution to this problem in this paper: *RxJS Debugging for Visual Studio Code* is an extension for Microsoft Visual Studio Code^[https://code.visualstudio.com] and augments the IDE with RxJS-specific debugging capabilities. By doing so, it makes manual print statements a tool of the past.
 
@@ -12,9 +12,51 @@ Before we do a deep-dive on the extensions functionality in Section [4](#sec:imp
 
 Understanding the fundamental process of debugging and how imperative program source code is debugged will help us to understand the struggles which come with reactive debugging.
 
+## Formal Debugging Process
+
 Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] formalized debugging as three-step iterative process: (i) Engineers start with collecting information about the actual problem scenario: How can a specific situation be reproduced? What internal and external influences lead to that particular circumstance? The first step concludes with the formalization of a hypothesis intending to resolve the identified problem. Using debugging tools (e.g. breakpoints, print statements etc.), they then (ii) continue to instrument the program under inspection in order to proof their hypothesis. Once done, they (iii) test the instrumented program to proof the hypothesis. Should the hypothesis test outcome be negative, the engineer uses gained insight from the test and starts gathering context information again. This loop might be reexecuted until the hypothesis concludes in a positive result.
 
 ![TODO: Replace with proper graphic; Iterative Debugging Process after Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013]: Gather context to formalize hypothesis, instrument hypothesis producing a modified system, and testing hypothesis resulting in a new iteration or a successfully proved hypothesis.](./content/debugging-process.png)
+
+{#fig:debugging-process}
+
+## Imperative Debugging
+
+The commonly shipped debugging utilities shipped with modern IDEs are focused on working with imperative, control-flow oriented programs: In the instrumentation phase, breakpoints allow to interrupt program execution once reaching that particular statement in its source code. A stackframe inspector provides precise information on what code lead to the execution of the halted statement and the variable inspector shows values of variables valid in the current execution context. Variable and stackframe inspector are tightly integrated with each other: Navigating "back" in the stack will show the related variable values of the selected frame. The variable inspector further allows to modify values of specific variables at runtime. This is a powerful tool to instrument the debugging hypothesis as well.
+
+Once the program is halted, step controls provide fine grained control on the successive program execution: Following statements can be executed one after another or regular program execution might be resumed.
+
+## Reactive Debugging
+
+One of the main characteristics of RP is the paradigm shift away from imperatively formulated, control-flow oriented code (see Listing [1](#lst:imperative)), over to declarative, data-flow focused source code [CITE]. Instead of instructing the program how to do what, one step after another, we use RP abstractions to describe the transformation of a potentially continuous flow of data as shown in Listing[2](#lst:rp).
+
+{#lst:imperative}
+```{caption="Basic example of imperative-style/control-flow oriented programming in TypeScript: Multiply integers between *0* and *4* for for every value that is smaller than *4* and call *consumer* with the result." .Typescript}
+import consumer from './consumer';
+
+for(let i = 0; i < 5; i++) {
+	if (i > 4) {
+		continue;
+	}
+	consumer(i * 2);
+}
+```
+
+{#lst:rp}
+```{caption="Basic RP example implemented with RxJS in TypeScript: Generate a data-flow of integers from *0* to *4*, skip values equal or larger then *4*, multiply these values by *2* and call *consumer* with each resulting value." .Typescript}
+import consumer from './consumer';
+import { of } from 'rxjs';
+import { filter, map, tap } from 'rxjs/operators';
+
+of(0, 1, 2, 3, 4).pipe( // Flow of integers 0..4
+  filter(i => i < 4),   // Omit 4
+  map(i => i * 2),      // Multiply with 2
+).subscribe(consumer)
+```
+
+
+Beside purely functional (e.g. Haskell) or multi-paradigm (e.g. Scala or F#) programming languages,  like 
+
 
 
 # Related Work {#sec:related_work}
