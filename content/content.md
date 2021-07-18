@@ -30,41 +30,50 @@ Once the program is halted, step controls provide fine grained control on the su
 
 One of the main characteristics of RP is the paradigm shift away from imperatively formulated, control-flow oriented code (see Listing [1](#lst:imperative)), over to declarative, data-flow focused source code [CITE]. Instead of instructing the program how to do what, one step after another, we use RP abstractions to describe the transformation of a potentially continuous flow of data as shown in Listing [2](#lst:rp).
 
-*TODO reference for listings*
+```{caption="Basic example of imperative-style/control-flow oriented programming in TypeScript: Multiply integers between 0 and 4 for every value that is smaller than 4 and call reportValue with the result." label=imperative .Typescript}
+import reportValue from './reporter';
 
-```{caption="Basic example of imperative-style/control-flow oriented programming in TypeScript: Multiply integers between 0 and 4 for for every value that is smaller than 4 and call consumer with the result." label=imperative .Typescript}
-import consumer from './consumer';
-
-for(let i = 0; i < 5; i++) {
-	if (i > 4) {
-		continue;
-	}
-	consumer(i * 2);
+for (let i = 0; i < 5; i++) {
+  if (i < 4) {
+    reportValue(i * 2);
+  }
 }
 ```
 
 
-```{caption="Basic RP example implemented with RxJS in TypeScript: Generate a data-flow of integers from 0 to 4, skip values equal or larger then 4, multiply these values by 2 and call consumer with each resulting value." label=rp .Typescript}
-import consumer from './consumer';
+```{caption="Basic RP example implemented with RxJS in TypeScript: Generate a data-flow of integers from 0 to 4, skip values equal or larger then 4, multiply these values by 2 and call reportValue with each resulting value." label=rp .Typescript}
+import reportValue from './reporter';
+import { of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+
+of(0, 1, 2, 3, 4).pipe( // Flow of integers 0..4
+  filter(i => i < 4),   // Omit 4
+  map(i => i * 2),      // Multiply with 2
+).subscribe(reportValue)
+```
+
+Once switched from an imperative to declarative programming style, the imperative-focused debugger reaches its limitations quickly: Where it can be used to step through the successive iterations of the `for` loop in Listing [1](#lst:imperative) as expected, this is not possible for the transformations described in Listing [2](#lst:rp): Assuming there is a breakpoint placed within the lambda function passed to `filter` on Line 6, stepping over to the next statement will not lead to the lambda of `map` on Line 7 as one might expect. Instead, the debugger will continue in the internal implementations of `filter`, which is part of the RP runtime environment. This circumstance might becomes plausible once engineers get a deeper understanding of a particular RP implementation. Alabor et al. showed nonetheless that software engineers expect a different behavior from the debugging tools they know from earlier experiences [@Alabor_Stolze_2020]. As a direct consequence, most engineers fall back to the clumsy debugging technique of adding manual print statements like in Listing [3](#lst:rp-print) to instrument their debugging hypotheses, they conclude.
+
+```{caption="Manually added print statements on Lines 6, 8 and 10 to debug a data-flow implemented with RxJS in TypeScript." label=rp-print .Typescript}
+import reportValue from './reporter';
 import { of } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
-of(0, 1, 2, 3, 4).pipe( // Flow of integers 0..4
-	filter(i => i < 4),   // Omit 4
-	map(i => i * 2),      // Multiply with 2
-).subscribe(consumer)
+of(0, 1, 2, 3, 4).pipe(
+  tap(console.log),     // <-- Print Statement
+  filter(i => i < 4),
+  tap(console.log),     // <-- Print Statement
+  map(i => i * 2),
+  tap(console.log),     // <-- Print Statement
+).subscribe(reportValue)
 ```
-
-
-Beside purely functional (e.g. Haskell) or multi-paradigm (e.g. Scala or F#) programming languages,  like 
-
 
 
 # Related Work {#sec:related_work}
 
-- [@Salvaneschi_Mezini_2016_Inspector]
-- [@Banken_Meijer_Gousios_2018]
-- Previous Work [@Alabor_Stolze_2020]
+- Reactive Inspector [@Salvaneschi_Mezini_2016_Inspector]
+- RxFiddle [@Banken_Meijer_Gousios_2018]
+- Study by Alabor et al. [@Alabor_Stolze_2020]
   - Interviews
   - Observational Study
 
