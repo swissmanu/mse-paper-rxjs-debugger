@@ -28,10 +28,11 @@ Once the program is halted, step controls provide fine grained control on the su
 
 ## Reactive Debugging
 
-One of the main characteristics of RP is the paradigm shift away from imperatively formulated, control-flow oriented code (see Listing [1](#lst:imperative)), over to declarative, data-flow focused source code [CITE]. Instead of instructing the program how to do what, one step after another, we use RP abstractions to describe the transformation of a potentially continuous flow of data as shown in Listing[2](#lst:rp).
+One of the main characteristics of RP is the paradigm shift away from imperatively formulated, control-flow oriented code (see Listing [1](#lst:imperative)), over to declarative, data-flow focused source code [CITE]. Instead of instructing the program how to do what, one step after another, we use RP abstractions to describe the transformation of a potentially continuous flow of data as shown in Listing [2](#lst:rp).
 
-{#lst:imperative}
-```{caption="Basic example of imperative-style/control-flow oriented programming in TypeScript: Multiply integers between *0* and *4* for for every value that is smaller than *4* and call *consumer* with the result." .Typescript}
+*TODO reference for listings*
+
+```{caption="Basic example of imperative-style/control-flow oriented programming in TypeScript: Multiply integers between 0 and 4 for for every value that is smaller than 4 and call consumer with the result." .Typescript}
 import consumer from './consumer';
 
 for(let i = 0; i < 5; i++) {
@@ -42,15 +43,15 @@ for(let i = 0; i < 5; i++) {
 }
 ```
 
-{#lst:rp}
-```{caption="Basic RP example implemented with RxJS in TypeScript: Generate a data-flow of integers from *0* to *4*, skip values equal or larger then *4*, multiply these values by *2* and call *consumer* with each resulting value." .Typescript}
+
+```{caption="Basic RP example implemented with RxJS in TypeScript: Generate a data-flow of integers from 0 to 4, skip values equal or larger then 4, multiply these values by 2 and call consumer with each resulting value." .Typescript}
 import consumer from './consumer';
 import { of } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
 of(0, 1, 2, 3, 4).pipe( // Flow of integers 0..4
-  filter(i => i < 4),   // Omit 4
-  map(i => i * 2),      // Multiply with 2
+	filter(i => i < 4),   // Omit 4
+	map(i => i * 2),      // Multiply with 2
 ).subscribe(consumer)
 ```
 
