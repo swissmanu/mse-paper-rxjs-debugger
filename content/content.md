@@ -10,7 +10,12 @@ Before we do a deep-dive on the extensions functionality in Section [4](#sec:imp
 
 # Challenges of Reactive Debugging {#sec:challenge}
 
-- Necessary? Or is it enough that we referenced papers describing this problem sufficiently already?
+Understanding the fundamental process of debugging and how imperative program source code is debugged will help us to understand the struggles which come with reactive debugging.
+
+Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] formalized debugging as three-step iterative process: (i) Engineers start with collecting information about the actual problem scenario: How can a specific situation be reproduced? What internal and external influences lead to that particular circumstance? The first step concludes with the formalization of a hypothesis intending to resolve the identified problem. Using debugging tools (e.g. breakpoints, print statements etc.), they then (ii) continue to instrument the program under inspection in order to proof their hypothesis. Once done, they (iii) test the instrumented program to proof the hypothesis. Should the hypothesis test outcome be negative, the engineer uses gained insight from the test and starts gathering context information again. This loop might be reexecuted until the hypothesis concludes in a positive result.
+
+![Iterative Debugging Process after Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013]: Gather context to formalize hypothesis, instrument hypothesis producing a modified system, and testing hypothesis resulting in a new iteration or a successfully proved hypothesis.](./content/debugging-process.png)
+
 
 # Related Work {#sec:related_work}
 
