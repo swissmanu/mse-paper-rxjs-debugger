@@ -18,8 +18,6 @@ Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] formalized debu
 
 ![TODO: Replace with proper graphic; Iterative Debugging Process after Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013]: Gather context to formalize hypothesis, instrument hypothesis producing a modified system, and testing hypothesis resulting in a new iteration or a successfully proved hypothesis.](./content/debugging-process.png)
 
-{#fig:debugging-process}
-
 ## Imperative Debugging
 
 The commonly shipped debugging utilities shipped with modern IDEs are focused on working with imperative, control-flow oriented programs: In the instrumentation phase, breakpoints allow to interrupt program execution once reaching that particular statement in its source code. A stackframe inspector provides precise information on what code lead to the execution of the halted statement and the variable inspector shows values of variables valid in the current execution context. Variable and stackframe inspector are tightly integrated with each other: Navigating "back" in the stack will show the related variable values of the selected frame. The variable inspector further allows to modify values of specific variables at runtime. This is a powerful tool to instrument the debugging hypothesis as well.
@@ -52,9 +50,9 @@ of(0, 1, 2, 3, 4).pipe( // Flow of integers 0..4
 ).subscribe(reportValue)
 ```
 
-Once switched from an imperative to declarative programming style, the imperative-focused debugger reaches its limitations quickly: Where it can be used to step through the successive iterations of the `for` loop in Listing [1](#lst:imperative) as expected, this is not possible for the transformations described in Listing [2](#lst:rp): Assuming there is a breakpoint placed within the lambda function passed to `filter` on Line 6, stepping over to the next statement will not lead to the lambda of `map` on Line 7 as one might expect. Instead, the debugger will continue in the internal implementations of `filter`, which is part of the RP runtime environment. This circumstance might becomes plausible once engineers get a deeper understanding of a particular RP implementation. Alabor et al. showed nonetheless that software engineers expect a different behavior from the debugging tools they know from earlier experiences [@Alabor_Stolze_2020]. As a direct consequence, most engineers fall back to the clumsy debugging technique of adding manual print statements like in Listing [3](#lst:rp-print) to instrument their debugging hypotheses, they conclude further.
+Once switched from an imperative to declarative programming style, the imperative-focused debugger reaches its limitations quickly: Where it can be used to step through the successive iterations of the *for* loop in Listing [1](#lst:imperative) as expected, this is not possible for the transformations described in Listing [2](#lst:rp): Assuming there is a breakpoint placed within the lambda function passed to *filter* on Line 6, stepping over to the next statement will not lead to the lambda of *map* on Line 7 as one might expect. Instead, the debugger will continue in the internal implementations of *filter*, which is part of the RP runtime environment. This circumstance might becomes plausible once engineers get a deeper understanding of a particular RP implementation. Alabor et al. showed nonetheless that software engineers expect a different behavior from the debugging tools they know from earlier experiences [@Alabor_Stolze_2020]. As a direct consequence, most engineers fall back to the clumsy debugging technique of adding manual print statements like in Listing [3](#lst:rp-print) to instrument their debugging hypotheses, they conclude further.
 
-```{caption="Manually added print statements on Lines 6, 8 and 10 to debug a data-flow implemented with RxJS in TypeScript." label=rp-print .Typescript}
+```{#lst:rp-print caption="Manually added print statements on Lines 6, 8 and 10 to debug a data-flow implemented with RxJS in TypeScript." .Typescript}
 import reportValue from './reporter';
 import { of } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
