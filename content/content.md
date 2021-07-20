@@ -104,6 +104,9 @@ of(0, 1, 2, 3, 4).pipe(
 	- Verify if extension helps beginners to get started with RxJS
 	- Verify effectiveness of extension for professionals (re-execute previous observational study)
   - More Usability Testing
+- Time travel debugging
+  - Simulating predictable data sources
+  - vs simulating concurrent systems
 
 # Conclusion {#sec:conclusion}
 

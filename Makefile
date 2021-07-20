@@ -2,7 +2,7 @@
 sections = content/content.md
 filename = paper
 
-.PHONY: default clean build build_pdf
+.PHONY: default clean build build_pdf build_html
 
 default: clean build
 
@@ -24,4 +24,16 @@ build_pdf:
     --standalone \
 		--template=./templates/template.tex \
 		--output=out/${filename}.pdf \
+		${sections}
+
+build_html:
+	@echo "Build out/${filename}.html"
+	@pandoc \
+    --lua-filter=lib/lua-filters/include-files/include-files.lua \
+    --metadata-file=./metadata.yml \
+    -f markdown+raw_tex \
+    --citeproc \
+    --listings \
+    --standalone \
+		--output=out/${filename}.html \
 		${sections}
