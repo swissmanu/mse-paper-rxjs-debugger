@@ -62,6 +62,8 @@ This debugging technique is often time consuming and cumbersome: The more print 
 
 ## Related Work
 
+
+
 - Reactive Inspector [@Salvaneschi_Mezini_2016_Inspector]
 - RxFiddle [@Banken_Meijer_Gousios_2018]
 - Study by Alabor et al. [@Alabor_Stolze_2020]
@@ -98,17 +100,27 @@ This debugging technique is often time consuming and cumbersome: The more print 
 - Usability study scope
 - "only" based on [@Alabor_Stolze_2020]
 
+## Internal Validity
+
+## External Validity
+
+## Construct Validity
+
+
 # Future Work {#sec:future_work}
 
-- Features:
-	- Support for Browser-based Applications (Selling point: Angular)
-	- Visualization of data flows
-	- Omniscient/time travel debugging for data flows
-	- Record/replay of data sources for later simulation
-- Research:
-	- Verify if extension helps beginners to get started with RxJS
-	- Verify effectiveness of extension for professionals (re-execute previous observational study)
-  - More Usability Testing
+## Features
+
+- Support for Browser-based Applications (Selling point: Angular)
+- Visualization of data flows
+- Omniscient/time travel debugging for data flows
+- Record/replay of data sources for later simulation
+
+## Research
+
+- Verify if extension helps beginners to get started with RxJS
+- Verify effectiveness of extension for professionals (re-execute previous observational study)
+- More Usability Testing
 
 # Conclusion {#sec:conclusion}
 
