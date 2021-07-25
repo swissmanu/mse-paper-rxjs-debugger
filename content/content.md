@@ -8,15 +8,15 @@ The most basic debugging technique for instrumentation and testing are manually 
 
 Modern IDEs enable software engineers to debug programs, no matter what programming language they are implemented with, using one, generalized user interface (UI). The result is a unified user experience where the supposed correct debugger is only a click away. Software engineers have accepted these debuggers as common practice according to Alabor et al. [@Alabor_Stolze_2020]. By integrating imperative debuggers in their workflows, software engineers face a new problem when working with reactive programming (RP) though. Alabor et al. highlight that multiple of their study participants intuitively expected their debuggers step controls to work on the RP data-flow graph, which they do not. This discrepancy between expected and actual behavior of the debugger lets engineers reportedly fall back to adding manual print statements.
 
-Debugging RP programs with the wrong debugging utilities is not a new problem: Salvaneschi et al. described the shortcoming of traditional debuggers when confronted with RP in their paper on *RP Debugging* [@Salvaneschi_Mezini_2016_Inspector]. Further, Banken et al. [@Banken_Meijer_Gousios_2018] researched on a possible solution for debugging RxJS RP programs using an external visualizer. Up to today, no fully integrated RP debugging solution for RxJS was available though.
+The circumstance of debugging RP programs with the wrong debugging utilities is not new: Salvaneschi et al. described the shortcoming of traditional debuggers when confronted with RP in their paper and coined the concept of *RP Debugging* [@Salvaneschi_Mezini_2016_Inspector]. Later, Banken et al. [@Banken_Meijer_Gousios_2018] researched on a possible solution for debugging RxJS RP programs using an external visualizer sandbox named *RxFiddle*. Surprisingly, software engineers still do not have the right tools at hand today, when needing them the most as Alabor et al. state.
 
-We are going to present our solution to this challenge in this paper: *RxJS Debugging for Visual Studio Code* is an extension for Microsoft Visual Studio Code^[https://code.visualstudio.com] which integrates RxJS-specific debugging capabilities within the IDE. By doing so, it makes manual print statements a debugging technique of the past.
+We present a solution to this problem in this paper: With *RxJS Debugging for Visual Studio Code*, an extension for Microsoft Visual Studio Code^[https://code.visualstudio.com], engineers building RxJS applications get access to a powerful RP debugging tool. It integrates tightly with the IDE itself and requires no extra efforts to debug a data-flow.
 
-Before we do a deep-dive on the extensions functionality in Section [4](#sec:implementation), we will give an example for the main challenge of reactive debugging in Section [2](#sec:challenge) and discuss the related work which lead to our solution in Section [3](#sec:related_work). Before we come to our conclusion in Section [8](#sec:conclusion), we will discuss potential Threats to Validity in Section [6](#sec:threats_to_validity) and give an overview on potential follow-up topics, research-wise as well as practical, in Section [7](#sec:future_work).
+Before we do a deep-dive on the extensions functionality in Section [4](#sec:implementation), we will give an example for the main challenge of RP debugging in Section [2](#sec:challenge). We discuss related work and the process that lead to our solution in Section [3](#sec:background). Before we come to our conclusion in Section [8](#sec:conclusion), we will consider potential threats to validity in Section [6](#sec:threats_to_validity) and give an overview on potential follow-up topics, research-wise as well as practical, in Section [7](#sec:future_work).
 
 # Challenges of RP Debugging {#sec:challenge}
 
-One of the main characteristics of RP is the paradigm shift away from imperatively formulated, control-flow oriented code (see Listing [1](#lst:imperative)), over to declarative, data-flow focused source code [CITE]. Instead of instructing the program how to do what, one step after another, we use RP abstractions to describe the transformation of a potentially continuous flow of data as shown in Listing [2](#lst:rp).
+One of the main characteristics of RP is the paradigm shift away from imperatively formulated, control-flow oriented code (see Listing [1](#lst:imperative)), over to declarative, data-flow focused source code. Instead of instructing the program how to do what, i.e. one step after another, we use RP abstractions to describe the transformation of a continuous flow of data as shown in Listing [2](#lst:rp).
 
 ```{caption="Basic example of imperative-style/control-flow oriented programming in TypeScript: Multiply integers between 0 and 4 for every value that is smaller than 4 and call reportValue with the result." label=imperative .Typescript}
 import reportValue from './reporter';
@@ -57,7 +57,9 @@ of(0, 1, 2, 3, 4).pipe(
 ```
 
 
-# Related Work {#sec:related_work}
+# Background {#sec:background}
+
+## Related Work
 
 - Reactive Inspector [@Salvaneschi_Mezini_2016_Inspector]
 - RxFiddle [@Banken_Meijer_Gousios_2018]
@@ -65,15 +67,26 @@ of(0, 1, 2, 3, 4).pipe(
   - Interviews
   - Observational Study
 
+## Prototype and Usability Test
+
+- Cognitive Walkthrough
+	- https://github.com/swissmanu/mse-paper-pa2
+- First prototype based on results by Alabor et al.
+- User Journey
+	- https://alabor.me/research/user-journey-debugging-of-rxjs-based-applications/
+- Moderated Remote Usability Test
+	- 3 Participants ... cite why this is enough regarding Nielsen
+	- Outcome
+
 # Extension {#sec:implementation}
 
 - New work:
 	- Prototyp
 	  - Describe how it relates to the debugging process [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013]
-	- UX Testing of Prototype. DONT CITE [@Alabor_2020], because not peer reviewed
 	- The Result: An extension for Visual Studio Code, as described in the next section:
 - Demonstrate/describe Extension
   - Log Points -> Relate with probes/traces [@McDirmid_2013]
+  - Reuse same code example as in the intro
 
 # Discussion {#sec:discussion}
 
@@ -90,6 +103,7 @@ of(0, 1, 2, 3, 4).pipe(
 	- Support for Browser-based Applications (Selling point: Angular)
 	- Visualization of data flows
 	- Omniscient/time travel debugging for data flows
+	- Record/replay of data sources for later simulation
 - Research:
 	- Verify if extension helps beginners to get started with RxJS
 	- Verify effectiveness of extension for professionals (re-execute previous observational study)
