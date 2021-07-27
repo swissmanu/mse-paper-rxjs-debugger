@@ -8,13 +8,22 @@ The most basic debugging technique for instrumentation and testing are manually 
 
 Modern IDEs enable software engineers to debug programs, no matter what programming language they are implemented with, using one, generalized user interface (UI). The result is a unified user experience (UX) where the supposed correct debugger is only a click away. Software engineers have accepted these debuggers as common practice according to Alabor et al. [@Alabor_Stolze_2020]. By integrating imperative debuggers in their workflows, software engineers face a new problem when working with reactive programming (RP) though. Alabor et al. highlight that multiple of their studys participants intuitively expected their debuggers step controls to work on the RP data-flow graph and were surprised that they did not at all. This discrepancy between expected and actual behavior of the debugger lets engineers reportedly fall back to adding manual print statements.
 
-The circumstance of debugging RP programs with the wrong debugging utilities is not new: Salvaneschi et al. described the shortcoming of traditional debuggers when confronted with RP in their paper and coined the concept of *RP Debugging* [@Salvaneschi_Mezini_2016_Inspector]. Later, Banken et al. [@Banken_Meijer_Gousios_2018] researched on a possible solution for debugging RxJS RP programs using an external visualizer sandbox named *RxFiddle*. Surprisingly, software engineers still do not have the right tools at hand today, when needing them the most as Alabor et al. state.
+The circumstance of debugging RP programs with the wrong debugging utilities is not new: Salvaneschi et al. described the shortcoming of traditional debuggers when confronted with RP in their paper and coined the concept of *RP Debugging* [@Salvaneschi_Mezini_2016_Inspector]. Later, Banken et al. [@Banken_Meijer_Gousios_2018] researched on a possible solution for debugging RxJS RP programs using an external visualizer sandbox named *RxFiddle*. Surprisingly, software engineers still do not have the right tools at hand today when needing them most, as Alabor et al. state.
 
 We present a solution to this problem in this paper: With *RxJS Debugging for Visual Studio Code*, an extension for Microsoft Visual Studio Code^[https://code.visualstudio.com], engineers building RxJS applications get access to a powerful RP debugging tool. It integrates tightly with the IDE itself and requires no extra efforts to debug an RP program.
 
 Before we do a deep-dive on the extensions functionality in Section [4](#sec:implementation), we will give an example for the main challenge of RP debugging in Section [2](#sec:challenge). We discuss related work and the process that lead to our solution in Section [3](#sec:background). Before we come to our conclusion in Section [8](#sec:conclusion), we will consider potential threats to validity in Section [6](#sec:threats_to_validity) and give an overview on potential follow-up topics, research-wise as well as practical, in Section [7](#sec:future_work).
 
-# Challenges of RP Debugging {#sec:challenge}
+# Expectation vs. Reality {#sec:challenge}
+
+*Other section titles*
+- *"Divergence of Reality and Expectation"*
+- *"RP Debugging: Expectation vs. Reality"*
+- *"Dilemma of RP Debugging"*
+- *"The Wrong Tool for the Job"*
+- *"The Wrong Tool at Hand"*
+- *"Different Expectations"*
+- *"Wrong Expectations"*
 
 One of the main characteristics of RP is the paradigm shift away from imperatively formulated, control-flow oriented code (see Listing [1](#lst:imperative)), over to declarative, data-flow focused source code [@Salvaneschi_Mezini_2016_Inspector]. Instead of instructing the program how to do what, i.e. one step after another, we use RP abstractions to describe the transformation of a continuous flow of data as shown in Listing [2](#lst:rp).
 
@@ -61,6 +70,8 @@ This debugging technique is often time consuming and cumbersome: The more print 
 # Background {#sec:background}
 
 ## Related Work
+
+The divergence of expected and actual behavior when debugging RP programs with control-flow oriented debuggers was topic for various previous research effort.
 
 
 
