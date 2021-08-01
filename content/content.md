@@ -76,21 +76,22 @@ Salvaneschi et al. [@Salvaneschi_Mezini_2016] identified the divergence between 
 
 In the meantime, RP gained more traction across various fields of software engineering. With a shared vision on how to surface RP abstractions on API level, *ReactiveX*^[http://reactivex.io/] consolidates numerous open source projects in one organization. Together, its members provide RP runtime environments for many of todays mainstream programming languages like Java, C#, or Swift. For the development of JavaScript-based applications, software engineers can rely on RxJS^[https://rxjs.dev]. One of the more popular adopters of this library is Googles Angular^[https://angular.io/], a framework to develop web frontend applications, where it is used to model asynchronous operations like fetching data.
 
-Two years after Salvaneschi et al. proposed RP Debugging, Banken et al. showed in their paper [@Banken_Meijer_Gousios_2018] that debugging RxJS-based RP programs is not that different from REScala-based ones. They identified four main activities which directly correlate with
+Two years after Salvaneschi et al. proposed RP Debugging, Banken et al. [@Banken_Meijer_Gousios_2018] showed in their paper that debugging RxJS-based RP programs is not that different from REScala-based ones. In fact, they were able to categorize the debugging motivations of their study participants into four main, overarching themes. These can be put in direct correlation  with the debugging issues identified by Salvaneschi et al. earlier as we show in Table [1](#tbl:salvaneschi-vs-banken).
 
 ```{.include}
 content/table-salvaneschi-vs-banken.tex
 ```
 
-Banken et al. followed up on the foundation work by Salvaneschi et al. Discovering the fact that debugging RP programs implemented using RxJS is no[@Banken_Meijer_Gousios_2018] looked into the visualization of data-flow graphs implemented using RxJS.
+The participants of the study by Banken et al. reported further, that they commonly use manual print statement to debug their programs. The research group finally provided a debugger utilities in form of an isolated visualizer sandbox: *RxFiddle*. The browser-based application executes an RxJS program and visualize its runtime behavior in two dimensions: A central (i) data-flow graph shows which elements in the graph interact with each other and a dynamic (ii) marble diagram[^1] represents the values which were processed by the graph over time.
+
+[^1]: Marble diagrams are a visualization technique used throughout the ReactiveX community to describe the behavior of a node in a data-flow graph graphically. A marble represents a value emitted by such a graph node. Marbles are arranged on a thread from left to right, indicating the point in time their value got emitted. See https://rxmarbles.com/ for more examples.
 
 Four years later, Alabor et al. [@Alabor_Stolze_2020] examined the state of RP debugging again. In their study, focussing on RxJS^[https://rxjs.dev], a RP runtime for JavaScript, they found out that software engineers
 
 
 
 
-- Reactive Inspector [@Salvaneschi_Mezini_2016]
-- RxFiddle [@Banken_Meijer_Gousios_2018]
+
 - Study by Alabor et al. [@Alabor_Stolze_2020]
   - Interviews
   - Observational Study
