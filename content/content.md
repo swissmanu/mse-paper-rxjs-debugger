@@ -84,13 +84,24 @@ content/table-salvaneschi-vs-banken.tex
 
 The participants of the study by Banken et al. reported further, that they commonly use manual print statement to debug their programs. The research group finally provided a debugger utilities in form of an isolated visualizer sandbox: *RxFiddle*. The browser-based application executes an RxJS program and visualize its runtime behavior in two dimensions: A central (i) data-flow graph shows which elements in the graph interact with each other and a dynamic (ii) marble diagram[^1] represents the values which were processed by the graph over time.
 
-[^1]: Marble diagrams are a visualization technique used throughout the ReactiveX community to describe the behavior of a node in a data-flow graph graphically. A marble represents a value emitted by such a graph node. Marbles are arranged on a thread from left to right, indicating the point in time their value got emitted. See https://rxmarbles.com/ for more examples.
+Both Banken et al. and Salvaneschi et al. suggested technical architectures for RP debugging systems. Both suggestions can be summarized as a distributed system consisting of two main components: The (i) instrumented RP runtime system is augmented to produce debugging-relevant events (e.g. value emitted or graph node created). These events get processed by the actual (ii) debugger which provides a UI to inspect the RP programs state eventually.
+
+[^1]: Marble diagrams are a visualization technique used throughout the ReactiveX community to describe the behavior of a node in a data-flow graph graphically. A marble represents a value emitted by such a graph node. Marbles are arranged on a thread from left to right, indicating the point in time when their value was emitted. See https://rxmarbles.com/ for more examples.
 
 Another two years after Banken et al. published their work, Alabor et al. [@Alabor_Stolze_2020] examined the state of RxJS RP debugging. According to their results, software engineers still struggle to use appropriate tools to debug their programs. The observational study the research group conducted produced the key finding of their work: Even though the subjects stated to know about suitable RP debugging utilities, none of them used such tools in the study. Alabor et al. credit this circumstance with the fact that their participants IDE did not provide such suitable RP debugging utilities right at hand.
 
-Alabor et al. conclude that knowing about the correct, externous RP debugging utilities (e.g. *RxFiddle*) is not enough. The barrier to use such utilities must be minimized; i.e. RP debugging utilities must be fully integrated into the IDE so using them is always only a keypress away.
+Alabor et al. conclude that knowing about the correct, externous RP debugging utilities (e.g. *RxFiddle*) is not enough. The barrier to use such utilities must be minimized; i.e. in order to live up to their full potential, RP debugging utilities must be fully integrated into the IDE so using them is ideally only a keypress away.
 
-## Prototype and Usability Test
+## Design Process
+
+Before we started with the implementation of our own take on a fully integrated RP debugging solution, we had to answer two questions:
+
+1. What features should the RP debugging utilities provide?
+2. In which IDE should the RP debugging utilities be integrated?
+
+In order to answer the feature set question, we determined to adopt a user-centered design approach. Further, we decided consciously against replicating *Reactive Inspector* "just" for another RP runtime. The most recent results by Alabor et al. [@Alabor_Stolze_2020] indicated that manual print statements are  one of the biggest nuisances when debugging RxJS programs. Hence, our first feature must be a solution to overcome the necessity for manual print statements.
+
+...
 
 - Cognitive Walkthrough
 	- https://github.com/swissmanu/mse-paper-pa2
