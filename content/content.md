@@ -16,7 +16,8 @@ Before we do a deep-dive on the extensions functionality in Section [4](#sec:imp
 
 # Expectation vs. Reality {#sec:challenge}
 
-*Other section titles*
+*Ideas for section title:*:
+
 - *"Divergence of Reality and Expectation"*
 - *"RP Debugging: Expectation vs. Reality"*
 - *"Dilemma of RP Debugging"*
@@ -75,28 +76,15 @@ Salvaneschi et al. [@Salvaneschi_Mezini_2016] identified the divergence between 
 
 In the meantime, RP gained more traction across various fields of software engineering. With a shared vision on how to surface RP abstractions on API level, *ReactiveX*^[http://reactivex.io/] consolidates numerous open source projects in one organization. Together, its members provide RP runtime environments for many of todays mainstream programming languages like Java, C#, or Swift. For the development of JavaScript-based applications, software engineers can rely on RxJS^[https://rxjs.dev]. One of the more popular adopters of this library is Googles Angular^[https://angular.io/], a framework to develop web frontend applications, where it is used to model asynchronous operations like fetching data.
 
-Two years after Salvaneschi et al. proposed RP Debugging, Banken et al. showed in their paper [@Banken_Meijer_Gousios_2018] that debugging RxJS-based RP programs is not that different from REScala-based ones. They identified four main activities which directly correlate with 
+Two years after Salvaneschi et al. proposed RP Debugging, Banken et al. showed in their paper [@Banken_Meijer_Gousios_2018] that debugging RxJS-based RP programs is not that different from REScala-based ones. They identified four main activities which directly correlate with
 
-- Missing Dependencies
-	- Understanding dependencies between observables
-- Bugs in Signal Expressions
-	- Finding bugs and issues in reactive behavior
-- Understanding RP programs
-	- Comprehending behavior of operators in existing code
-	- Gaining high-level overview of the reactive structure
-- Memory and Time Leaks
-- Performance Bugs
+```{.include}
+content/table-salvaneschi-vs-banken.tex
+```
 
+Banken et al. followed up on the foundation work by Salvaneschi et al. Discovering the fact that debugging RP programs implemented using RxJS is no[@Banken_Meijer_Gousios_2018] looked into the visualization of data-flow graphs implemented using RxJS.
 
-
-
-
-
-
-
-Banken et al. followed up on the foundation work by Salvaneschi et al. Discovering the fact that debugging RP programs implemented using RxJS is no[@Banken_Meijer_Gousios_2018] looked into the visualization of data-flow graphs implemented using RxJS. 
-
-Four years later, Alabor et al. [@Alabor_Stolze_2020] examined the state of RP debugging again. In their study, focussing on RxJS^[https://rxjs.dev], a RP runtime for JavaScript, they found out that software engineers 
+Four years later, Alabor et al. [@Alabor_Stolze_2020] examined the state of RP debugging again. In their study, focussing on RxJS^[https://rxjs.dev], a RP runtime for JavaScript, they found out that software engineers
 
 
 
