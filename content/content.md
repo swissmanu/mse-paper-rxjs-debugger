@@ -86,15 +86,9 @@ The participants of the study by Banken et al. reported further, that they commo
 
 [^1]: Marble diagrams are a visualization technique used throughout the ReactiveX community to describe the behavior of a node in a data-flow graph graphically. A marble represents a value emitted by such a graph node. Marbles are arranged on a thread from left to right, indicating the point in time their value got emitted. See https://rxmarbles.com/ for more examples.
 
-Four years later, Alabor et al. [@Alabor_Stolze_2020] examined the state of RP debugging again. In their study, focussing on RxJS^[https://rxjs.dev], a RP runtime for JavaScript, they found out that software engineers
+Another two years after Banken et al. published their work, Alabor et al. [@Alabor_Stolze_2020] examined the state of RxJS RP debugging. According to their results, software engineers still struggle to use appropriate tools to debug their programs. The observational study the research group conducted produced the key finding of their work: Even though the subjects stated to know about suitable RP debugging utilities, none of them used such tools in the study. Alabor et al. credit this circumstance with the fact that their participants IDE did not provide such suitable RP debugging utilities right at hand.
 
-
-
-
-
-- Study by Alabor et al. [@Alabor_Stolze_2020]
-  - Interviews
-  - Observational Study
+Alabor et al. conclude that knowing about the correct, externous RP debugging utilities (e.g. *RxFiddle*) is not enough. The barrier to use such utilities must be minimized; i.e. RP debugging utilities must be fully integrated into the IDE so using them is always only a keypress away.
 
 ## Prototype and Usability Test
 
