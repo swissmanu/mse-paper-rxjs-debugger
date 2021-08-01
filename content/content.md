@@ -8,9 +8,9 @@ The most basic debugging technique for instrumentation and testing are manually 
 
 Modern IDEs enable software engineers to debug programs, no matter what programming language they are implemented with, using one, generalized user interface (UI). The result is a unified user experience (UX) where the supposed correct debugger is only a click away. Software engineers have accepted these debuggers as common practice according to Alabor et al. [@Alabor_Stolze_2020]. By integrating imperative debuggers in their workflows, software engineers face a new problem when working with reactive programming (RP) though. Alabor et al. highlight that multiple of their studys participants intuitively expected their debuggers step controls to work on the RP data-flow graph and were surprised that they did not at all. This discrepancy between expected and actual behavior of the debugger lets engineers reportedly fall back to adding manual print statements.
 
-The circumstance of debugging RP programs with the wrong debugging utilities is not new: Salvaneschi et al. described the shortcoming of traditional debuggers when confronted with RP in their paper and coined the concept of *RP Debugging* [@Salvaneschi_Mezini_2016_Inspector]. Later, Banken et al. [@Banken_Meijer_Gousios_2018] researched on a possible solution for debugging RxJS RP programs using an external visualizer sandbox named *RxFiddle*. Surprisingly, software engineers still do not have the right tools at hand today when needing them most, as Alabor et al. state.
+The circumstance of debugging RP programs with the wrong debugging utilities is not new: Salvaneschi et al. described the shortcoming of traditional debuggers when confronted with RP in their paper and coined the concept of *RP Debugging* [@Salvaneschi_Mezini_2016]. Later, Banken et al. [@Banken_Meijer_Gousios_2018] researched on a possible solution for debugging RxJS RP programs using an external visualizer sandbox named *RxFiddle*. Surprisingly, software engineers still do not have the right tools at hand today when needing them most, as Alabor et al. state.
 
-We present a solution to this problem in this paper: With *RxJS Debugging for Visual Studio Code*, an extension for Microsoft Visual Studio Code^[https://code.visualstudio.com], engineers building RxJS applications get access to a powerful RP debugging tool. It integrates tightly with the IDE itself and requires no extra efforts to debug an RP program.
+We present our contribution, a solution to this problem, in this paper: With *RxJS Debugging for Visual Studio Code*, an extension for Microsoft Visual Studio Code^[https://code.visualstudio.com], engineers building RxJS applications get access to a powerful RP debugging tool. It integrates tightly with the IDE itself and requires no extra efforts to debug an RP program.
 
 Before we do a deep-dive on the extensions functionality in Section [4](#sec:implementation), we will give an example for the main challenge of RP debugging in Section [2](#sec:challenge). We discuss related work and the process that lead to our solution in Section [3](#sec:background). Before we come to our conclusion in Section [8](#sec:conclusion), we will consider potential threats to validity in Section [6](#sec:threats_to_validity) and give an overview on potential follow-up topics, research-wise as well as practical, in Section [7](#sec:future_work).
 
@@ -25,7 +25,7 @@ Before we do a deep-dive on the extensions functionality in Section [4](#sec:imp
 - *"Different Expectations"*
 - *"Wrong Expectations"*
 
-One of the main characteristics of RP is the paradigm shift away from imperatively formulated, control-flow oriented code (see Listing [1](#lst:imperative)), over to declarative, data-flow focused source code [@Salvaneschi_Mezini_2016_Inspector]. Instead of instructing the program how to do what, i.e. one step after another, we use RP abstractions to describe the transformation of a continuous flow of data as shown in Listing [2](#lst:rp).
+One of the main characteristics of RP is the paradigm shift away from imperatively formulated, control-flow oriented code (see Listing [1](#lst:imperative)), over to declarative, data-flow focused source code [@Salvaneschi_Mezini_2016]. Instead of instructing the program how to do what, i.e. one step after another, we use RP abstractions to describe the transformation of a continuous flow of data as shown in Listing [2](#lst:rp).
 
 ```{caption="Basic example of imperative-style/control-flow oriented programming in TypeScript: Multiply integers between 0 and 4 for every value that is smaller than 4 and call reportValue with the result." label=imperative .Typescript}
 import reportValue from './reporter';
@@ -71,11 +71,37 @@ This debugging technique is often time consuming and cumbersome: The more print 
 
 ## Related Work
 
-The divergence of expected and actual behavior when debugging RP programs with control-flow oriented debuggers was topic for various previous research effort.
+Salvaneschi et al. [@Salvaneschi_Mezini_2016] identified the divergence between expected and actual behavior of a control-flow oriented debugger as one of their key motivations for RP debugging: The stack-based runtime model of control-flow oriented debuggers does not match the software engineers data-flow oriented mental model of the program they are debugging. This is because the debugger has a "lack of abstractions"; it cannot interpret high-level RP abstractions and works on the low-level implementations of the regarding RP runtime environment instead. Based on this insight, the provided the first specialized RP debugging solution for RP programs implemented with REScala [@Salvaneschi_Hintz_Mezini_2014], a RP runtime for the Scala^[https://scala-lang.org/] programming language. Integrated in the Eclipse IDE, it provides extensive RP debugging functionalities like the visualization of data-flow graphs and the information that traverses through them, or reactive breakpoints which allow to interrupt program execution once a graph node re-evalutes its value.
+
+In the meantime, RP gained more traction across various fields of software engineering. With a shared vision on how to surface RP abstractions on API level, *ReactiveX*^[http://reactivex.io/] consolidates numerous open source projects in one organization. Together, its members provide RP runtime environments for many of todays mainstream programming languages like Java, C#, or Swift. For the development of JavaScript-based applications, software engineers can rely on RxJS^[https://rxjs.dev]. One of the more popular adopters of this library is Googles Angular^[https://angular.io/], a framework to develop web frontend applications, where it is used to model asynchronous operations like fetching data.
+
+Two years after Salvaneschi et al. proposed RP Debugging, Banken et al. showed in their paper [@Banken_Meijer_Gousios_2018] that debugging RxJS-based RP programs is not that different from REScala-based ones. They identified four main activities which directly correlate with 
+
+- Missing Dependencies
+	- Understanding dependencies between observables
+- Bugs in Signal Expressions
+	- Finding bugs and issues in reactive behavior
+- Understanding RP programs
+	- Comprehending behavior of operators in existing code
+	- Gaining high-level overview of the reactive structure
+- Memory and Time Leaks
+- Performance Bugs
 
 
 
-- Reactive Inspector [@Salvaneschi_Mezini_2016_Inspector]
+
+
+
+
+
+Banken et al. followed up on the foundation work by Salvaneschi et al. Discovering the fact that debugging RP programs implemented using RxJS is no[@Banken_Meijer_Gousios_2018] looked into the visualization of data-flow graphs implemented using RxJS. 
+
+Four years later, Alabor et al. [@Alabor_Stolze_2020] examined the state of RP debugging again. In their study, focussing on RxJS^[https://rxjs.dev], a RP runtime for JavaScript, they found out that software engineers 
+
+
+
+
+- Reactive Inspector [@Salvaneschi_Mezini_2016]
 - RxFiddle [@Banken_Meijer_Gousios_2018]
 - Study by Alabor et al. [@Alabor_Stolze_2020]
   - Interviews
@@ -99,7 +125,9 @@ The divergence of expected and actual behavior when debugging RP programs with c
 	  - Describe how it relates to the debugging process [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013]
 	- The Result: An extension for Visual Studio Code, as described in the next section:
 - Demonstrate/describe Extension
-  - Log Points -> Relate with probes/traces [@McDirmid_2013]
+  - Log Points
+	  - Relate with probes/traces [@McDirmid_2013]
+	  - Relate with "Understanding Reactive Programs" [@Salvaneschi_Mezini_2016]
   - Reuse same code example as in the intro
 
 # Discussion {#sec:discussion}
@@ -126,6 +154,7 @@ The divergence of expected and actual behavior when debugging RP programs with c
 - Visualization of data flows
 - Omniscient/time travel debugging for data flows
 - Record/replay of data sources for later simulation
+	- [@Perez_Nilsson_2017]
 
 ## Research
 
