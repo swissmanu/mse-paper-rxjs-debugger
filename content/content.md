@@ -94,12 +94,11 @@ Alabor et al. conclude that knowing about the correct RP debugging utility (e.g.
 
 ## Design Process
 
-The final conclusion by Alabor et al. lead us to the venture of providing a novel, fully integrated RP debugging solution for RxJS. Before we could start with the implementation, we had to answer two questions though:
+The final conclusion by Alabor et al. [@Alabor_Stolze_2020], the importance of "readiness-at-hand", became the central guiding principle for designing an RP debugger for RxJS. Because of this, it was clear to us that a novel RxJS debugger must be integrated with an IDE rather than reside in an external utilities (e.g. like *RxFiddle*). We decided to implement the debuggers proof of concept (PoC) as an extension to Microsoft Visual Studio Code, which is implemented using the same programming language as RxJS itself: TypeScript.
 
-1. What features should the RP debugging utilities provide?
-2. In which IDE should the RP debugging utilities be integrated?
+We decided further against "simply replicating" *Reactive Inspector* [@Salvaneschi_Mezini_2016] for a new RP runtime yet and chose a user-centered design (UCD) approach instead. In order to decide on the feature set for our first design iteration, we relied on the recent results by Alabor et al., which proofed that manual print statements were still a common debugging practice among RxJS software engineers. Including a solution to make this habit obsolete was the logical conclusion.
 
-In order to answer the feature set question, we determined to adopt a user-centered design approach. Further, we decided consciously against replicating *Reactive Inspector* "just" for another RP runtime. The most recent results by Alabor et al. [@Alabor_Stolze_2020] indicated that manual print statements are  one of the biggest nuisances when debugging RxJS programs. Hence, our first feature must be a solution to overcome the necessity for manual print statements.
+
 
 ...
 
