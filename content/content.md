@@ -92,7 +92,7 @@ The first iteration of *RxJS Debugging for Visual Studio Code* solves a problem 
 
 [^2]: An RxJS *Observable* is an abstraction of a reactive source. Once a consumer *subscribes* the source, the source pushes/*emits* values, *completes* (e.g. when a network request has completed), fails with an *error*, or may get *unsubscribed* from the consumer. These are the five main life cycle events engineers are interested in when debugging an observable.
 
-![*RxJS Debugging* extension running in vscode. A diamond icon indicates operator log points: Specifically, a grey outline represents a suggested log point (Line 7), a filled, red diamond an enabled log point (Line 8). Life cycle event logs are shown at the end of the respective line in the source code editor (Line 8, "Unsubscribe").](./content/operator-log-points.png)
+![*RxJS Debugging for vscode* used to debug code from Listing [2](#lst:rp): A diamond icon indicates operator log points: Specifically, a grey outline represents a suggested log point (Line 7), a filled, red diamond an enabled log point (Line 8). Life cycle event logs are shown at the end of the respective line in the source code editor (Line 8, "Unsubscribe").](./content/operator-log-points.png)
 
 ## Architecture
 
