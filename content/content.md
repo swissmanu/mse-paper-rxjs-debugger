@@ -112,10 +112,14 @@ Compared to *RxFiddle*, our implementation uses a different way to connect these
 
 [^4]: We contributed the ability to reuse a CDP connection from the generic JavaScript debugger as part of our work https://github.com/microsoft/vscode-js-debug/pull/964
 
-# Discussion {#sec:discussion}
+# Validation {#sec:discussion}
+
+
 
 - Relate to [@Salvaneschi_Mezini_2016] "Understanding reactive programs"
 - Cognitive Walkthrough
+	- [@Wharton_Rieman_Clayton_Polson_1994]
+	- [@Nielsen_1994]
 	- https://github.com/swissmanu/mse-paper-pa2
 - First prototype based on results by Alabor et al.
 - User Journey
