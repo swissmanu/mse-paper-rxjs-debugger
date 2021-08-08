@@ -125,6 +125,11 @@ Compared to *RxFiddle*, our implementation uses a different way to connect these
 - User Journey
 	- https://alabor.me/research/user-journey-debugging-of-rxjs-based-applications/
 - Moderated Remote Usability Test
+  - Systematic: Synchronous Remote Usability Evaluation
+    - [@Andreasen_Nielsen_Schroder_Stage_2007]
+  - Think aloud:
+    - [@Boren_Ramey_2000]
+    - [@Norgaard_Hornbaek_2006]
 	- 3 Participants ... cite why this is enough regarding Nielsen
 	- Outcome
 
