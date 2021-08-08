@@ -112,19 +112,24 @@ Compared to *RxFiddle*, our implementation uses a different way to connect these
 
 [^4]: We contributed the ability to reuse a CDP connection from the generic JavaScript debugger as part of our work https://github.com/microsoft/vscode-js-debug/pull/964
 
-# Validation {#sec:discussion}
+# Usability Validation {#sec:discussion}
 
+Making use of a User Centered Design (UCD) approach, we implemented our extension in three iterations: After sketching a rough (i) proof of concept, we did a cognitive walkthrough to validate our idea of replacing manual print statements with operator log points. The resulting data helped us to build the first (ii) prototype of our extension. A moderated remote usability test helped us uncovering blind spots in our UX concept as well as finding bugs early in the development process. The outcome finally allowed us to implement the (iii) first minor release, which we released to the Visual Studio Marketplace eventually.
 
+Alabor et al. [@Alabor_Stolze_2020] used two, small web applications^[https://github.com/swissmanu/mse-pa1-experiment] in their observational study. Because their participants reportedly used manual print statements to debug these applications, we decided to reuse *Problem 2*, the more complex application, of the authors for our usability inspections. Using an already validated object for testing helped us to prevent  introducing unwanted bias.
 
-- Relate to [@Salvaneschi_Mezini_2016] "Understanding reactive programs"
+## Cognitive Walkthrough
+
 - Cognitive Walkthrough
 	- [@Wharton_Rieman_Clayton_Polson_1994]
 	- [@Nielsen_1994]
 	- https://github.com/swissmanu/mse-paper-pa2
-- First prototype based on results by Alabor et al.
-- User Journey
-	- https://alabor.me/research/user-journey-debugging-of-rxjs-based-applications/
+- Use Case: Alabor et al. [@Alabor_Stolze_2020]
+
+## Moderated Remote Usability Test
+
 - Moderated Remote Usability Test
+	- Use Case: again: Alabor et al. [@Alabor_Stolze_2020]
   - Systematic: Synchronous Remote Usability Evaluation
     - [@Andreasen_Nielsen_Schroder_Stage_2007]
   - Think aloud:
