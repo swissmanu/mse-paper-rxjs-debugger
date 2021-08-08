@@ -10,7 +10,9 @@ Modern IDEs enable software engineers to debug programs, no matter what programm
 
 The circumstance of debugging RP programs with the wrong debugging utilities is not new: Salvaneschi et al. described the shortcoming of traditional debuggers when confronted with RP in their paper and coined the concept of *RP Debugging* [@Salvaneschi_Mezini_2016]. Later, Banken et al. [@Banken_Meijer_Gousios_2018] researched on a possible solution for debugging RxJS RP programs using an external visualizer sandbox named *RxFiddle*. Surprisingly, software engineers still do not have the right tools at hand today when needing them most, as Alabor et al. state.
 
-We present our contribution, a solution to this problem, in this paper: With *RxJS Debugging for Visual Studio Code*, an extension for Microsoft Visual Studio Code^[https://code.visualstudio.com], engineers building RxJS applications get access to a powerful RP debugging tool. It integrates tightly with the IDE itself and requires no extra efforts to debug an RP program.
+We present our contribution, a solution to this problem, in this paper: With *RxJS Debugging for Visual Studio Code*, an extension for Microsoft Visual Studio Code^[https://code.visualstudio.com] (vscode), engineers building RxJS applications get access to a powerful RP debugging tool. It integrates tightly with the IDE itself and requires no extra efforts to debug an RP program.
+
+TODO Tell about contribution on architecture iteration based on robust CDP communication channel.
 
 TODO Rewrite ~~Before we do a deep-dive on the extensions functionality in Section [4](#sec:implementation), we will give an example for the main challenge of RP debugging in Section [2](#sec:challenge). We discuss related work in Section [3](#sec:background). Before we come to our conclusion in Section [8](#sec:conclusion), we will consider potential threats to validity in Section [6](#sec:threats_to_validity) and give an overview on potential follow-up topics, research-wise as well as practical, in Section [7](#sec:future_work).~~
 
@@ -80,26 +82,32 @@ Another two years after Banken et al. published their work, Alabor et al. [@Alab
 
 Alabor et al. conclude that knowing about the correct RP debugging utility (e.g. *RxFiddle*) is not enough. The barrier to use such utilities must be minimized; i.e. in order to live up to their full potential, RP debugging utilities must be fully integrated into the IDE so using them is ideally only an engineers keypress away.
 
-# Extension {#sec:implementation}
+# Readiness-to-hand: An RxJS RP Debugger {#sec:implementation}
 
-~~The final conclusion by Alabor et al. [@Alabor_Stolze_2020], the importance of "readiness-at-hand", became the central guiding principle for designing an RP debugger for RxJS. Because of this, it was clear to us that a novel RxJS debugger must be integrated with an IDE rather than reside in an external utilities (e.g. like *RxFiddle*). We decided to implement the debuggers proof of concept (PoC) as an extension to Microsoft Visual Studio Code, which is implemented using the same programming language as RxJS itself: TypeScript.~~
+We translated these findings into the central principle for the design of our RP debugger for RxJS: *Readiness-to-hand*. Software engineers should always have the proper debugging tool ready, no matter what kind of program they are currently confronted with. Further, this tool should integrate with the engineers workflow seamlessly.
 
-~~We decided further against "simply replicating" *Reactive Inspector* [@Salvaneschi_Mezini_2016] for a new RP runtime yet and chose a user-centered design (UCD) approach instead. In order to decide on the feature set for our first design iteration, we relied on the recent results by Alabor et al., which proofed that manual print statements were still a common debugging practice among RxJS software engineers. Including a solution to make this habit obsolete was the logical conclusion.~~
+## Features
+
+The first iteration of *RxJS Debugging for Visual Studio Code* solves a problem repeatedly reported in previous research and supports engineers during the instrumentation as well as the hypothesis testing phase [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] of debugging: *Operator Log Points* make manual print statements obsolete and are based on the *probe* concept proposed by McDirmid [@McDirmid_2013] for live programming: Our extension detects operators in the source code and suggests a log point inline. Similar to a live probe, an enabled log point weaves information on an observables life cycle events[^2] into the source code editor, once the program is executed with the debugger attached.
+
+[^2]: An RxJS *Observable* is an abstraction of a reactive source. Once a consumer *subscribes* the source, the source pushes/*emits* values, *completes* (e.g. when a network request has completed), fails with an *error*, or may get *unsubscribed* from the consumer. These are the five main life cycle events engineers are interested in when debugging an observable.
+
+![*RxJS Debugging* extension running in vscode. A diamond icon indicates operator log points: Specifically, a grey outline represents a suggested log point (Line 7), a filled, red diamond an enabled log point (Line 8). Life cycle event logs are shown at the end of the respective line in the source code editor (Line 8, "Unsubscribe").](./content/operator-log-points.png)
+
+## Architecture
+
+The technical architecture of *RxJS Debugging for vscode* is a refined version of the system proposed by Banken et al. [@Banken_Meijer_Gousios_2018] and shares its fundamental components as shown in Figure [3](#fig:architecture): The *Telemetry* component runs in the same process as the debugged RP program augmenting it. Telemetry gathers and relays life cycle events to the debuggers *UI* component which runs as an extension in the vscode process.
+
+![TODO do it nice & improve figure caption; The *Telemetry* component instruments the RP program (right). The *UI* component runs as an extension within vscodes process. The two components communicate with each other by piggybacking messages on the CDP communication channel, which is established by the generic vscode JavaScript debugger.](./content/architecture.png)
+
+Our implementation uses a different way to connect these two components, compared to *RxFiddle*. Where the solution by Banken et al. uses WebSockets to exchange messages, we leverage on the *Chrome DevTools Protocol*[^3] (CDP) connection, which gets established by the generic JavaScript debugger, instead. We decided for this approach because it gives us two benefits out of the box: (i) UX-wise, the software engineer does not to decide "how" they want to debug their program (i.e. traditionally control-flow oriented or RP, data-flow oriented). They start debugging using familiar commands and RP specific debugging capabilities are provided when available. (ii) Technically, we do not need to care for "where" the RP program the user wants to debug is running (e.g. on the local machine, in a browser, or a process on a remote computer) since this is already taken care for by the generic JavaScript debugger. This results in a stable, less complex system.
 
 
-- New work:
-	- Prototyp
-	  - Describe how it relates to the debugging process [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013]
-	- The Result: An extension for Visual Studio Code, as described in the next section:
-- Demonstrate/describe Extension
-  - Log Points
-	  - Relate with probes/traces [@McDirmid_2013]
-	  - Relate with "Understanding Reactive Programs" [@Salvaneschi_Mezini_2016]
-  - Reuse same code example as in the intro
-
+[^3]: JavaScript virtual machines like V8 (used in Google Chrome, Node.js) or SpiderMonkey (used in Mozilla Firefox) implement (a subset of) the CDP. External debugging utilities can use CDP to connect and debug programs at runtime. vscode is shipped with *js-debug*, a control-flow oriented JavaScript debugger, relying on CDP.
 
 # Discussion {#sec:discussion}
 
+- Relate to [@Salvaneschi_Mezini_2016] "Understanding reactive programs"
 - Cognitive Walkthrough
 	- https://github.com/swissmanu/mse-paper-pa2
 - First prototype based on results by Alabor et al.
