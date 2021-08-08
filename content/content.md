@@ -12,9 +12,9 @@ The circumstance of debugging RP programs with the wrong debugging utilities is 
 
 We present our contribution, a solution to this problem, in this paper: With *RxJS Debugging for Visual Studio Code*, an extension for Microsoft Visual Studio Code^[https://code.visualstudio.com] (vscode), engineers building RxJS applications get access to a powerful RP debugging tool. It integrates tightly with the IDE itself and requires no extra efforts to debug an RP program.
 
-TODO Tell about contribution on architecture iteration based on robust CDP communication channel.
+*TODO Tell about contribution on architecture iteration based on robust CDP communication channel.*
 
-TODO Rewrite ~~Before we do a deep-dive on the extensions functionality in Section [4](#sec:implementation), we will give an example for the main challenge of RP debugging in Section [2](#sec:challenge). We discuss related work in Section [3](#sec:background). Before we come to our conclusion in Section [8](#sec:conclusion), we will consider potential threats to validity in Section [6](#sec:threats_to_validity) and give an overview on potential follow-up topics, research-wise as well as practical, in Section [7](#sec:future_work).~~
+*TODO Rewrite Before we do a deep-dive on the extensions functionality in Section [4](#sec:implementation), we will give an example for the main challenge of RP debugging in Section [2](#sec:challenge). We discuss related work in Section [3](#sec:background). Before we come to our conclusion in Section [8](#sec:conclusion), we will consider potential threats to validity in Section [6](#sec:threats_to_validity) and give an overview on potential follow-up topics, research-wise as well as practical, in Section [7](#sec:future_work).*
 
 # RP Debugging: The Hard Way {#sec:challenge}
 
@@ -100,10 +100,11 @@ The technical architecture of *RxJS Debugging for vscode* is a refined version o
 
 ![TODO do it nice & improve figure caption; The *Telemetry* component instruments the RP program (right). The *UI* component runs as an extension within vscodes process. The two components communicate with each other by piggybacking messages on the CDP communication channel, which is established by the generic vscode JavaScript debugger.](./content/architecture.png)
 
-Our implementation uses a different way to connect these two components, compared to *RxFiddle*. Where the solution by Banken et al. uses WebSockets to exchange messages, we leverage on the *Chrome DevTools Protocol*[^3] (CDP) connection, which gets established by the generic JavaScript debugger, instead. We decided for this approach because it gives us two benefits out of the box: (i) UX-wise, the software engineer does not to decide "how" they want to debug their program (i.e. traditionally control-flow oriented or RP, data-flow oriented). They start debugging using familiar commands and RP specific debugging capabilities are provided when available. (ii) Technically, we do not need to care for "where" the RP program the user wants to debug is running (e.g. on the local machine, in a browser, or a process on a remote computer) since this is already taken care for by the generic JavaScript debugger. This results in a stable, less complex system.
-
+Our implementation uses a different way to connect these two components, compared to *RxFiddle*. Where the solution by Banken et al. uses WebSockets to exchange messages, we leverage on the *Chrome DevTools Protocol*[^3] (CDP) connection, which gets established by the generic JavaScript debugger, instead[^4]. We decided for this approach because it gives us two benefits out of the box: (i) UX-wise, the software engineer does not to decide "how" they want to debug their program (i.e. traditionally control-flow oriented or RP, data-flow oriented). They start debugging using familiar commands and RP specific debugging capabilities are provided when available. (ii) Technically, we do not need to care for "where" the RP program the user wants to debug is running (e.g. on the local machine, in a browser, or a process on a remote computer) since this is already taken care for by the generic JavaScript debugger. This results in a stable, less complex system.
 
 [^3]: JavaScript virtual machines like V8 (used in Google Chrome, Node.js) or SpiderMonkey (used in Mozilla Firefox) implement (a subset of) the CDP. External debugging utilities can use CDP to connect and debug programs at runtime. vscode is shipped with *js-debug*, a control-flow oriented JavaScript debugger, relying on CDP.
+
+[^4]: We contributed the ability to reuse a CDP connection from the generic JavaScript debugger as part of our work https://github.com/microsoft/vscode-js-debug/pull/964
 
 # Discussion {#sec:discussion}
 
