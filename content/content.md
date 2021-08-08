@@ -16,8 +16,6 @@ Within this paper, we are going to present two concrete contributions to the fie
 
 1. With *RxJS Debugging for Visual Studio Code*, an extension for Microsoft Visual Studio Code^[https://code.visualstudio.com] (vscode), engineers building RxJS applications get access to a powerful RP debugging tool. It integrates tightly with the IDE itself and requires no extra efforts to debug an RP program.
 
-\ 
-
 2. A refined architecture for RxJS RP debuggers leveraging on the *Chrome DevTools Protocol*^[https://chromedevtools.github.io/devtools-protocol/] (CDP) for message-based communication between individual system components.
 
 \ 
