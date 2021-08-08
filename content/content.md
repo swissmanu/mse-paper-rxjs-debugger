@@ -12,15 +12,15 @@ The circumstance of debugging RP programs with the wrong debugging utilities is 
 
 Within this paper, we are going to present two concrete contributions to the field of RxJS RP debugging:
 
-\_
+\ 
 
 1. With *RxJS Debugging for Visual Studio Code*, an extension for Microsoft Visual Studio Code^[https://code.visualstudio.com] (vscode), engineers building RxJS applications get access to a powerful RP debugging tool. It integrates tightly with the IDE itself and requires no extra efforts to debug an RP program.
 
-\_
+\ 
 
 2. A refined architecture for RxJS RP debuggers leveraging on the *Chrome DevTools Protocol*^[https://chromedevtools.github.io/devtools-protocol/] (CDP) for message-based communication between individual system components.
 
-\_
+\ 
 
 *TODO Rewrite Before we do a deep-dive on the extensions functionality in Section [4](#sec:implementation), we will give an example for the main challenge of RP debugging in Section [2](#sec:challenge). We discuss related work in Section [3](#sec:background). Before we come to our conclusion in Section [8](#sec:conclusion), we will consider potential threats to validity in Section [6](#sec:threats_to_validity) and give an overview on potential follow-up topics, research-wise as well as practical, in Section [7](#sec:future_work).*
 
