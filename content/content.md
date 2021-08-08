@@ -12,11 +12,15 @@ The circumstance of debugging RP programs with the wrong debugging utilities is 
 
 Within this paper, we are going to present two concrete contributions to the field of RxJS RP debugging:
 
+\_
 
 1. With *RxJS Debugging for Visual Studio Code*, an extension for Microsoft Visual Studio Code^[https://code.visualstudio.com] (vscode), engineers building RxJS applications get access to a powerful RP debugging tool. It integrates tightly with the IDE itself and requires no extra efforts to debug an RP program.
 
+\_
+
 2. A refined architecture for RxJS RP debuggers leveraging on the *Chrome DevTools Protocol*^[https://chromedevtools.github.io/devtools-protocol/] (CDP) for message-based communication between individual system components.
 
+\_
 
 *TODO Rewrite Before we do a deep-dive on the extensions functionality in Section [4](#sec:implementation), we will give an example for the main challenge of RP debugging in Section [2](#sec:challenge). We discuss related work in Section [3](#sec:background). Before we come to our conclusion in Section [8](#sec:conclusion), we will consider potential threats to validity in Section [6](#sec:threats_to_validity) and give an overview on potential follow-up topics, research-wise as well as practical, in Section [7](#sec:future_work).*
 
@@ -92,7 +96,7 @@ We translated these findings into the central principle for the design of our RP
 
 ## Features
 
-We made manual print statements for debugging RxJS RP programs obsolete by providing a better alternative with *RxJS Debugging for vscode*. For this, we implemented *Operator Log Points*, a similar tool to *probes* as proposed by McDirmid [McDirmid_2013] for live programming environments. The extension achieves this by continuously parsing of the source code in the current editor. The resulting AST is evaluated in order to detect operators passed to the *pipe* function of an observable[^2]. For every operator detected, the extension suggests a log point by displaying a diamond icon. A suggested log point can be enabled by hovering the mouse pointer on its icon and selecting the *Add Operator Log Point* action (see Figure [3](#fig:operator-log-points)). With this, engineers have our debugging tool right at hand without any detours.
+We made manual print statements for debugging RxJS RP programs obsolete by providing a better alternative with *RxJS Debugging for vscode*. For this, we implemented *Operator Log Points*, a similar tool to *probes* as proposed by McDirmid [@McDirmid_2013] for live programming environments. The extension achieves this by continuously parsing of the source code in the current editor. The resulting AST is evaluated in order to detect operators passed to the *pipe* function of an observable[^2]. For every operator detected, the extension suggests a log point by displaying a diamond icon. A suggested log point can be enabled by hovering the mouse pointer on its icon and selecting the *Add Operator Log Point* action (see Figure [3](#fig:operator-log-points)). With this, engineers have our debugging tool right at hand without any detours.
 
 [^2]: An RxJS *Observable* is an abstraction of a reactive source. Once a consumer *subscribes* the source, the source pushes/*emits* values, *completes* (e.g. when a network request has completed), fails with an *error*, or may get *unsubscribed* from the consumer. These are the five main life cycle events engineers are interested in when debugging an observable. An operators is a node in the materialized data-flow graph. An operator transforms emitted values or composes multiple observables.
 
