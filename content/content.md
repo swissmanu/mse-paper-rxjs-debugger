@@ -126,13 +126,13 @@ For both the cognitive walkthrough and the remote usability test, we reused the 
 
 The first iteration on building an RxJS debugger resulted in a POC demonstrating the basic concept of operator log points as a vscode extension.
 
-At this early stage of development, we were looking for an informal, expert-driven usability inspection method [@Nielsen_1994], which we found in the cognitive walkthrough [@Wharton_Rieman_Clayton_Polson_1994]. After we prepared the persona of *Frank Flow*, the profile of a typical user of the RP debugger, we formulated the action sequence for the walkthrough (Figure [4](#fig:cognitive-walkthrough)) based on the debugging process by Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] and Franks potential workflow to debug the *Problem 1* web application by Alabor et al.
+At this early stage of development, we were looking for an informal, expert-driven usability inspection method [@Nielsen_1994], which we found in the cognitive walkthrough [@Wharton_Rieman_Clayton_Polson_1994]. After we prepared the persona of *Frank Flow*, the profile of a typical user of the RP debugger, we formulated the action sequence for the walkthrough (Table [2](#fig:cognitive-walkthrough)) based on the debugging process by Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] and Franks potential workflow to debug the *Problem 1* web application by Alabor et al.
 
 ```{.include}
-content/figures/steps-cognitive-walkthrough.tex
+content/tables/steps-cognitive-walkthrough.tex
 ```
 
-We successfully identify six major usability issues during the later steps of the walkthrough, as summarized in Table [2](#tbl:cognitive-walkthrough-issues). The full walkthrough report, including the persona description of Frank Flow, is available in **XXX Where do we make this available? Appendix? Additional document? ...?**.
+We successfully identify six major usability issues during the later steps of the walkthrough, as summarized in Table [3](#tbl:cognitive-walkthrough-issues). The full walkthrough report, including the persona description of Frank Flow, is available in **XXX Where do we make this available? Appendix? Additional document? ...?**.
 
 ```{.include}
 content/tables/issues-cognitive-walkthrough.tex
@@ -156,7 +156,7 @@ Once the participants had everything set up, they worked for 25 minutes finding 
 
 ### Study Evaluation
 
-One participant was not able to get the prototype up and running on their system, which means we had two valid data sets for further evaluation after study execution. We categorized the observed usability issues by debugging process phase (i.e. gather context, instrument hypothesis, and test hypothesis) and task (e.g. "manage log points" or "interpret log"). From a total of 10 issues, we observed four being a problem for both remaining study subjects (see Table [3](#tbl:issues-usability-test) for a summary). The full report of usability issues is available in **XXX Where do we make this available? Appendix? Additional document? ...?**
+One participant was not able to get the prototype up and running on their system, which means we had two valid data sets for further evaluation after study execution. We categorized the observed usability issues by debugging process phase (i.e. gather context, instrument hypothesis, and test hypothesis) and task (e.g. "manage log points" or "interpret log"). From a total of 10 issues, we observed four being a problem for both remaining study subjects (see Table [4](#tbl:issues-usability-test) for a summary). The full report of usability issues is available in **XXX Where do we make this available? Appendix? Additional document? ...?**
 
 ```{.include}
 content/tables/issues-usability-test.tex
