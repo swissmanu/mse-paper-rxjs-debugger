@@ -6,8 +6,6 @@ When software engineers look at the source code of an existing application, they
 content/figures/debugging-process.tex
 ```
 
-![Iterative Debugging Process after Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013]: Gather context to formalize hypothesis, instrument hypothesis producing a modified system, and testing hypothesis resulting in a new iteration or a successfully proved hypothesis.](./content/figures/debugging-process.png)
-
 The most basic debugging technique for instrumentation and testing are manually added print statements to the source code: They generate execution logs when placed  across the programs code and allow the reconstruction of the programs runtime behavior. Once the number of generated log entries increases, the required amount of work to analyze the logs gets out of hand quickly. This is why specialized debugging utilities provide tools to interact with a program at runtime: After interrupting program execution with a breakpoint, they allow engineers to inspect stack frames, inspect and modify variables, step through successive source code statements, or resume program execution eventually. These utilities work best with imperative, or control-flow oriented programming languages since they interact with the debugged program on a statement and stack frame level.
 
 Modern IDEs enable software engineers to debug programs, no matter what programming language they are implemented with, using one, generalized user interface (UI). The result is a unified user experience (UX) where the supposed correct debugger is only a click away. Software engineers have accepted these debuggers as common practice according to Alabor et al. [@Alabor_Stolze_2020]. By integrating imperative debuggers in their workflows, software engineers face a new problem when working with reactive programming (RP) though. Alabor et al. highlight that multiple of their studys participants intuitively expected their debuggers step controls to work on the RP data-flow graph and were surprised that they did not. This discrepancy between expected and actual behavior of the debugger lets engineers fall back to adding manual print statements.
@@ -120,7 +118,7 @@ Contrary to *RxFiddle*, our implementation uses a different way to connect these
 
 # Usability Validation {#sec:discussion}
 
-Making use of a User Centered Design (UCD) approach, we implemented our extension in three iterations: After sketching a rough (i) proof of concept (POC), we performed a cognitive walkthrough to validate our idea of replacing manual print statements with operator log points. The resulting data helped us to build a (ii) prototype of the extension. We conducted a synchronous, moderated, remote usability test with three subjects, which allowed us to uncover blind spots in the UX concept of the prototype as well as finding bugs early in the development process. We used the results of these sessions for further refinement and finalized the (iii) first minor version of the RxJS RP debugger, which we released to the Visual Studio Marketplace in May 2021.
+Making use of a User Centered Design (UCD) approach, we implemented our extension in three iterations: After sketching a rough (i) proof of concept (POC), we performed a cognitive walkthrough to validate our idea of replacing manual print statements with operator log points. The resulting data helped us to build a (ii) prototype of the extension. We conducted a moderated remote usability test with three subjects, which allowed us to uncover blind spots in the UX concept of the prototype as well as finding bugs early in the development process. We used the results of these sessions for further refinement and finalized the (iii) first minor version of the RxJS RP debugger, which we released to the Visual Studio Marketplace in May 2021.
 
 For both the cognitive walkthrough and the remote usability test, we reused the objects for testing created by Alabor et al. [@Alabor_Stolze_2020] for their observational study^[https://github.com/swissmanu/mse-pa1-experiment]. Since their study subjects reportedly used manual print statements to debug  those, we were able to minimize the introduction of unwanted bias by creating new examples for our usability inspections.
 
@@ -141,17 +139,18 @@ content/tables/issues-cognitive-walkthrough.tex
 ```
 
 
+
 ## Moderated Remote Usability Test
 
-- Moderated Remote Usability Test
-	- Use Case: again: Alabor et al. [@Alabor_Stolze_2020]
-  - Systematic: Synchronous Remote Usability Evaluation
-    - [@Andreasen_Nielsen_Schroder_Stage_2007]
-  - Think aloud:
-    - [@Boren_Ramey_2000]
-    - [@Norgaard_Hornbaek_2006]
-	- 3 Participants ... cite why this is enough regarding Nielsen
-	- Outcome
+After the initial validation using the cognitive walkthrough by ourselfs, we were ready to show the refined prototype to actual users. The optimal number of participants for a think aloud test are five subjects [@Nielsen_Participants_1994]. However, we decided that three software engineers were a sufficient number of participants since we were looking for a basic indication if our debugger improved anything at all rather than the thoroughness of a full usability test.
+
+We recruited the participants for the usability test via Twitter. Subjects were required to have at least worked with RxJS recently and use vscode as their main IDE. All participants received a PDF containing the study briefing and the basic functionality of the prototype a week before the actual test session took place. Along with the two main agenda points, performing the usability test and collecting informal feedback to the prototype, the briefing document highlighted the importance of "think aloud" [@Boren_Ramey_2000; @Norgaard_Hornbaek_2006], the practice of verbalizing thoughts constantly without reasoning about them. Further, we informed the subjects about the minimal software requirements (Node.js, npm/Yarn, vscode, and Zoom) for the remote usability test.
+
+Right at the start of a test session, we provided each participant with the URL to a Git repository^[https://github.com/swissmanu/mse-pa2-usability-test] containing the *Problem 2* web application by Alabor et al. and the packaged version of the debugger extension prototype for vscode. While the subjects prepared their development environment, we started the video and audio recording with their consent and gave a short introduction to the code base they just received.
+
+Once the participants had everything set up, they had 25 minutes time to find and solve bugs in the provided web application. We took care to repeatedly remind a subject not vocalizing their thoughts during this part of the session.
+
+**OUTCOME**
 
 # Threats to Validity {#sec:threats_to_validity}
 
