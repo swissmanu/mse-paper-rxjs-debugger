@@ -2,7 +2,7 @@
 
 When software engineers look at the source code of an existing application, they want to learn about how the program was implemented technically. They might do this either because they want to get themselves acquainted with a new code base they never worked with before (e.g. during onboarding of a new team member) or, more often, because someone reported an unexpected behavior of the application (e.g. the program crashed). This kind of work is commonly known as "debugging" [@IEEE_Glossary]. Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] formalized an iterative process model (see Figure [1](#fig:debugging-process)) by dividing the broader task of debugging into three concrete steps: The engineer uses (i) gathered context information to build a hypothesis on what the problem at hand might be. With the goal to prove this hypothesis, the engineer (ii) instruments the program using appropriate techniques. Eventually, they (iii) test the instrumented program. If the outcome proves the hypothesis to be correct, the process ends. Otherwise, the engineer uses gained insight as input for the next iteration.
 
-![TODO: Replace with proper graphic; Orient steps clockwise; Iterative Debugging Process after Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013]: Gather context to formalize hypothesis, instrument hypothesis producing a modified system, and testing hypothesis resulting in a new iteration or a successfully proved hypothesis.](./content/debugging-process.png)
+![TODO: Replace with proper graphic; Orient steps clockwise; Iterative Debugging Process after Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013]: Gather context to formalize hypothesis, instrument hypothesis producing a modified system, and testing hypothesis resulting in a new iteration or a successfully proved hypothesis.](./content/figures/debugging-process.png)
 
 The most basic debugging technique for instrumentation and testing are manually added print statements to the source code: They generate execution logs when placed  across the programs code and allow the reconstruction of the programs runtime behavior. Once the number of generated log entries increases, the required amount of work to analyze the logs gets out of hand quickly. This is why specialized debugging utilities provide tools to interact with a program at runtime: After interrupting program execution with a breakpoint, they allow engineers to inspect stack frames, inspect and modify variables, step through successive source code statements, or resume program execution eventually. These utilities work best with imperative, or control-flow oriented programming languages since they interact with the debugged program on a statement and stack frame level.
 
@@ -71,7 +71,7 @@ Since then, RP gained more traction across various fields of software engineerin
 Two years after Salvaneschi et al. proposed RP Debugging, Banken et al. [@Banken_Meijer_Gousios_2018] showed in their paper that debugging RxJS-based RP programs is not that different from REScala-based ones. They were able to categorize the debugging motivations of their study participants into four main, overarching themes. These can be put into direct correlation with the debugging issues identified by Salvaneschi et al. earlier as we show in Table [1](#tbl:salvaneschi-vs-banken).
 
 ```{.include}
-content/table-salvaneschi-vs-banken.tex
+content/tables/table-salvaneschi-vs-banken.tex
 ```
 
 The authors further provided a debugger in form of an isolated visualizer sandbox: *RxFiddle*. The browser-based application executes an RxJS program and visualize its runtime behavior in two dimensions: A central (i) data-flow graph shows which elements in the graph interact with each other and a dynamic (ii) marble diagram[^1] represents the values which were processed by the graph over time.
@@ -98,7 +98,7 @@ We made manual print statements for debugging RxJS RP programs obsolete by provi
 
 Once the software engineer starts the RP program with vscodes built-in JavaScript debugger, our extension displays life cycle events for all enabled log points inline with the source code which produced the event. Engineers are free to enable or disable additional log points during the debugging session.
 
-![*RxJS Debugging for vscode* used to debug code from Listing [2](#lst:rp): A diamond icon indicates operator log points: Specifically, a grey outline represents a suggested log point (Line 7), a filled, red diamond an enabled log point (Line 8). Life cycle event logs are shown at the end of the respective line in the source code editor (Line 8, "Unsubscribe"). Log points are managed by hovering a log point icon and selecting the appropriate action.](./content/operator-log-points.png)
+![*RxJS Debugging for vscode* used to debug code from Listing [2](#lst:rp): A diamond icon indicates operator log points: Specifically, a grey outline represents a suggested log point (Line 7), a filled, red diamond an enabled log point (Line 8). Life cycle event logs are shown at the end of the respective line in the source code editor (Line 8, "Unsubscribe"). Log points are managed by hovering a log point icon and selecting the appropriate action.](./content/figures/operator-log-points.png)
 
 The result is a strikingly simple, yet effective way to reconstruct and trace the runtime behavior of RxJS observables. Hence, this simplicity is only possible because of a coordinated, distributed system behind the curtains.
 
@@ -106,7 +106,7 @@ The result is a strikingly simple, yet effective way to reconstruct and trace th
 
 The technical architecture of *RxJS Debugging for vscode* is a refined version of the system proposed by Banken et al. [@Banken_Meijer_Gousios_2018] and shares its fundamental components as shown in Figure [4](#fig:architecture): The *Telemetry* component runs in the same process as the debugged RP program augmenting it. Telemetry gathers and relays life cycle events to the debuggers *UI* component which runs as an extension in the vscode process.
 
-![TODO do it nice & improve figure caption; The *Telemetry* component instruments the RP program (right). The *UI* component runs as an extension within vscodes process. The two components communicate with each other by piggybacking messages on the CDP communication channel, which is established by the generic vscode JavaScript debugger.](./content/architecture.png)
+![TODO do it nice & improve figure caption; The *Telemetry* component instruments the RP program (right). The *UI* component runs as an extension within vscodes process. The two components communicate with each other by piggybacking messages on the CDP communication channel, which is established by the generic vscode JavaScript debugger.](./content/figures/architecture.png)
 
 Contrary to *RxFiddle*, our implementation uses a different way to connect these two components. Where the solution by Banken et al. uses WebSockets to exchange messages, we leverage on the CDP[^3] connection, established by the generic JavaScript debugger, instead[^4]. We decided for this approach because it gives us two benefits out of the box: (i) UX-wise, the software engineer does not to decide "how" they want to debug their program (i.e. traditionally control-flow oriented or RP, data-flow oriented). They start debugging using familiar commands and RP specific debugging capabilities are provided once available without additional effort. (ii) Technically, we do not need to care for "where" the RP program the user wants to debug is running (e.g. locally in a browser or in a Node.js process on a remote computer) since this is already taken care for by the generic JavaScript debugger. The result is a robust, less complex system since we do not need to maintain an additional side channel for RP debugging communication.
 
@@ -116,17 +116,25 @@ Contrary to *RxFiddle*, our implementation uses a different way to connect these
 
 # Usability Validation {#sec:discussion}
 
-Making use of a User Centered Design (UCD) approach, we implemented our extension in three iterations: After sketching a rough (i) proof of concept, we performed a cognitive walkthrough to validate our idea of replacing manual print statements with operator log points. The resulting data helped us to build the first (ii) prototype of our extension. A moderated remote usability test helped us uncovering blind spots in our UX concept as well as finding bugs early in the development process. The outcome finally allowed us to implement the (iii) first minor release, which we released to the Visual Studio Marketplace.
+Making use of a User Centered Design (UCD) approach, we implemented our extension in three iterations: After sketching a rough (i) proof of concept (POC), we performed a cognitive walkthrough to validate our idea of replacing manual print statements with operator log points. The resulting data helped us to build the first (ii) prototype of our extension. A moderated remote usability test helped us uncovering blind spots in our UX concept as well as finding bugs early in the development process. The outcome finally allowed us to implement the (iii) first minor release, which we released to the Visual Studio Marketplace.
 
-Alabor et al. [@Alabor_Stolze_2020] used two, small web applications^[https://github.com/swissmanu/mse-pa1-experiment] in their observational study. Because their participants reportedly used manual print statements to debug these applications, we decided to reuse *Problem 2*, the more complex application, of the authors for our usability inspections. Using an already validated object for testing helped us to prevent  introducing unwanted bias.
+Alabor et al. [@Alabor_Stolze_2020] used two, small web applications^[https://github.com/swissmanu/mse-pa1-experiment] in their observational study. Their participants reportedly used manual print statements to debug these applications. Because of this, we decided to reuse *Problem 2*, the more complex application of the two, for our usability inspections. Using an already validated object for testing helped us to prevent  introducing unwanted bias.
 
 ## Cognitive Walkthrough
 
-- Cognitive Walkthrough
-	- [@Wharton_Rieman_Clayton_Polson_1994]
-	- [@Nielsen_1994]
-	- https://github.com/swissmanu/mse-paper-pa2
-- Use Case: Alabor et al. [@Alabor_Stolze_2020]
+The first iteration on building an RxJS debugger resulted in a POC demonstrating the basic concept of operator log points as a vscode extension.
+
+At this early stage of the debugger, we were looking for an informal, expert-driven usability inspection method [@Nielsen_1994], which we found with the cognitive walkthrough [@Wharton_Rieman_Clayton_Polson_1994]. After we got the persona of *Frank Flow*, basically the profile of a typical user of the RP debugger, prepared, we formulated the action sequence of the walkthrough (Figure [5](#fig:cognitive-walkthrough)) based on the debugging process after Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] and Franks potential workflow to solve the exemplary web application by Alabor et al.
+
+```{.include}
+content/figures/tikz/steps-cognitive-walkthrough.tex
+```
+
+We could successfully identify six major usability issues in the POC, as summarized in Table [x](#tbl:cognitive-walkthrough-issies). The full report of the cognitive walkthrough is available in **XXX Where do we put this?**.
+
+```{.include}
+content/figures/tikz/steps-cognitive-walkthrough.tex
+```
 
 ## Moderated Remote Usability Test
 
