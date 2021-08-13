@@ -2,7 +2,11 @@
 
 When software engineers look at the source code of an existing application, they want to learn about how the program was implemented technically. They might do this either because they want to get themselves acquainted with a new code base they never worked with before (e.g. during onboarding of a new team member) or, more often, because someone reported an unexpected behavior of the application (e.g. the program crashed). This kind of work is commonly known as "debugging" [@IEEE_Glossary]. Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] formalized an iterative process model (see Figure [1](#fig:debugging-process)) by dividing the broader task of debugging into three concrete steps: The engineer uses (i) gathered context information to build a hypothesis on what the problem at hand might be. With the goal to prove this hypothesis, the engineer (ii) instruments the program using appropriate techniques. Eventually, they (iii) test the instrumented program. If the outcome proves the hypothesis to be correct, the process ends. Otherwise, the engineer uses gained insight as input for the next iteration.
 
-![TODO: Replace with proper graphic; Orient steps clockwise; Iterative Debugging Process after Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013]: Gather context to formalize hypothesis, instrument hypothesis producing a modified system, and testing hypothesis resulting in a new iteration or a successfully proved hypothesis.](./content/figures/debugging-process.png)
+```{.include}
+content/figures/debugging-process.tex
+```
+
+![Iterative Debugging Process after Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013]: Gather context to formalize hypothesis, instrument hypothesis producing a modified system, and testing hypothesis resulting in a new iteration or a successfully proved hypothesis.](./content/figures/debugging-process.png)
 
 The most basic debugging technique for instrumentation and testing are manually added print statements to the source code: They generate execution logs when placed  across the programs code and allow the reconstruction of the programs runtime behavior. Once the number of generated log entries increases, the required amount of work to analyze the logs gets out of hand quickly. This is why specialized debugging utilities provide tools to interact with a program at runtime: After interrupting program execution with a breakpoint, they allow engineers to inspect stack frames, inspect and modify variables, step through successive source code statements, or resume program execution eventually. These utilities work best with imperative, or control-flow oriented programming languages since they interact with the debugged program on a statement and stack frame level.
 
@@ -124,16 +128,16 @@ Alabor et al. [@Alabor_Stolze_2020] used two, small web applications^[https://gi
 
 The first iteration on building an RxJS debugger resulted in a POC demonstrating the basic concept of operator log points as a vscode extension.
 
-At this early stage of the debugger, we were looking for an informal, expert-driven usability inspection method [@Nielsen_1994], which we found with the cognitive walkthrough [@Wharton_Rieman_Clayton_Polson_1994]. After we got the persona of *Frank Flow*, basically the profile of a typical user of the RP debugger, prepared, we formulated the action sequence of the walkthrough (Figure [5](#fig:cognitive-walkthrough)) based on the debugging process after Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] and Franks potential workflow to solve the exemplary web application by Alabor et al.
+At this early stage of the debugger, we were looking for an informal, expert-driven usability inspection method [@Nielsen_1994], which we found with the cognitive walkthrough [@Wharton_Rieman_Clayton_Polson_1994]. After we got the persona of *Frank Flow*, basically the profile of a typical user of the RP debugger, prepared, we formulated the action sequence of the walkthrough (Figure [4](#fig:cognitive-walkthrough)) based on the debugging process after Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] and Franks potential workflow to solve the exemplary web application by Alabor et al.
 
 ```{.include}
-content/figures/tikz/steps-cognitive-walkthrough.tex
+content/figures/steps-cognitive-walkthrough.tex
 ```
 
-We could successfully identify six major usability issues in the POC, as summarized in Table [x](#tbl:cognitive-walkthrough-issies). The full report of the cognitive walkthrough is available in **XXX Where do we put this?**.
+We could successfully identify six major usability issues in the POC, as summarized in Table [2](#tbl:cognitive-walkthrough-issues). The full report of the cognitive walkthrough is available in **XXX Where do we put this?**.
 
 ```{.include}
-content/figures/tikz/steps-cognitive-walkthrough.tex
+content/tables/issues-cognitive-walkthrough.tex
 ```
 
 ## Moderated Remote Usability Test

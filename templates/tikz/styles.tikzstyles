@@ -5,6 +5,8 @@
 
 % Node styles
 \tikzstyle{taskstep}=[fill=white, draw=black, shape=circle]
+\tikzstyle{processstep}=[fill=white, draw=black, shape=circle, text width=1.5cm, align=center]
 
 % Edge styles
-\tikzstyle{line}=[->]
+\tikzstyle{line}=[->, line width=0.35mm]
+\tikzstyle{dashedline}=[->, line width=0.35mm, dashed]
