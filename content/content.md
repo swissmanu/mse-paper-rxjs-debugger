@@ -64,7 +64,7 @@ of(0, 1, 2, 3, 4).pipe(
 ).subscribe(reportValue)
 ```
 
-This debugging technique is often time consuming and cumbersome: The more print statements are added, the more log entries get generated, which in turn are harder to analyze and interpret. The print statements might further reside in the source code after the engineer finished with their debugging activities. This results in production artifacts containing irrelevant code or even newly introduced bugs if the engineers miss to clean up their instrumented code carefully.
+This debugging technique is time consuming and cumbersome: The more print statements are added, the more log entries get generated, which in turn are harder to analyze and interpret. The print statements might further reside in the source code after the engineer finished with their debugging activities. This results in production artifacts containing irrelevant code or even newly introduced bugs if the engineers miss to clean up their instrumented code carefully.
 
 # Related Work {#sec:background}
 
@@ -80,11 +80,11 @@ content/tables/table-salvaneschi-vs-banken.tex
 
 The authors further provided a debugger in form of an isolated visualizer sandbox: *RxFiddle*. The browser-based application executes an RxJS program and visualize its runtime behavior in two dimensions: A central (i) data-flow graph shows which elements in the graph interact with each other and a dynamic (ii) marble diagram[^1] represents the values which were processed by the graph over time.
 
-[^1]: Marble diagrams are a visualization technique used throughout the ReactiveX community to describe the behavior of a node in a data-flow graph graphically. A marble represents a value emitted by such a graph node. Marbles are arranged on a thread from left to right, indicating the point in time when their value was emitted. See https://rxmarbles.com/ for more examples.
+[^1]: Marble diagrams are a visualization technique used throughout the ReactiveX community to describe the behavior of a node in a data-flow graph graphically. A marble represents a value emitted by a graph node. Marbles are arranged on a thread from left to right, indicating the point in time when their value was emitted. See https://rxmarbles.com/ for more examples.
 
 Both Banken et al. and Salvaneschi et al. suggested technical architectures for RP debugging systems. Both suggestions can be summarized as distributed systems consisting of two main components: The (i) instrumented RP runtime environment is augmented to produce debugging-relevant events (e.g. value emitted or graph node created). These events get processed by the actual (ii) debugger which provides a UI to inspect the RP programs state eventually.
 
-Another two years after Banken et al. published their work, Alabor et al. [@Alabor_Stolze_2020] examined the state of RxJS RP debugging. According to their research, software engineers still struggle to use appropriate tools to debug RxJS programs. The observational study the authors conducted produced the key finding of their work: Even though their subjects stated to know about suitable RP debugging utilities, none of them used such tools during the study. Alabor et al. credit this circumstance to the fact that their participants IDEs did not provide such suitable RP debugging utilities right at hand.
+Another two years after Banken et al. published their work, Alabor et al. [@Alabor_Stolze_2020] examined the state of RxJS RP debugging. According to their research, software engineers struggle to use appropriate tools to debug RxJS programs. The observational study the authors conducted produced the key finding of their work: Even though their subjects stated to know about suitable RP debugging utilities, none of them used such tools during the study. Alabor et al. credited this circumstance to the fact that their participants IDEs did not provide suitable RP debugging utilities right at hand.
 
 Alabor et al. conclude that knowing about the correct RP debugging utility (e.g. *RxFiddle*) is not enough. The barrier to use such utilities must be minimized; i.e. in order to live up to their full potential, RP debugging utilities must be fully integrated into the IDE so using them is ideally only an engineers key press away and adheres to accustomed UX patterns known by them.
 
@@ -92,7 +92,7 @@ Alabor et al. conclude that knowing about the correct RP debugging utility (e.g.
 
 > *RxJS Debugger for vscode, the tool presente din this paper, achieves "readiness-to-hand" for engineers by providing following features:*
 
-We translated these findings into the central principle for the design of our RP debugger for RxJS: *Readiness-to-hand*. Software engineers should always have the proper debugging tool ready, no matter what kind of program they are currently confronted with. Further, this tool should integrate with the engineers workflow seamlessly.
+We translated these findings into the central principle for the design of our RP debugger for RxJS: *Readiness-to-hand*. Software engineers should always have the proper debugging tool ready, no matter what type of program they are currently confronted with. Further, this tool should integrate with the engineers workflow seamlessly.
 
 ## Features
 
@@ -102,9 +102,9 @@ We made manual print statements for debugging RxJS RP programs obsolete by provi
 
 Once the software engineer starts the RP program with vscodes built-in JavaScript debugger, our extension displays life cycle events for all enabled log points inline with the source code which produced the event. Engineers are free to enable or disable additional log points during the debugging session.
 
-![*RxJS Debugging for vscode* used to debug code from Listing [2](#lst:rp): A diamond icon indicates operator log points: Specifically, a grey outline represents a suggested log point (Line 7), a filled, red diamond an enabled log point (Line 8). Life cycle event logs are shown at the end of the respective line in the source code editor (Line 8, "Unsubscribe"). Log points are managed by hovering a log point icon and selecting the appropriate action.](./content/figures/operator-log-points.png)
+![*RxJS Debugging for vscode* used to debug code from Listing [2](#lst:rp). A diamond icon indicates operator log points: A grey outline represents a suggested log point (Line 7), a filled, red diamond an enabled log point (Line 8). Life cycle event logs are shown at the end of the respective line in the source code editor (Line 8, "Unsubscribe"). Log points are managed by hovering a log point icon and selecting the appropriate action.](./content/figures/operator-log-points.png)
 
-The result is a strikingly simple, yet effective way to reconstruct and trace the runtime behavior of RxJS observables. Hence, this simplicity is only possible because of a coordinated, distributed system behind the curtains.
+The result is a strikingly simple, yet effective way to reconstruct and trace the runtime behavior of RxJS observables. Hence, this simplicity is possible because of a coordinated, distributed system behind the curtains.
 
 ## Architecture
 
@@ -112,7 +112,7 @@ The technical architecture of *RxJS Debugging for vscode* is a refined version o
 
 ![TODO do it nice & improve figure caption; The *Telemetry* component instruments the RP program (right). The *UI* component runs as an extension within vscodes process. The two components communicate with each other by piggybacking messages on the CDP communication channel, which is established by the generic vscode JavaScript debugger.](./content/figures/architecture.png)
 
-Contrary to *RxFiddle*, our implementation uses a different way to connect these two components. Where the solution by Banken et al. uses WebSockets to exchange messages, we leverage on the CDP[^3] connection, established by the generic JavaScript debugger, instead[^4]. We decided for this approach because it gives us two benefits out of the box: (i) UX-wise, the software engineer does not to decide "how" they want to debug their program (i.e. traditionally control-flow oriented or RP, data-flow oriented). They start debugging using familiar commands and RP specific debugging capabilities are provided once available without additional effort. (ii) Technically, we do not need to care for "where" the RP program the user wants to debug is running (e.g. locally in a browser or in a Node.js process on a remote computer) since this is already taken care for by the generic JavaScript debugger. The result is a robust, less complex system since we do not need to maintain an additional side channel for RP debugging communication.
+Contrary to *RxFiddle*, our implementation uses a different way to connect these two components. Where the solution by Banken et al. uses WebSockets to exchange messages, we leverage on the CDP[^3] connection, established by the generic JavaScript debugger, instead[^4]. We decided for this approach because it gives us two benefits out of the box: (i) UX-wise, the software engineer does not to decide "how" they want to debug their program (i.e. traditionally control-flow oriented or RP, data-flow oriented). They start debugging using familiar commands and RP specific debugging capabilities are provided once available without additional effort. (ii) Technically, we do not need to care for "where" the RP program the user wants to debug is running (e.g. locally in a browser or in a Node.js process on a remote computer) since this is taken care for by the generic JavaScript debugger. The result is a robust, less complex system since we do not need to maintain an additional side channel for RP debugging communication.
 
 [^3]: JavaScript virtual machines like V8 (used in Google Chrome, Node.js) or SpiderMonkey (used in Mozilla Firefox) implement (a subset of) the *Chrome DevTools Protocol*. External debugging utilities use CDP to connect and debug JavaScript programs. vscode ships with *js-debug*, a control-flow oriented JavaScript debugger, relying on CDP.
 
@@ -120,25 +120,26 @@ Contrary to *RxFiddle*, our implementation uses a different way to connect these
 
 # Usability Validation {#sec:discussion}
 
-Making use of a User Centered Design (UCD) approach, we implemented our extension in three iterations: After sketching a rough (i) proof of concept (POC), we performed a cognitive walkthrough to validate our idea of replacing manual print statements with operator log points. The resulting data helped us to build the first (ii) prototype of our extension. A moderated remote usability test helped us uncovering blind spots in our UX concept as well as finding bugs early in the development process. The outcome finally allowed us to implement the (iii) first minor release, which we released to the Visual Studio Marketplace.
+Making use of a User Centered Design (UCD) approach, we implemented our extension in three iterations: After sketching a rough (i) proof of concept (POC), we performed a cognitive walkthrough to validate our idea of replacing manual print statements with operator log points. The resulting data helped us to build a (ii) prototype of the extension. We conducted a synchronous, moderated, remote usability test with three subjects, which allowed us to uncover blind spots in the UX concept of the prototype as well as finding bugs early in the development process. We used the results of these sessions for further refinement and finalized the (iii) first minor version of the RxJS RP debugger, which we released to the Visual Studio Marketplace in May 2021.
 
-Alabor et al. [@Alabor_Stolze_2020] used two, small web applications^[https://github.com/swissmanu/mse-pa1-experiment] in their observational study. Their participants reportedly used manual print statements to debug these applications. Because of this, we decided to reuse *Problem 2*, the more complex application of the two, for our usability inspections. Using an already validated object for testing helped us to prevent  introducing unwanted bias.
+For both the cognitive walkthrough and the remote usability test, we reused the objects for testing created by Alabor et al. [@Alabor_Stolze_2020] for their observational study^[https://github.com/swissmanu/mse-pa1-experiment]. Since their study subjects reportedly used manual print statements to debug  those, we were able to minimize the introduction of unwanted bias by creating new examples for our usability inspections.
 
 ## Cognitive Walkthrough
 
 The first iteration on building an RxJS debugger resulted in a POC demonstrating the basic concept of operator log points as a vscode extension.
 
-At this early stage of the debugger, we were looking for an informal, expert-driven usability inspection method [@Nielsen_1994], which we found with the cognitive walkthrough [@Wharton_Rieman_Clayton_Polson_1994]. After we got the persona of *Frank Flow*, basically the profile of a typical user of the RP debugger, prepared, we formulated the action sequence of the walkthrough (Figure [4](#fig:cognitive-walkthrough)) based on the debugging process after Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] and Franks potential workflow to solve the exemplary web application by Alabor et al.
+At this early stage of development, we were looking for an informal, expert-driven usability inspection method [@Nielsen_1994], which we found in the cognitive walkthrough [@Wharton_Rieman_Clayton_Polson_1994]. After we prepared the persona of *Frank Flow*, the profile of a typical user of the RP debugger, we formulated the action sequence for the walkthrough (Figure [4](#fig:cognitive-walkthrough)) based on the debugging process by Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] and Franks potential workflow to debug the *Problem 1* web application by Alabor et al.
 
 ```{.include}
 content/figures/steps-cognitive-walkthrough.tex
 ```
 
-We could successfully identify six major usability issues in the POC, as summarized in Table [2](#tbl:cognitive-walkthrough-issues). The full report of the cognitive walkthrough is available in **XXX Where do we put this?**.
+We successfully identify six major usability issues during the later steps of the walkthrough, as summarized in Table [2](#tbl:cognitive-walkthrough-issues). The full walkthrough report, including the persona description of Frank Flow, is available in **XXX Where do we make this available? Appendix? Additional document? ...?**.
 
 ```{.include}
 content/tables/issues-cognitive-walkthrough.tex
 ```
+
 
 ## Moderated Remote Usability Test
 
