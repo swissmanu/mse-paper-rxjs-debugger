@@ -144,15 +144,28 @@ content/tables/issues-cognitive-walkthrough.tex
 
 ## Moderated Remote Usability Test
 
-After the initial validation using the cognitive walkthrough by ourselfs, we were ready to show the refined prototype to actual users. The optimal number of participants for a think aloud test are five subjects [@Nielsen_Participants_1994]. However, we decided that three software engineers were a sufficient number of participants since we were looking for a basic indication if our debugger improved anything at all rather than the thoroughness of a full usability test.
+After the initial validation using the cognitive walkthrough by ourselves, we were ready to show the refined prototype to actual users.
 
-We recruited the participants for the usability test via Twitter. Subjects were required to have at least worked with RxJS recently and use vscode as their main IDE. All participants received a PDF containing the study briefing and the basic functionality of the prototype a week before the actual test session took place. Along with the two main agenda points, performing the usability test and collecting informal feedback to the prototype, the briefing document highlighted the importance of "think aloud" [@Boren_Ramey_2000; @Norgaard_Hornbaek_2006], the practice of verbalizing thoughts constantly without reasoning about them. Further, we informed the subjects about the minimal software requirements (Node.js, npm/Yarn, vscode, and Zoom) for the remote usability test.
+### Study Design
 
-Right at the start of a test session, we provided each participant with the URL to a Git repository^[https://github.com/swissmanu/mse-pa2-usability-test] containing the *Problem 2* web application by Alabor et al. and the packaged version of the debugger extension prototype for vscode. While the subjects prepared their development environment, we started the video and audio recording with their consent and gave a short introduction to the code base they just received.
+The optimal number of participants for a think aloud test are five subjects [@Nielsen_Participants_1994]. However, we decided that three software engineers were a sufficient number of participants since we were looking for a basic indication if our debugger improved anything at all rather than the thoroughness of a full usability test. We recruited the participants for the usability test via Twitter. Subjects were required to have at least worked with RxJS during the past year and use vscode as their main IDE. We sent out a PDF containing a short briefing and the feature description of the prototype a week before the actual test session took place. Along with the main goal, performing the usability test for a novel RxJS debugger, the briefing highlighted the importance of "think aloud" [@Boren_Ramey_2000; @Norgaard_Hornbaek_2006], the practice of verbalizing thoughts constantly without reasoning about them. Further, we informed the subjects about the minimal software requirements (Zoom, Node.js, npm/Yarn and vscode) for the remote usability test.
 
-Once the participants had everything set up, they had 25 minutes time to find and solve bugs in the provided web application. We took care to repeatedly remind a subject not vocalizing their thoughts during this part of the session.
+### Study Execution
 
-**OUTCOME**
+At the start of a test session, we provided each participant with a ZIP file^[See https://github.com/swissmanu/mse-pa2-usability-test] containing the *Problem 2* web application by Alabor et al. and the packaged version of the debugger extension prototype^[See https://github.com/swissmanu/mse-pa2-spike-vscode] for vscode. While the subject prepared their development environment, we started the video and audio recording with their consent and gave a short introduction to the code base they just received.
+
+Once the participants had everything set up, they worked for 25 minutes finding and solving any bugs in the provided web application, ideally using the debugger prototype. We took care to repeatedly remind a participant not vocalizing their thoughts during this part of the study.
+
+### Study Evaluation
+
+One participant was not able to get the prototype up and running on their system, which means we had two valid data sets for further evaluation after study execution. We categorized the observed usability issues by debugging process phase (i.e. gather context, instrument hypothesis, and test hypothesis) and task (e.g. "manage log points" or "interpret log"). From a total of 10 issues, we observed four being a problem for both remaining study subjects (see Table [3](#tbl:issues-usability-test) for a summary). The full report of usability issues is available in **XXX Where do we make this available? Appendix? Additional document? ...?**
+
+```{.include}
+content/tables/issues-usability-test.tex
+```
+
+The final extension as presented in Section [4](#sec:implementation) would not have been possible without the valuable insight we gained during the remote usability test: So are e.g. the display of life cycle events within the source code editor instead of in a separate window pane or indicating suggested operator log points with an icon direct measures to mitigate issues observed during the test sessions.
+
 
 # Threats to Validity {#sec:threats_to_validity}
 
