@@ -1,10 +1,13 @@
-\begin{table}[]
-\begin{tabular}{|l|l|l|}
-\hline
-Phase      & Task              & Issue                                                                                                  \\ \hline
-Instrument & Manage Log Point  & Participant unable to find log point list in debugging view.                                           \\ \hline
-Test       & Interpret Log     & Participant has difficulties to make a connection from a log point to the generated log entry.         \\ \hline
-Test       & Interpret Log     & Participant interprets logged value as the "input" of the instrumented operator.                       \\ \hline
-Instrument & Environment Setup & Participant starts the application in debugging mode, even though they have started it before already. \\ \hline
-\end{tabular}
+\begin{table}
+  \caption{Major UX issues observed during test session, occurred for two participants.}
+
+  \newcommand{\wrap}[1]{\parbox{.61\linewidth}{\vspace{1.5mm}#1\vspace{1mm}}}
+  \begin{tabular}{|l|l|l|}
+    \hline
+    \small{\bf{Phase}}  & \small{\bf{Task}} & \small{\bf{Issue}}                                                                                            \\ \hline
+    \small{Instru.}     & \small{Setup}     & \wrap{\small{Participant starts the application in debugging mode, even though they have started it before.}} \\ \hline
+    \small{Instru.}     & \small{Manage}    & \wrap{\small{Participant unable to find log point list in debugging view.}}                                   \\ \hline
+    \small{Test}        & \small{Interpret} & \wrap{\small{Participant has difficulties to make a connection from a log point to the generated log entry.}} \\ \hline
+    \small{Test}        & \small{Interpret} & \wrap{\small{Participant interprets logged value as the ``input'' of the instrumented operator.}}             \\ \hline
+  \end{tabular}
 \end{table}
