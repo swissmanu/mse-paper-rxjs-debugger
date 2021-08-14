@@ -106,9 +106,11 @@ The result is a strikingly simple, yet effective way to reconstruct and trace th
 
 ## Architecture
 
-The technical architecture of *RxJS Debugging for vscode* is a refined version of the system proposed by Banken et al. [@Banken_Meijer_Gousios_2018] and shares its fundamental components as shown in Figure [4](#fig:architecture): The *Telemetry* component runs in the same process as the debugged RP program augmenting it. Telemetry gathers and relays life cycle events to the debuggers *UI* component which runs as an extension in the vscode process.
+The technical architecture of *RxJS Debugging for vscode* is a refined version of the system proposed by Banken et al. [@Banken_Meijer_Gousios_2018] and shares its fundamental components as shown in Figure [4](#fig:architecture): The *Telemetry* component runs in the same process as the debugged RP program augmenting it. Telemetry gathers and relays life cycle events to the debugger extension component running in the vscode process.
 
-![TODO do it nice & improve figure caption; The *Telemetry* component instruments the RP program (right). The *UI* component runs as an extension within vscodes process. The two components communicate with each other by piggybacking messages on the CDP communication channel, which is established by the generic vscode JavaScript debugger.](./content/figures/architecture.png)
+```{.include}
+content/figures/architecture.tex
+```
 
 Contrary to *RxFiddle*, our implementation uses a different way to connect these two components. Where the solution by Banken et al. uses WebSockets to exchange messages, we leverage on the CDP[^3] connection, established by the generic JavaScript debugger, instead[^4]. We decided for this approach because it gives us two benefits out of the box: (i) UX-wise, the software engineer does not to decide "how" they want to debug their program (i.e. traditionally control-flow oriented or RP, data-flow oriented). They start debugging using familiar commands and RP specific debugging capabilities are provided once available without additional effort. (ii) Technically, we do not need to care for "where" the RP program the user wants to debug is running (e.g. locally in a browser or in a Node.js process on a remote computer) since this is taken care for by the generic JavaScript debugger. The result is a robust, less complex system since we do not need to maintain an additional side channel for RP debugging communication.
 

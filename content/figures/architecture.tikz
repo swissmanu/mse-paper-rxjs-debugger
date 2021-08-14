@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=process] (0) at (-5, 2) {\small{vscode}};
+		\node [style=component] (1) at (-5, 0) {\small{js-debug Extension}};
+		\node [style=component, below of=1, node distance=14mm] (2) {\small{RxJS Debugger Extension}};
+
+		\node [style=component, right of=1, node distance=30mm] (3) {\small{js-debug Adapter}};
+
+		\node [style=process] (4) at (7, 2) {\small{Node.js}};
+    \node [style=component, right of=3, node distance=30mm] (5) {\small{RxJS Program}};
+		\node [style=component, below of=5, node distance=14mm] (6) {\small{Telemetry}};
+	\end{pgfonlayer}
+
+  \begin{pgfonlayer}{edgelayer}
+		\path (1) edge[style=biline] node[above, font=\tiny, pos=0.5] {DAP} (3);
+		\path (3) edge[style=biline] node[above, font=\tiny, pos=0.5] {CDP} (4.75, 0);
+    \draw [style=dashedbiline] (2.east) -- (-2, -2.8) -- (-2, -0.5) -- (4, -0.5) -- (4, -2.8) -- (6.west);
+    \draw [style=biline] (6) to (5);
+	\end{pgfonlayer}
+\end{tikzpicture}
