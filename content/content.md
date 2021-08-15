@@ -152,7 +152,7 @@ The optimal number of participants for a think aloud test are five subjects [@Ni
 
 ### Study Execution
 
-At the start of a test session, we provided each participant with a ZIP file^[https://github.com/swissmanu/mse-pa2-usability-test] containing the *Problem 2* web application by Alabor et al. and the packaged version of the debugger extension prototype^[https://github.com/swissmanu/mse-pa2-spike-vscode] for vscode. While the subject prepared their development environment, we started the video and audio recording with their consent. Further, we gave a short introduction to the code base they just received.
+At the start of a test session, we provided each participant with a ZIP file^[https://github.com/swissmanu/mse-pa2-usability-test] containing the *Problem 2* web application by Alabor et al. and the packaged version of the debugger extension prototype^[https://github.com/swissmanu/mse-pa2-spike-vscode] for vscode. While the subject prepared their development environment, we started the video, screen, and audio recording with their consent. Further, we gave a short introduction to the code base they just received.
 
 Once the participants had everything set up, they worked for 25 minutes finding and solving any bugs in the provided web application. We took care to repeatedly remind a participant not vocalizing their thoughts.
 
@@ -169,19 +169,19 @@ The final extension we presented in Section [4](#sec:implementation) would not h
 
 # Threats to Validity {#sec:threats_to_validity}
 
-We discuss threats to the validity of the results from the usability test in this section.
+The results of the usability test are subject to the following threats and limitations:
 
 ## Internal Validity
 
-> Extent to which you are able to say that no other variables, apart from independent variable, caused a change in the dependent variable
+The usability test was performed in an uncontrolled, remote environment and all participants used their own computers and software installations. The down side of this setup was the early failure of one subject, which could not get the prototype extension running on their system. Even though this could have been prevented in a controlled lab, we deem the data we were able to collect to be of the same quality as when it would have been collected in a lab [@Andreasen_Nielsen_Schroder_Stage_2007].
 
 ## External Validity
 
-Due to the unfortunate circumstance that one study participant could not set up the prototype extension on their development system, we ended up with having only two valid data sets after the the remote usability tests. Considering Nielsen et al. [@Nielsen_Landauer_1993], we discovered around 50% of all usability issues present in the prototype this way. We observed two participants sharing 4 issues, thus we are confident that we found the most critical ones.
+Due to the circumstance that one study participant could not set up the prototype extension, we ended up having only two valid data sets after the the remote usability tests. According to Nielsen et al. [@Nielsen_Landauer_1993], we discovered around 50% of all usability issues present this way. We observed two participants sharing four of 10 issues, thus we are confident having found the most critical ones nonetheless.
 
 ## Construct Validity
 
-Asking a participant to continuously express their thoughts in an unbiased, direct way, i.e. applingy "think aloud", might result in an unfamiliar atmosphere. ***Further, a subject might tend to mention only specific things they a rather than This might influence how a subject acts, thus change the test sessions outcome. Further, the control over a subjects environment is limited in a moderated remote usability test.***
+We consider asking the subjects to "think aloud" during the remote usability test to create an unfamiliar environment; software engineers are usually not used to "speak to themselves" when working on a problem. Even though a participant might not vocalize their thoughts at all time, the screen and video recordings of the session mitigates the risk of missing important data. Careful moderation during the session [@Boren_Ramey_2000] helped further to remind a silent participant to tell us about their thoughts without risking to influence the result.
 
 # Future Work {#sec:future_work}
 
