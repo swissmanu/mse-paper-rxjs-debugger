@@ -185,7 +185,17 @@ We consider asking the subjects to "think aloud" during the remote usability tes
 
 # Future Work {#sec:future_work}
 
+There are several ways how future work might contribute to the efforts presented in this paper. For a better overview, we grouped them into two categories: *Research* and *Features*.
+
+## Research
+
+We validated the demonstrated RxJS RP debugger mainly for its UX  and usability with two different inspection methods during development. So far, we did not put any work into further, empirical validation of the novel debugger. We see three possibilities how this might be approached: (i) There is a steep learning curve for software engineers starting with RxJS [@Alabor_Stolze_2020]. It might be interesting to see, if the tools provided by the RP debugger ease the first steps with RxJS for those engineers. (ii) A quantitative study, comparing the effectiveness of control-flow and the new data-flow oriented debugger would further justify the efforts invested in the presented debugger and lead the way for further development. Lastly, (iii) a new observational study with experienced RxJS engineers to validate pervious findings [@Alabor_Stolze_2020] would prove that "readiness-to-hand" is indeed of uttermost importance when it comes to effective debugging utilities.
+
+As of writing this paper, the latest version v0.1.2 of *RxJS Debugging for vscode* is the product of two usability inspections. More usability testing of this version will further improve the overall UX, since we have no confirmation on the presence nor absence of newly introduced usability issues.
+
 ## Features
+
+
 
 - Support for Browser-based Applications (Selling point: Angular)
 - Visualization of data flows
@@ -193,11 +203,7 @@ We consider asking the subjects to "think aloud" during the remote usability tes
 - Record/replay of data sources for later simulation
 	- [@Perez_Nilsson_2017]
 
-## Research
 
-- Verify if extension helps beginners to get started with RxJS
-- Verify effectiveness of extension for professionals (re-execute previous observational study)
-- More Usability Testing
 
 # Conclusion {#sec:conclusion}
 
