@@ -195,14 +195,19 @@ As of writing this paper, the latest version v0.1.2 of *RxJS Debugging for vscod
 
 ## Features
 
+We designed the project governance around *RxJS Debugging for vscode* as an open source project. We present three highliths from the feature back log^[[https://github.com/swissmanu/rxjs-debugging-for-vscode/issues](https://github.com/swissmanu/rxjs-debugging-for-vscode/issues?q=is%3Aopen+is%3Aissue+label%3Afeature%2Cimprovement)] which is publicly available on Github.
 
+### Visualizer Component^[[https://github.com/swissmanu/rxjs-debugging-for-vscode/issues/50](https://github.com/swissmanu/rxjs-debugging-for-vscode/issues/50)]
 
-- Support for Browser-based Applications (Selling point: Angular)
-- Visualization of data flows
-- Omniscient/time travel debugging for data flows
-- Record/replay of data sources for later simulation
-	- [@Perez_Nilsson_2017]
+*RxFiddle* by Banken et al. [@Banken_Meijer_Gousios_2018] proposed visualization functionalities for data-flow graphs declared using RxJS observables. Adding a component representing complex graphs visually will be a helpful addition in order to comprehend such structures better.
 
+### Record/Replay^[[https://github.com/swissmanu/rxjs-debugging-for-vscode/issues/51](https://github.com/swissmanu/rxjs-debugging-for-vscode/issues/51)]
+
+Recording telemetry data of a running RP program and replaying that data independently [@OCallahan_Jones_Froyd_Huey_Noll_Partush_2017; @Perez_Nilsson_2017] can help to simplify testing a debugging hypothesis in complex systems. Recorded data might be used to test a modified system without re-executing the complete RP program further.
+
+### Time Travel Debugging^[[https://github.com/swissmanu/rxjs-debugging-for-vscode/issues/62](https://github.com/swissmanu/rxjs-debugging-for-vscode/issues/62)]
+
+Once there is a way to record, store and replay telemetry data, omniscient[@Pothier_Tanter_2009], or "time travel" debugging is a viable next step. Software engineers can manually step through recorded data and observe how individual parts of the system react on the stimuli. Contrary regular control-flow oriented debuggers, time travel debuggers can step forward as well as backward in time, since they do not rely on an actual running program.
 
 
 # Conclusion {#sec:conclusion}
