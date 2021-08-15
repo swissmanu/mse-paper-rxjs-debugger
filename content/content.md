@@ -152,7 +152,7 @@ The optimal number of participants for a think aloud test are five subjects [@Ni
 
 ### Study Execution
 
-At the start of a test session, we provided each participant with a ZIP file^[Available on Github https://github.com/swissmanu/mse-pa2-usability-test] containing the *Problem 2* web application by Alabor et al. and the packaged version of the debugger extension prototype^[Available on Github https://github.com/swissmanu/mse-pa2-spike-vscode] for vscode. While the subject prepared their development environment, we started the video and audio recording with their consent. Further, we gave a short introduction to the code base they just received.
+At the start of a test session, we provided each participant with a ZIP file^[https://github.com/swissmanu/mse-pa2-usability-test] containing the *Problem 2* web application by Alabor et al. and the packaged version of the debugger extension prototype^[https://github.com/swissmanu/mse-pa2-spike-vscode] for vscode. While the subject prepared their development environment, we started the video and audio recording with their consent. Further, we gave a short introduction to the code base they just received.
 
 Once the participants had everything set up, they worked for 25 minutes finding and solving any bugs in the provided web application. We took care to repeatedly remind a participant not vocalizing their thoughts.
 
@@ -177,16 +177,11 @@ We discuss threats to the validity of the results from the usability test in thi
 
 ## External Validity
 
-Due to the unfortunate circumstance that one study participant could not set up the prototype extension on their development system, we ended up with having only two valid data sets after the the remote usability tests. Considering Nielsen et al. [@Nielsen_Mathematical_Model], we discovered around 50% of all usability issues present in the prototype this way. We observed two participants sharing 4 issues, thus we are confident that we found the most critical ones.
-
-RESEARCH SOURCES!!!
-
-- https://dl.acm.org/doi/10.1145/169059.169166
-- https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/
+Due to the unfortunate circumstance that one study participant could not set up the prototype extension on their development system, we ended up with having only two valid data sets after the the remote usability tests. Considering Nielsen et al. [@Nielsen_Landauer_1993], we discovered around 50% of all usability issues present in the prototype this way. We observed two participants sharing 4 issues, thus we are confident that we found the most critical ones.
 
 ## Construct Validity
 
-Asking a participant to continuously express their thoughts in an unbiased, direct way, i.e. applingy "think aloud", might result in an unfamiliar atmosphere. ***Further, a subject might tend to mention only specific things they a rather than This might influence how a subject acts, thus change the test sessions outcome. Further, the control over a subjects environment is limited in a moderated remote usability test.*** 
+Asking a participant to continuously express their thoughts in an unbiased, direct way, i.e. applingy "think aloud", might result in an unfamiliar atmosphere. ***Further, a subject might tend to mention only specific things they a rather than This might influence how a subject acts, thus change the test sessions outcome. Further, the control over a subjects environment is limited in a moderated remote usability test.***
 
 # Future Work {#sec:future_work}
 
