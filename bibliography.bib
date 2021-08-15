@@ -1,44 +1,3 @@
- @inproceedings{Tanimoto_2015,
-  place     = {Atlanta, GA, USA},
-  title     = {Transparency and liveness in visual programming environments for novices},
-  isbn      = {978-1-4673-8367-7},
-  url       = {http://ieeexplore.ieee.org/document/7369016/},
-  doi       = {10.1109/BLOCKS.2015.7369016},
-  booktitle = {2015 IEEE Blocks and Beyond Workshop (Blocks and Beyond)},
-  publisher = {IEEE},
-  author    = {Tanimoto, Steven L.},
-  year      = {2015},
-  month     = {Oct},
-  pages     = {113–114}
-}
-
- @inproceedings{Tanimoto_2013,
-  place     = {San Francisco, CA, USA},
-  title     = {A perspective on the evolution of live programming},
-  isbn      = {978-1-4673-6265-8},
-  url       = {http://ieeexplore.ieee.org/document/6617346/},
-  doi       = {10.1109/LIVE.2013.6617346},
-  booktitle = {2013 1st International Workshop on Live Programming (LIVE)},
-  publisher = {IEEE},
-  author    = {Tanimoto, Steven L.},
-  year      = {2013},
-  month     = {May},
-  pages     = {31–34}
-}
-
- @article{Pothier_Tanter_2009,
-  title   = {Back to the Future: Omniscient Debugging},
-  volume  = {26},
-  issn    = {0740-7459},
-  doi     = {10.1109/MS.2009.169},
-  number  = {6},
-  journal = {IEEE Software},
-  author  = {Pothier, Guillaume and Tanter, Éric},
-  year    = {2009},
-  month   = {Nov},
-  pages   = {78–85}
-}
-
 @inproceedings{Salvaneschi_Mezini_2016,
   place     = {Austin, Texas},
   title     = {Debugging for reactive programming},
@@ -336,6 +295,26 @@ In this paper, we adopt reactive debugging as a basis for live modifications and
   pages     = {206–213}
 }
 
-@article{OCallahan_Jones_Froyd_Huey_Noll_Partush_2017, title={Engineering Record And Replay For Deployability: Extended Technical Report}, url={http://arxiv.org/abs/1705.05937}, abstractNote={The ability to record and replay program executions with low overhead enables many applications, such as reverse-execution debugging, debugging of hard-to-reproduce test failures, and “black box” forensic analysis of failures in deployed systems. Existing record-and-replay approaches limit deployability by recording an entire virtual machine (heavyweight), modifying the OS kernel (adding deployment and maintenance costs), requiring pervasive code instrumentation (imposing significant performance and complexity overhead), or modifying compilers and runtime systems (limiting generality). We investigated whether it is possible to build a practical record-and-replay system avoiding all these issues. The answer turns out to be yes - if the CPU and operating system meet certain non-obvious constraints. Fortunately modern Intel CPUs, Linux kernels and user-space frameworks do meet these constraints, although this has only become true recently. With some novel optimizations, our system ‘rr’ records and replays real-world low-parallelism workloads with low overhead, with an entirely user-space implementation, using stock hardware, compilers, runtimes and operating systems. “rr” forms the basis of an open-source reverse-execution debugger seeing significant use in practice. We present the design and implementation of ‘rr’, describe its performance on a variety of workloads, and identify constraints on hardware and operating system design required to support our approach.}, note={arXiv: 1705.05937}, journal={arXiv:1705.05937 [cs]}, author={O’Callahan, Robert and Jones, Chris and Froyd, Nathan and Huey, Kyle and Noll, Albert and Partush, Nimrod}, year={2017}, month={May} }
+@article{OCallahan_Jones_Froyd_Huey_Noll_Partush_2017,
+  title        = {Engineering Record And Replay For Deployability: Extended Technical Report},
+  url          = {http://arxiv.org/abs/1705.05937},
+  abstractnote = {The ability to record and replay program executions with low overhead enables many applications, such as reverse-execution debugging, debugging of hard-to-reproduce test failures, and “black box” forensic analysis of failures in deployed systems. Existing record-and-replay approaches limit deployability by recording an entire virtual machine (heavyweight), modifying the OS kernel (adding deployment and maintenance costs), requiring pervasive code instrumentation (imposing significant performance and complexity overhead), or modifying compilers and runtime systems (limiting generality). We investigated whether it is possible to build a practical record-and-replay system avoiding all these issues. The answer turns out to be yes - if the CPU and operating system meet certain non-obvious constraints. Fortunately modern Intel CPUs, Linux kernels and user-space frameworks do meet these constraints, although this has only become true recently. With some novel optimizations, our system ‘rr’ records and replays real-world low-parallelism workloads with low overhead, with an entirely user-space implementation, using stock hardware, compilers, runtimes and operating systems. “rr” forms the basis of an open-source reverse-execution debugger seeing significant use in practice. We present the design and implementation of ‘rr’, describe its performance on a variety of workloads, and identify constraints on hardware and operating system design required to support our approach.},
+  note         = {arXiv: 1705.05937},
+  journal      = {arXiv:1705.05937 [cs]},
+  author       = {O’Callahan, Robert and Jones, Chris and Froyd, Nathan and Huey, Kyle and Noll, Albert and Partush, Nimrod},
+  year         = {2017},
+  month        = {May}
+}
 
-@article{Pothier_Tanter_2009, title={Back to the Future: Omniscient Debugging}, volume={26}, ISSN={0740-7459}, DOI={10.1109/MS.2009.169}, number={6}, journal={IEEE Software}, author={Pothier, Guillaume and Tanter, Éric}, year={2009}, month={Nov}, pages={78–85} }
+@article{Pothier_Tanter_2009,
+  title   = {Back to the Future: Omniscient Debugging},
+  volume  = {26},
+  issn    = {0740-7459},
+  doi     = {10.1109/MS.2009.169},
+  number  = {6},
+  journal = {IEEE Software},
+  author  = {Pothier, Guillaume and Tanter, Éric},
+  year    = {2009},
+  month   = {Nov},
+  pages   = {78–85}
+}

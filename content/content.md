@@ -14,9 +14,9 @@ The circumstance of debugging RP programs with the wrong debugging utilities is 
 
 Within this paper, we are going to present two concrete contributions to the field of RxJS RP debugging:
 
-1. With *RxJS Debugging for Visual Studio Code*, an extension for Microsoft Visual Studio Code^[https://code.visualstudio.com] (vscode), engineers building RxJS applications get access to a powerful RP debugging tool. It integrates tightly with the IDE itself and requires no extra efforts to debug an RP program.
+1. With *RxJS Debugging for Visual Studio Code*, an extension for Microsoft Visual Studio Code^[[https://code.visualstudio.com](https://code.visualstudio.com)] (vscode), engineers building RxJS applications get access to a powerful RP debugging tool. It integrates tightly with the IDE itself and requires no extra efforts to debug an RP program.
 
-2. A refined architecture for RxJS RP debuggers leveraging on the *Chrome DevTools Protocol*^[https://chromedevtools.github.io/devtools-protocol/] (CDP) for message-based communication between individual system components.
+2. A refined architecture for RxJS RP debuggers leveraging on the *Chrome DevTools Protocol*^[[https://chromedevtools.github.io/devtools-protocol/](https://chromedevtools.github.io/devtools-protocol/)] (CDP) for message-based communication between individual system components.
 
 *TODO Rewrite Before we do a deep-dive on the extensions functionality in Section [4](#sec:implementation), we will give an example for the main challenge of RP debugging in Section [2](#sec:challenge). We discuss related work in Section [3](#sec:background). Before we come to our conclusion in Section [8](#sec:conclusion), we will consider potential threats to validity in Section [6](#sec:threats_to_validity) and give an overview on potential follow-up topics, research-wise as well as practical, in Section [7](#sec:future_work).*
 
@@ -66,9 +66,9 @@ This debugging technique is time consuming and cumbersome: The more print statem
 
 # Related Work {#sec:background}
 
-Salvaneschi et al. [@Salvaneschi_Mezini_2016] identified the divergence between expected and actual behavior of a control-flow oriented debugger as one of their key motivations for RP debugging: The stack-based runtime model of control-flow oriented debuggers does not match the software engineers data-flow oriented mental model of the program they are debugging. This is because the debugger has a "lack of abstractions"; it cannot interpret high-level RP abstractions and works on the low-level implementations of the regarding RP runtime environment instead. The group proposed the first specialized RP debugging solution for RP programs implemented with REScala [@Salvaneschi_Hintz_Mezini_2014], a RP runtime for the Scala^[https://scala-lang.org/] programming language. Integrated in the Eclipse IDE, the utilities provide a wide range of RP debugging functionalities like the visualization of data-flow graphs and the information that traverses through them. Reactive breakpoints allow further to interrupt program execution once a graph node re-evalutes its value.
+Salvaneschi et al. [@Salvaneschi_Mezini_2016] identified the divergence between expected and actual behavior of a control-flow oriented debugger as one of their key motivations for RP debugging: The stack-based runtime model of control-flow oriented debuggers does not match the software engineers data-flow oriented mental model of the program they are debugging. This is because the debugger has a "lack of abstractions"; it cannot interpret high-level RP abstractions and works on the low-level implementations of the regarding RP runtime environment instead. The group proposed the first specialized RP debugging solution for RP programs implemented with REScala [@Salvaneschi_Hintz_Mezini_2014], a RP runtime for the Scala programming language. Integrated in the Eclipse IDE, the utilities provide a wide range of RP debugging functionalities like the visualization of data-flow graphs and the information that traverses through them. Reactive breakpoints allow further to interrupt program execution once a graph node re-evalutes its value.
 
-Since then, RP gained more traction across various fields of software engineering. With a shared vision on how to surface RP abstractions on API level, *ReactiveX*^[http://reactivex.io/] consolidated numerous projects under one open source organization. Together, its members provide RP runtime environments for many of todays mainstream programming languages like Java, C#, or Swift. For the development of JavaScript-based applications, software engineers can rely on RxJS^[https://rxjs.dev]. One of the more popular adopters of this library is Google Angular^[https://angular.io/], a framework to develop web frontend applications, where it is used to model asynchronous operations like fetching data.
+Since then, RP gained more traction across various fields of software engineering. With a shared vision on how to surface RP abstractions on API level, *ReactiveX*^[[http://reactivex.io/](http://reactivex.io/)] consolidated numerous projects under one open source organization. Together, its members provide RP runtime environments for many of todays mainstream programming languages like Java, C#, or Swift. For the development of JavaScript-based applications, software engineers can rely on RxJS^[[https://rxjs.dev](https://rxjs.dev)]. One of the more popular adopters of this library is Google Angular^[[https://angular.io/](https://angular.io/)], a framework to develop web frontend applications, where it is used to model asynchronous operations like fetching data.
 
 Two years after Salvaneschi et al. proposed RP Debugging, Banken et al. [@Banken_Meijer_Gousios_2018] showed in their paper that debugging RxJS-based RP programs is not that different from REScala-based ones. They were able to categorize the debugging motivations of their study participants into four main, overarching themes. These can be put into direct correlation with the debugging issues identified by Salvaneschi et al. earlier as we show in Table [1](#tbl:salvaneschi-vs-banken).
 
@@ -78,7 +78,7 @@ content/tables/table-salvaneschi-vs-banken.tex
 
 The authors further provided a debugger in form of an isolated visualizer sandbox: *RxFiddle*. The browser-based application executes an RxJS program and visualize its runtime behavior in two dimensions: A central (i) data-flow graph shows which elements in the graph interact with each other and a dynamic (ii) marble diagram[^1] represents the values which were processed by the graph over time.
 
-[^1]: Marble diagrams are a visualization technique used throughout the ReactiveX community to describe the behavior of a node in a data-flow graph graphically. A marble represents a value emitted by a graph node. Marbles are arranged on a thread from left to right, indicating the point in time when their value was emitted. See https://rxmarbles.com/ for more examples.
+[^1]: Marble diagrams are a visualization technique used throughout the ReactiveX community to describe the behavior of a node in a data-flow graph graphically. A marble represents a value emitted by a graph node. Marbles are arranged on a thread from left to right, indicating the point in time when their value was emitted. See [https://rxmarbles.com/](https://rxmarbles.com/) for more examples.
 
 Both Banken et al. and Salvaneschi et al. suggested technical architectures for RP debugging systems. Both suggestions can be summarized as distributed systems consisting of two main components: The (i) instrumented RP runtime environment is augmented to produce debugging-relevant events (e.g. value emitted or graph node created). These events get processed by the actual (ii) debugger which provides a UI to inspect the RP programs state eventually.
 
@@ -88,17 +88,15 @@ Alabor et al. conclude that knowing about the correct RP debugging utility (e.g.
 
 # Readiness-to-hand: An RxJS RP Debugger {#sec:implementation}
 
-> *RxJS Debugger for vscode, the tool presente din this paper, achieves "readiness-to-hand" for engineers by providing following features:*
-
 We translated these findings into the central principle for the design of our RP debugger for RxJS: *Readiness-to-hand*. Software engineers should always have the proper debugging tool ready, no matter what type of program they are currently confronted with. Further, this tool should integrate with the engineers workflow seamlessly.
 
 ## Features
 
-We made manual print statements for debugging RxJS RP programs obsolete by providing a better alternative with *RxJS Debugging for vscode*. For this, we implemented *Operator Log Points*, a similar tool to *probes* as proposed by McDirmid [@McDirmid_2013] for live programming environments. The extension suggests a log point for every operator function detected. The engineer may enable such a log point by hovering the mouse pointer over its icon and selecting the *Add Operator Log Point* action (see Figure [2](#fig:operator-log-points)). Log point suggestions are generated by continuously parsing the source code of the current editor. The extension evaluates the resulting AST in order to detect operators passed to the *pipe* function of an observable[^2].
+We made manual print statements for debugging RxJS RP programs obsolete by providing a better alternative with *RxJS Debugging for vscode*. For this, we implemented *Operator Log Points*, a similar tool to *probes* as proposed by McDirmid [@McDirmid_2013] for live programming environments. The extension suggests a log point for every operator function detected. The engineer may enable such a log point by hovering the mouse pointer over its icon and selecting the *Add Operator Log Point* action (see Figure [2](#fig:operator-log-points)). Once the software engineer starts the RP program with vscodes built-in JavaScript debugger, our extension displays life cycle events for all enabled log points inline with the source code which produced the event. Engineers are free to enable or disable additional log points during the debugging session.
+
+Log point suggestions are generated by continuously parsing the source code of the current editor. The extension evaluates the resulting AST in order to detect operators passed to the *pipe* function of an observable[^2].
 
 [^2]: An RxJS *Observable* is an abstraction of a reactive source. Once a consumer *subscribes* the source, the source pushes/*emits* values, *completes* (e.g. when a network request has completed), fails with an *error*, or may get *unsubscribed* from the consumer. These are the five main life cycle events engineers are interested in when debugging an observable. An operators is a node in the materialized data-flow graph. An operator transforms emitted values or composes multiple observables.
-
-Once the software engineer starts the RP program with vscodes built-in JavaScript debugger, our extension displays life cycle events for all enabled log points inline with the source code which produced the event. Engineers are free to enable or disable additional log points during the debugging session.
 
 ![*RxJS Debugging for vscode* used to debug code from Listing [2](#lst:rp). A diamond icon indicates operator log points: A grey outline represents a suggested log point (Line 7), a filled, red diamond an enabled log point (Line 8). Life cycle event logs are shown at the end of the respective line in the source code editor (Line 8, "Unsubscribe"). Log points are managed by hovering a log point icon and selecting the appropriate action.](./content/figures/operator-log-points.png)
 
@@ -116,13 +114,13 @@ Contrary to *RxFiddle*, our implementation uses a different way to connect these
 
 [^3]: JavaScript virtual machines like V8 (used in Google Chrome, Node.js) or SpiderMonkey (used in Mozilla Firefox) implement (a subset of) the *Chrome DevTools Protocol*. External debugging utilities use CDP to connect and debug JavaScript programs. vscode ships with *js-debug*, a control-flow oriented JavaScript debugger, relying on CDP.
 
-[^4]: We contributed the possibility for CDP connection-reuse to js-debug as part of our work on the RxJS RP debugging extension. https://github.com/microsoft/vscode-js-debug/pull/964
+[^4]: We contributed the possibility for CDP connection-reuse to js-debug as part of our work on the RxJS RP debugging extension. [https://github.com/microsoft/vscode-js-debug/pull/964](https://github.com/microsoft/vscode-js-debug/pull/964)
 
 # Usability Validation {#sec:discussion}
 
 Making use of a User Centered Design (UCD) approach, we implemented our extension in three iterations: After sketching a rough (i) proof of concept (POC), we performed a cognitive walkthrough to validate our idea of replacing manual print statements with operator log points. The resulting data helped us to build a (ii) prototype of the extension. We conducted a moderated remote usability test with three subjects, which allowed us to uncover blind spots in the UX concept of the prototype as well as finding bugs early in the development process. We used the results of these sessions for further refinement and finalized the (iii) first minor version of the RxJS RP debugger, which we released to the Visual Studio Marketplace in May 2021.
 
-For both the cognitive walkthrough and the remote usability test, we reused the objects for testing created by Alabor et al. [@Alabor_Stolze_2020] for their observational study^[https://github.com/swissmanu/mse-pa1-experiment]. Since their study subjects reportedly used manual print statements to debug  those, we were able to minimize the introduction of unwanted bias by creating new examples for our usability inspections.
+For both the cognitive walkthrough and the remote usability test, we reused the objects for testing created by Alabor et al. [@Alabor_Stolze_2020] for their observational study^[[https://github.com/swissmanu/mse-pa1-experiment](https://github.com/swissmanu/mse-pa1-experiment)]. Since their study subjects reportedly used manual print statements to debug  those, we were able to minimize the introduction of unwanted bias by creating new examples for our usability inspections.
 
 ## Cognitive Walkthrough
 
@@ -152,7 +150,7 @@ The optimal number of participants for a think aloud test are five subjects [@Ni
 
 ### Study Execution
 
-At the start of a test session, we provided each participant with a ZIP file^[https://github.com/swissmanu/mse-pa2-usability-test] containing the *Problem 2* web application by Alabor et al. and the packaged version of the debugger extension prototype^[https://github.com/swissmanu/mse-pa2-spike-vscode] for vscode. While the subject prepared their development environment, we started the video, screen, and audio recording with their consent. Further, we gave a short introduction to the code base they just received.
+At the start of a test session, we provided each participant with a ZIP file^[[https://github.com/swissmanu/mse-pa2-usability-test](https://github.com/swissmanu/mse-pa2-usability-test)] containing the *Problem 2* web application by Alabor et al. and the packaged version of the debugger extension prototype^[[https://github.com/swissmanu/mse-pa2-spike-vscode](https://github.com/swissmanu/mse-pa2-spike-vscode)] for vscode. While the subject prepared their development environment, we started the video, screen, and audio recording with their consent. Further, we gave a short introduction to the code base they just received.
 
 Once the participants had everything set up, they worked for 25 minutes finding and solving any bugs in the provided web application. We took care to repeatedly remind a participant not vocalizing their thoughts.
 
@@ -195,19 +193,19 @@ As of writing this paper, the latest version v0.1.2 of *RxJS Debugging for vscod
 
 ## Features
 
-We designed the project governance around *RxJS Debugging for vscode* as an open source project. We present three highliths from the feature back log^[[https://github.com/swissmanu/rxjs-debugging-for-vscode/issues](https://github.com/swissmanu/rxjs-debugging-for-vscode/issues?q=is%3Aopen+is%3Aissue+label%3Afeature%2Cimprovement)] which is publicly available on Github.
+We designed *RxJS Debugging for vscode* to be an open source project. In the following, we present three highlights from its on Github publicly accessible feature back log^[[https://github.com/swissmanu/rxjs-debugging-for-vscode/issues](https://github.com/swissmanu/rxjs-debugging-for-vscode/issues?q=is%3Aopen+is%3Aissue+label%3Afeature%2Cimprovement)].
 
-### Visualizer Component^[[https://github.com/swissmanu/rxjs-debugging-for-vscode/issues/50](https://github.com/swissmanu/rxjs-debugging-for-vscode/issues/50)]
+### Visualizer Component
 
 *RxFiddle* by Banken et al. [@Banken_Meijer_Gousios_2018] proposed visualization functionalities for data-flow graphs declared using RxJS observables. Adding a component representing complex graphs visually will be a helpful addition in order to comprehend such structures better.
 
-### Record/Replay^[[https://github.com/swissmanu/rxjs-debugging-for-vscode/issues/51](https://github.com/swissmanu/rxjs-debugging-for-vscode/issues/51)]
+### Record/Replay
 
 Recording telemetry data of a running RP program and replaying that data independently [@OCallahan_Jones_Froyd_Huey_Noll_Partush_2017; @Perez_Nilsson_2017] can help to simplify testing a debugging hypothesis in complex systems. Recorded data might be used to test a modified system without re-executing the complete RP program further.
 
-### Time Travel Debugging^[[https://github.com/swissmanu/rxjs-debugging-for-vscode/issues/62](https://github.com/swissmanu/rxjs-debugging-for-vscode/issues/62)]
+### Time Travel Debugging
 
-Once there is a way to record, store and replay telemetry data, omniscient[@Pothier_Tanter_2009], or "time travel" debugging is a viable next step. Software engineers can manually step through recorded data and observe how individual parts of the system react on the stimuli. Contrary regular control-flow oriented debuggers, time travel debuggers can step forward as well as backward in time, since they do not rely on an actual running program.
+Once there is a way to record, store and replay telemetry data, omniscient [@Pothier_Tanter_2009], or "time travel" debugging is a viable next step. Software engineers can manually step through recorded data and observe how individual parts of the system react on the stimuli. Contrary regular control-flow oriented debuggers, time travel debuggers can step forward as well as backward in time, since they do not rely on an actual running program.
 
 
 # Conclusion {#sec:conclusion}
