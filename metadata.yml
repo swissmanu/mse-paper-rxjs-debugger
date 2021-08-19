@@ -1,6 +1,6 @@
 # Metadata
 title: Debugging Support for Reactive Programming
-subtitle: Empirically Grounded Development of a Debugger for RxJS
+subtitle: User Centered Development of a Debugger for RxJS
 keywords:
   - reactive programming
   - debugging
@@ -23,34 +23,36 @@ documentclass: acmart
 
 # acmart Configuration
 classoption:
-  - nonacm # Hide ACM publication specifics
-  - review # Show Review Marks
+  #- nonacm # Hide ACM publication specifics
+  - sigconf
+  - review
+  - anonymous
   # - authordraft # Watermark
 
-# author:
-#   - name: Manuel Alabor
-#     email: manuel.alabor@ost.ch
-#     affiliation:
-#       institution: Eastern Switzerland University of Applied Sciences
-#       city: Rapperswil
-#       country: Switzerland
-#   - name: Markus Stolze
-#     email: markus.stolze@ost.ch
-#     affiliation:
-#       institution: Eastern Switzerland University of Applied Sciences
-#       city: Rapperswil
-#       country: Switzerland
-# copyright: acmlicensed
-# acmPrice: "15.00"
+author:
+  - name: Manuel Alabor
+    email: manuel.alabor@ost.ch
+    affiliation:
+      institution: Eastern Switzerland University of Applied Sciences
+      city: Rapperswil
+      country: Switzerland
+  - name: Markus Stolze
+    email: markus.stolze@ost.ch
+    affiliation:
+      institution: Eastern Switzerland University of Applied Sciences
+      city: Rapperswil
+      country: Switzerland
+#copyright: acmlicensed
+#acmPrice: "15.00"
 # acmDOI: 10.1145/3427763.3428313
-# acmYear: "2021"
-# copyrightyear: "2021"
+acmYear: "2022"
+copyrightyear: "2022"
 # acmSubmissionID: splashws20reblsmain-p3-p
 # acmISBN: 978-1-4503-8188-8/20/11
-# acmConference:
-#   short: LIVE '21
-#   publication: Proceedings of the 7th ACM SIGPLAN International Workshop on Reactive and Event-Based Languages and Systems
-#   date: November 16, 2020
-#   location: Virtual, USA
+acmConference:
+  short: ICSE 2022
+  publication: The 44th International Conference on Software Engineering
+  date: May 21–29, 2022
+  location: Pittsburgh, PA, USA
 # acmBooktitle: Proceedings of the 7th ACM SIGPLAN International Workshop on Reactive and Event-Based Languages and Systems (REBLS '20), November 16, 2020, Virtual, USA
 
