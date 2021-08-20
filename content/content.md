@@ -146,23 +146,25 @@ After the initial validation using the cognitive walkthrough by ourselves, we we
 
 ### Study Design
 
-The optimal number of participants for a think aloud test are five subjects [@Nielsen_Participants_1994]. However, we decided that three software engineers were a sufficient number of participants since we were looking for a basic indication if our debugger improved anything at all rather than the thoroughness of a full usability test. We recruited the subjects for the usability test via Twitter. The participants were required to have at least worked with RxJS during the past year and use vscode as their main IDE. We sent out a PDF containing a short briefing and the feature description of the prototype a week before the actual test session. Along with the main goal, performing the usability test for a novel RxJS debugger, the briefing emphasized on the importance of "think aloud" [@Boren_Ramey_2000; @Norgaard_Hornbaek_2006], the practice of verbalizing thoughts constantly without reasoning about them. Further, we informed the subjects about the minimal software requirements (Zoom, Node.js, npm/Yarn and vscode) for the remote usability test.
+"Think aloud" tests for systems with a high functionality saturation benefit from at least five test subjects or more [@Nielsen_Participants_1994]. The feature spectrum of the RP debugger prototype was small, which is why we decided to work with a subject population of three individuals. All participants, recruited via Twitter, were required to have at least worked with RxJS during the past year and use vscode as their main IDE. We sent out a PDF containing a short briefing and the description of the prototype a week before the actual test session. The briefing contained information about software requirements (Zoom, Node.js, npm/Yarn and vscode) as well as details on what the subjects might encounter during their test session. Here, we emphasized on the importance of "think aloud" [@Boren_Ramey_2000; @Norgaard_Hornbaek_2006], the practice of continuously verbalizing thoughts without reasoning about them.
 
 ### Study Execution
 
-At the start of a test session, we provided each participant with a ZIP file^[**WARNING: This link might reveal the authors identity** [https://github.com/swissmanu/mse-pa2-usability-test](https://github.com/swissmanu/mse-pa2-usability-test)] containing the *Problem 2* web application by Alabor et al. and the packaged version of the debugger extension prototype^[**WARNING: This link might reveal the authors identity** [https://github.com/swissmanu/mse-pa2-spike-vscode](https://github.com/swissmanu/mse-pa2-spike-vscode)] for vscode. While the subject prepared their development environment, we started the video, screen, and audio recording with their consent. Further, we gave a short introduction to the code base they just received.
+At the start of a test session, we provided each participant with a ZIP file^[**WARNING: This link might reveal the authors identity** [https://github.com/swissmanu/mse-pa2-usability-test](https://github.com/swissmanu/mse-pa2-usability-test)] containing the *Problem 2* web application by Alabor et al. and the packaged version of the debugger extension prototype^[**WARNING: This link might reveal the authors identity** [https://github.com/swissmanu/mse-pa2-spike-vscode](https://github.com/swissmanu/mse-pa2-spike-vscode)] for vscode. While the subject prepared their development environment, we started the video, screen, and audio recording with their consent. Also, we gave a short introduction to the code base they just received.
 
-Once the participants had everything set up, they worked for 25 minutes finding and solving any bugs in the provided web application. We took care to repeatedly remind a participant not vocalizing their thoughts.
+Once the participants had everything set up, they worked for 25 minutes resolving any bugs in the provided web application.
 
 ### Study Evaluation
 
-One participant was not able to get the prototype extension up and running on their system, which means we had only two valid data sets for further evaluation after study execution. We categorized the observed usability issues by debugging process phase (i.e. gather context, instrument hypothesis, and test hypothesis) and task (e.g. "Setup Environment", "Manage Log Points", or "Interpret Log"). From a total of 10 issues, we observed four being a problem for both remaining study subjects. These issues are summarized in Table [4](#tbl:issues-usability-test) and we prioritized them as "major". The full report with all usability issues is available on Github^[**WARNING: This link might reveal the authors identity** [PROVIDE REPORT](https://github.com/)].
+One participant was not able to get the prototype extension up and running on their system, which means we had only two valid data sets for further evaluation after study execution. We categorized the observed usability issues by debugging process phase (i.e. gather context, instrument hypothesis, and test hypothesis) and task (e.g. "Setup Environment", "Manage Log Points", or "Interpret Log"). From a total of 10 issues, we observed four being a problem for both remaining study subjects, thus we prioritized them as "major". The full usability issue report is available on Github^[**WARNING: This link might reveal the authors identity** [PROVIDE REPORT](https://github.com/)]. Table [4](#tbl:issues-usability-test) presents the four major issues.
 
 ```{.include}
 content/tables/issues-usability-test.tex
 ```
 
-The final extension we presented in Section [4](#sec:implementation) would not have been possible without the valuable insight we gained during the remote usability test. So are e.g. the display of life cycle events within the source code editor instead of in a separate window pane or indicating suggested operator log points with an icon direct measures in order to mitigate major issues observed during the test sessions.
+## Application of Results
+
+The results from the cognitive walkthrough as well as the usability tests were essential input on the way of developing the RxJS RP debugger presented in Section [4](#sec:implementation). E.g., both the POC and the prototype had an extra view for displaying life cycle events. We classified this concept during the walkthrough as prone to confuse the user. This suspicion was confirmed later during the usability test with real subjects. Because of this, we replaced the detached view with an inline display of life cycle events, directly in the source code editor. The way, how the extension surfaces operator log point suggestions, is another example of an improvement implemented based on the validation results: Subjects were not aware that suggested log points are available via the code action menu, even though this is an established UX pattern in vscode. We removed the suggestions from this menu and introduced the diamond-shaped indicator icon.
 
 
 # Threats to Validity {#sec:threats_to_validity}
@@ -171,15 +173,15 @@ The results of the usability test are subject to the following threats and limit
 
 ## Internal Validity
 
-The usability test was performed in an uncontrolled, remote environment and all participants used their own computers and software installations. The down side of this setup was the early failure of one subject, which could not get the prototype extension running on their system. Even though this could have been prevented in a controlled lab, we deem the data we were able to collect to be of the same quality as when it would have been collected in a lab [@Andreasen_Nielsen_Schroder_Stage_2007].
+The usability test was performed in an uncontrolled, remote environment and all participants used their own computers and software installations. The down side of this was the early failure of one subject, which could not get the prototype extension running on their system, hence not participate in the test at all. Even though this situation could have been prevented in a controlled lab environment, we consciously decided for a remote environemnt because of its simpler setup and accepted the risk of reduced validity and reproducibility.
 
 ## External Validity
 
-Due to the circumstance that one study participant could not set up the prototype extension, we ended up having only two valid data sets after the the remote usability tests. According to Nielsen et al. [@Nielsen_Landauer_1993], we discovered around 50% of all usability issues present this way. We observed two participants sharing four of 10 issues, thus we are confident having found the most critical ones nonetheless.
+Due to the circumstance, that one study participant could not set up the prototype extension, we ended up having only two valid data sets after the the remote usability test. Two test subjects should have allowed us to find around 50% of all usability issues present [@Nielsen_Landauer_1993]. Because the two remaining subjects share four of 10 issues, we are confident, that we could identify the most important usability problems nonetheless.
 
 ## Construct Validity
 
-We consider asking the subjects to "think aloud" during the remote usability test to create an unfamiliar environment; software engineers are usually not used to "speak to themselves" when working on a problem. Even though a participant might not vocalize their thoughts at all time, the screen and video recordings of the session mitigates the risk of missing important data. Careful moderation during the session [@Boren_Ramey_2000] helped further to remind a silent participant to tell us about their thoughts without risking to influence the result.
+We carefully moderated the test session once a test subject fell silent for more then 10 seconds and missed to "think aloud". Even though we consider this moderation to create an unfamiliar environment (software engineers are usually not used to "speak to themselves" when working on a problem), we expect the moderation techniques used to minimize any influence on the result [@Boren_Ramey_2000].
 
 # Future Work {#sec:future_work}
 
@@ -187,7 +189,7 @@ There are several ways how future work might contribute to the efforts presented
 
 ## Research
 
-We validated the demonstrated RxJS RP debugger mainly for its UX  and usability with two different inspection methods during development. So far, we did not put any work into further, empirical validation of the novel debugger. We see three possibilities how this might be approached: (i) There is a steep learning curve for software engineers starting with RxJS [@Alabor_Stolze_2020]. It might be interesting to see, if the tools provided by the RP debugger ease the first steps with RxJS for those engineers. (ii) A quantitative study, comparing the effectiveness of control-flow and the new data-flow oriented debugger would further justify the efforts invested in the presented debugger and lead the way for further development. Lastly, (iii) a new observational study with experienced RxJS engineers to validate pervious findings [@Alabor_Stolze_2020] would prove that "readiness-to-hand" is indeed of uttermost importance when it comes to effective debugging utilities.
+We validated the demonstrated RxJS RP debugger mainly for its UX  and usability with two different validation methods during development. So far, we did not put any work into further, empirical validation of the novel debugger. We see three possibilities how this might be approached: (i) There is a steep learning curve for software engineers starting with RxJS [@Alabor_Stolze_2020]. It might be interesting to see, if the tools provided by the RP debugger ease the first steps with RxJS for those engineers. (ii) A quantitative study, comparing the effectiveness of control-flow and the new data-flow oriented debugger would further justify the efforts invested in the presented debugger and lead the way for further development. Lastly, (iii) a new observational study with experienced RxJS engineers to validate pervious findings [@Alabor_Stolze_2020] would prove that "readiness-to-hand" is indeed of uttermost importance when it comes to effective debugging utilities.
 
 As of writing this paper, the latest version v0.1.2 of *RxJS Debugging for vscode* is the product of two usability inspections. More usability testing of this version will further improve the overall UX, since we have no confirmation on the presence nor absence of newly introduced usability issues.
 
@@ -205,7 +207,7 @@ Recording telemetry data of a running RP program and replaying that data indepen
 
 ### Time Travel Debugging
 
-Once there is a way to record, store and replay telemetry data, omniscient [@Pothier_Tanter_2009], or "time travel" debugging is a viable next step. Software engineers can manually step through recorded data and observe how individual parts of the system react on the stimuli. Contrary regular control-flow oriented debuggers, time travel debuggers can step forward as well as backward in time, since they do not rely on an actual running program.
+Once there is a way to record, store and replay telemetry data, omniscient [@Pothier_Tanter_2009], or "time travel" debugging is a viable next step. Software engineers can manually step through recorded data and observe how individual parts of the system react on the stimuli. Contrary regular control-flow oriented debuggers, time travel debuggers can step forward as well as backward in time, since they do not rely on a currently running program.
 
 
 # Conclusion {#sec:conclusion}
