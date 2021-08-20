@@ -181,7 +181,7 @@ Due to the circumstance, that one study participant could not set up the prototy
 
 ## Construct Validity
 
-We carefully moderated the test session once a test subject fell silent for more then 10 seconds and missed to "think aloud". Even though we consider this moderation to create an unfamiliar environment (software engineers are usually not used to "speak to themselves" when working on a problem), we expect the moderation techniques used to minimize any influence on the result [@Boren_Ramey_2000].
+We carefully moderated the test session once a test subject fell silent for more then 10 seconds and missed to "think aloud". Even though the participants told us, that "speaking to themselves" creates an unfamiliar environment for them (software engineers are usually not used to "speak to themselves" when working on a problem), we expect the moderation techniques used [@Boren_Ramey_2000] to minimize any influences on the results.
 
 # Future Work {#sec:future_work}
 
@@ -189,9 +189,9 @@ There are several ways how future work might contribute to the efforts presented
 
 ## Research
 
-We validated the demonstrated RxJS RP debugger mainly for its UX  and usability with two different validation methods during development. So far, we did not put any work into further, empirical validation of the novel debugger. We see three possibilities how this might be approached: (i) There is a steep learning curve for software engineers starting with RxJS [@Alabor_Stolze_2020]. It might be interesting to see, if the tools provided by the RP debugger ease the first steps with RxJS for those engineers. (ii) A quantitative study, comparing the effectiveness of control-flow and the new data-flow oriented debugger would further justify the efforts invested in the presented debugger and lead the way for further development. Lastly, (iii) a new observational study with experienced RxJS engineers to validate pervious findings [@Alabor_Stolze_2020] would prove that "readiness-to-hand" is indeed of uttermost importance when it comes to effective debugging utilities.
+As of writing this paper, *RxJS Debugging for vscode* is available in version v0.1.2 allowing to debug RxJS applications running in Node.js. Once v1.0.0^[**WARNING: This link might reveal the authors identity** [https://github.com/swissmanu/rxjs-debugging-for-vscode/milestone/2](https://github.com/swissmanu/rxjs-debugging-for-vscode/milestone/2)] introduces support for debugging such programs running in internet browsers, we see the necessity for two new empirical studies: (i) An observational study to answer the question, if "readiness-to-hand" is indeed of uttermost importance when it comes to effective RP debugging utilities [@Alabor_Stolze_2020]. Further, (ii) we propose to test the effectiveness of the presented RP debugger for RxJS compared to traditional debugging utilities like manual print statements and control-flow oriented debuggers.
 
-As of writing this paper, the latest version v0.1.2 of *RxJS Debugging for vscode* is the product of two usability inspections. More usability testing of this version will further improve the overall UX, since we have no confirmation on the presence nor absence of newly introduced usability issues.
+Even though we validated the UX concepts of the new RxJS debugger twice during its development, more usability testing would potentially provide hints on how the UX could be improved further.
 
 ## Features
 
@@ -199,15 +199,15 @@ We designed *RxJS Debugging for vscode* to be an open source project. In the fol
 
 ### Visualizer Component
 
-*RxFiddle* by Banken et al. [@Banken_Meijer_Gousios_2018] proposed visualization functionalities for data-flow graphs declared using RxJS observables. Adding a component representing complex graphs visually will be a helpful addition in order to comprehend such structures better.
+*RxFiddle* by Banken et al. [@Banken_Meijer_Gousios_2018] proposed visualization functionalities for data-flow graphs described with RxJS observables. The debugging utilities we presented in this paper could benefit from the integration of such a visualizer. Having a graphical representation of an observable graph might help software engineers new to RxJS understand basic concepts better. Experienced engineers might benefit from an additional view on the abstract composition of multiple observables when debugging such further.
 
-### Record/Replay
+### Record and Replay
 
-Recording telemetry data of a running RP program and replaying that data independently [@OCallahan_Jones_Froyd_Huey_Noll_Partush_2017; @Perez_Nilsson_2017] can help to simplify testing a debugging hypothesis in complex systems. Recorded data might be used to test a modified system without re-executing the complete RP program further.
+A software engineer can record telemetry data of a running RP program and replay that data independently as many times as they wish later [@OCallahan_Jones_Froyd_Huey_Noll_Partush_2017]. Such a function would allow two things: During debugging, the engineer can rerun a recorded failure scenario without depending on external systems like remote API's. Further, recorded data might be used for regression testing to verify that a modified program still works as expected [@Perez_Nilsson_2017].
 
 ### Time Travel Debugging
 
-Once there is a way to record, store and replay telemetry data, omniscient [@Pothier_Tanter_2009], or "time travel" debugging is a viable next step. Software engineers can manually step through recorded data and observe how individual parts of the system react on the stimuli. Contrary regular control-flow oriented debuggers, time travel debuggers can step forward as well as backward in time, since they do not rely on a currently running program.
+Once there is a way to record, store and replay telemetry data, omniscient [@Pothier_Tanter_2009], or "time travel" debugging is a possible next step. Software engineers can manually step through recorded data and observe how individual parts of the system react on the stimuli. Contrary regular control-flow oriented debuggers, time travel debuggers can not only step forward, but backward in time as well. This is because they do not rely on a currently running program.
 
 
 # Conclusion {#sec:conclusion}
