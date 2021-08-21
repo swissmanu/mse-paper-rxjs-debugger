@@ -136,7 +136,7 @@ At this early stage of development, we were looking for an informal, expert-driv
 content/tables/steps-cognitive-walkthrough.tex
 ```
 
-We successfully identify six major usability issues during the later steps of the walkthrough, as summarized in Table [3](#tbl:cognitive-walkthrough-issues). The full walkthrough report, including the persona description of Frank Flow, is available on Github^[**WARNING: This link might reveal the author's identity** [PROVIDE REPORT](https://github.com/)].
+We successfully identify six major usability issues during the later steps of the walkthrough, as summarized in Table [3](#tbl:cognitive-walkthrough-issues). The full walkthrough report, including the persona description of Frank Flow, is available on Github^[**WARNING: This link might reveal the author's identity** [https://github.com/swissmanu/mse-paper-rxjs-debugger/releases](https://github.com/swissmanu/mse-paper-rxjs-debugger/releases)].
 
 ```{.include}
 content/tables/issues-cognitive-walkthrough.tex
@@ -160,7 +160,7 @@ Once the participants had everything set up, they worked for 25 minutes, resolvi
 
 ### Study Evaluation
 
-One participant was not able to get the prototype extension up and running on their system, which means we had only two valid data sets for further evaluation after study execution. We categorized the observed usability issues by debugging process phase (i.e., gather context, instrument hypothesis, and test hypothesis) and task (e.g., "Setup Environment", "Manage Log Points", or "Interpret Log"). From a total of 10 issues, we observed four being a problem for both remaining study subjects. Thus we prioritized them as "major". The full usability issue report is available on Github^[**WARNING: This link might reveal the author's identity** [PROVIDE REPORT](https://github.com/)]. Table [4](#tbl:issues-usability-test) presents the four major issues.
+One participant was not able to get the prototype extension up and running on their system, which means we had only two valid data sets for further evaluation after study execution. We categorized the observed usability issues by debugging process phase (i.e., gather context, instrument hypothesis, and test hypothesis) and task (e.g., "Setup Environment", "Manage Log Points", or "Interpret Log"). From a total of 10 issues, we observed four being a problem for both remaining study subjects. Thus we prioritized them as "major". The full usability issue report is available on Github^[**WARNING: This link might reveal the author's identity** [https://github.com/swissmanu/mse-paper-rxjs-debugger/releases](https://github.com/swissmanu/mse-paper-rxjs-debugger/releases)]. Table [4](#tbl:issues-usability-test) presents the four major issues.
 
 ```{.include}
 content/tables/issues-usability-test.tex
