@@ -1,0 +1,23 @@
+# Metadata
+title: Debugging Support for Reactive Programming
+subtitle: Usability Validation Reports
+
+# Common Configuration
+lang: en-US
+link-citations: true
+csl: templates/transactions-on-programming-languages-and-systems
+reference-section-title: References
+bibliography: bibliography.bib
+
+header-includes:
+- |
+  ```{=latex}
+  \usepackage{pdflscape}
+  \newcommand{\blandscape}{\begin{landscape}}
+  \newcommand{\elandscape}{\end{landscape}}
+    ```
+
+author:
+  - Manuel Alabor
+  - Markus Stolze
+

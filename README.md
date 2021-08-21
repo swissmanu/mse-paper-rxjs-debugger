@@ -1,6 +1,6 @@
 # Paper: Debugging Support for Reactive Programming
 
-> Empirically Grounded Development of a Debugger for RxJS
+> User Centered Development of a Debugger for RxJS
 
 ## Build in Docker Container
 
