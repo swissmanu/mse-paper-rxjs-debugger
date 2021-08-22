@@ -17,7 +17,7 @@ header-includes:
   \newcommand{\elandscape}{\end{landscape}}
     ```
 
-author:
-  - Manuel Alabor
-  - Markus Stolze
+# author:
+#   - Manuel Alabor
+#   - Markus Stolze
 

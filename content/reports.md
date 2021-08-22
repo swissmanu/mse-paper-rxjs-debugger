@@ -1,12 +1,12 @@
 > This report complements the research paper "Debugging Support
-> for Reactive Programming: User Centered Development of a Debugger for
+> for Reactive Programming: User-Centered Development of a Debugger for
 > RxJS". The report compiles all usability validation results
 > collected during the development of the presented RxJS debugging
 > extension.
 >
 > The main research paper is available on Github:
 >
-> https://github.com/swissmanu/mse-paper-rxjs-debugger.
+> **WARNING: This link might reveal the author(s) identity/identities:** [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-paper-rxjs-debugger).
 
 # Cognitive Walkthrough
 
@@ -76,13 +76,11 @@ After I started the "Problem 1" application and inspected its UI, I was
 able to observe multiple, unexpected updates rendered in quick
 succession after I clicked the reset button. Based on this evidence, I
 formulate my first debugging hypothesis: I suspect that the `flatMap`
-operator on Line 18 in the file `index.ts`[^1] does create multiple
+operator on Line 18 in the file `index.ts` does create multiple
 observables, which do not get unsubscribed when the reset button is
 clicked. This results in the observed behavior eventually. To proof my
 hypothesis, I want to inspect the life cycle events of the created
 observables more closely.
-
-[^1]: <https://github.com/swissmanu/mse-pa1-experiment/blob/v1.0.2/src/problem-1/index.ts#L18>
 
 ### Environment
 

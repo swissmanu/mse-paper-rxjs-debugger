@@ -1,4 +1,4 @@
-\documentclass[sigplan,screen,$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+\documentclass[$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
 
 % \usepackage{ccicons}
 % \usepackage{hyperref}
@@ -146,7 +146,7 @@ $if(acmISBN)$
 \acmISBN{$acmISBN$}
 $endif$
 $if(acmConference)$
-\acmConference[$acmConference.short$]{$acmConference.publication$}{$acmConference.date$}{$acmConference.location$}
+\acmConference[$acmConference.short$]{$acmConference.name$}{$acmConference.date$}{$acmConference.venue$}
 $endif$
 $if(acmBooktitle)$
 \acmBooktitle{$acmBooktitle$}
