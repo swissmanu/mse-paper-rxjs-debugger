@@ -10,6 +10,8 @@
 
 # Cognitive Walkthrough
 
+The cognitive walkthrough report follows the guide by Wharton et al. [@Wharton_Rieman_Clayton_Polson_1994].
+
 ## Persona "Frank Flow" {#sec:persona}
 
 ### Profile
@@ -291,7 +293,7 @@ This is a summary of all failure stories identified during the cognitive walkthr
 
 # Usability Test Issues
 
-This are all usability issues identified during the usability test sessions.
+These are all usability issues identified during the usability test sessions.
 
 | Subject(s)     | Phase                 | Task              | Problem                                                      |
 | -------------- | --------------------- | ----------------- | ------------------------------------------------------------ |
