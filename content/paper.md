@@ -16,11 +16,17 @@ This debugging technique is time-consuming and cumbersome: Adding more print sta
 
 The observation of debugging RP programs with the wrong debugging utilities is not new: Salvaneschi et al. described the shortcoming of traditional debuggers when confronted with RP in their paper and coined the concept of *RP Debugging* [@Salvaneschi_Mezini_2016]. Later, Banken et al. [@Banken_Meijer_Gousios_2018] proposed a possible solution for debugging RxJS RP programs using an external visualizer sandbox. However, software engineers still do not have the right tools at hand today when needing them most, as Alabor et al. stated.
 
+\vspace{3mm}
+
 Within this paper, we are going to present two concrete contributions to the field of RxJS RP debugging:
 
-1. *RxJS Debugging for Visual Studio Code* is an extension for Microsoft Visual Studio Code^[[https://code.visualstudio.com](https://code.visualstudio.com)] (vscode) and provides operator log points to debug RxJS-based programs. It integrates with UX patterns conforming to the IDE and requires no extra effort to debug an RP program.
+\vspace{1mm}
+
+1. *RxJS Debugging for Visual Studio Code* is an extension for Microsoft Visual Studio Code^[[https://code.visualstudio.com](https://code.visualstudio.com)] (vscode) and provides operator log points to debug RxJS-based programs. It integrates with UX patterns conforming to the IDE and requires no extra effort to debug an RP program.\vspace{1mm}
 
 2. A refined architecture for RxJS RP debuggers reusing a preexisting *Chrome DevTools Protocol*[^3] (CDP) connection for message-based communication between the debugger's components.
+
+\vspace{3mm}
 
 [^3]: JavaScript virtual machines like V8 (Google Chrome, Node.js) or SpiderMonkey (Mozilla Firefox) implement (a subset of) the *Chrome DevTools Protocol*. External debugging utilities use CDP to connect and debug JavaScript programs. vscode ships with *js-debug*, a control-flow-oriented JavaScript debugger relying on CDP. [https://chromedevtools.github.io/devtools-protocol/](https://chromedevtools.github.io/devtools-protocol/)
 

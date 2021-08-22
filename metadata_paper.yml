@@ -23,7 +23,7 @@ documentclass: acmart
 
 # acmart Configuration
 classoption:
-  #- nonacm # Hide ACM publication specifics
+  # - nonacm # Hide ACM publication specifics
   - sigconf
   - review
   - anonymous
