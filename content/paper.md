@@ -30,8 +30,7 @@ Within this paper, we are going to present two concrete contributions to the fie
 
 [^3]: JavaScript virtual machines like V8 (Google Chrome, Node.js) or SpiderMonkey (Mozilla Firefox) implement (a subset of) the *Chrome DevTools Protocol*. External debugging utilities use CDP to connect and debug JavaScript programs. vscode ships with *js-debug*, a control-flow-oriented JavaScript debugger relying on CDP. [https://chromedevtools.github.io/devtools-protocol/](https://chromedevtools.github.io/devtools-protocol/)
 
-
-***TODO Rewrite** Before we do a deep-dive on the extensions functionality in Section [4](#sec:implementation), we will give an example for the main challenge of RP debugging in Section [2](#sec:challenge). We discuss related work in Section [3](#sec:background). Before we come to our conclusion in Section [8](#sec:conclusion), we will consider potential threats to validity in Section [6](#sec:threats_to_validity) and give an overview on potential follow-up topics, research-wise as well as practical, in Section [7](#sec:future_work).*
+Before we do a deep-dive on the debuggers functionality in Section [4](#sec:implementation), we present an example for the primary challenge of RP debugging in Section [2](#sec:challenge) and discuss related work in Section [3](#sec:background). Next, we give an overview of performed usability inspections and validations in Section [5](#sec:ux). Finally, we consider threats to validity regarding the usability tests in Section [6](#sec:threats_to_validity), introduce topics for future work in Section [7](#sec:future_work), and finish with our conclusion in Section [8](#sec:conclusion).
 
 # RP Debugging: The Hard Way {#sec:challenge}
 
@@ -126,7 +125,7 @@ Contrary to *RxFiddle*, our implementation uses a different way to connect these
 
 [^4]: We contributed the possibility for CDP connection-reuse to js-debug as part of our work on the RxJS RP debugging extension: **WARNING: This link might reveal the author(s) identity/identities** [https://github.com/microsoft/vscode-js-debug/pull/964](https://github.com/microsoft/vscode-js-debug/pull/964)
 
-# Usability: Inspection and Validation {#sec:discussion}
+# Usability: Inspection and Validation {#sec:ux}
 
 We followed a User-Centered Design (UCD) approach in three iterations to conceptualize and implement our debugging utility. After sketching a rough (i) proof of concept (POC), we performed a cognitive walkthrough to validate our idea of replacing manual print statements with operator log points. The resulting data helped us to build a (ii) prototype of the extension. Next, we used this prototype to conduct a moderated remote usability test with three subjects. This allowed us to uncover pitfalls in the UX concept and find bugs early in the development process. Finally, we used the results of these sessions for further refinement. We finalized the (iii) first minor version of the RxJS RP debugger, which we released to the Visual Studio Marketplace in May 2021.
 
