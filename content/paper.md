@@ -126,7 +126,7 @@ Contrary to *RxFiddle*, our implementation uses a different way to connect these
 
 [^4]: We contributed the possibility for CDP connection-reuse to js-debug as part of our work on the RxJS RP debugging extension: **WARNING: This link might reveal the author's identity** [https://github.com/microsoft/vscode-js-debug/pull/964](https://github.com/microsoft/vscode-js-debug/pull/964)
 
-# Usability Validation {#sec:discussion}
+# Usability: Inspection and Validation {#sec:discussion}
 
 We followed a User-Centered Design (UCD) approach in three iterations to conceptualize and implement our debugging utility. After sketching a rough (i) proof of concept (POC), we performed a cognitive walkthrough to validate our idea of replacing manual print statements with operator log points. The resulting data helped us to build a (ii) prototype of the extension. Next, we used this prototype to conduct a moderated remote usability test with three subjects. This allowed us to uncover pitfalls in the UX concept and find bugs early in the development process. Finally, we used the results of these sessions for further refinement. We finalized the (iii) first minor version of the RxJS RP debugger, which we released to the Visual Studio Marketplace in May 2021.
 

@@ -8,8 +8,8 @@ keywords:
   - user centered design
 
 # Abstract
-#abstract: |
-#  Past research proved that debugging of reactive applications is a cumbersome, inefficient process and often lacks proper tool support in todays IDEs. These facts are valid for modern JavaScript applications as well: Software engineers debug RxJS applications by introducing manual print statements in their source code. In this paper, we are going to present a novel approach on how reactive data streams, implemented with RxJS, can be debugged: The demonstrated utility is tightly integrated in the engineers workflow and makes manual print statements and the analysis of the resulting logs obsolete. We discuss the new debugging solution in perspective to previous work in the field and conclude with the proposal of potential topics for future research related to RxJS-specific debugging.
+abstract: |
+ Debugging reactive data-flow-oriented applications is a cumbersome task. Unfortunately, modern development environments provide only suitable tools to debug control-flow-oriented programs. As a result, software engineers utilizing RxJS, a popular library for reactive programming in JavaScript, remain obligated to use inapt debugging tools, antiquated debugging practices like manual print statements, or utilities outside of their accustomed IDE. This paper presents two contributions to reactive debugging for RxJS: (i) Operator log points make manual print statements obsolete. Ready-to-hand, the debugging utility is fully integrated into Microsoft Visual Studio Code without interrupting the engineers' workflow. Furthermore, the proposed debugger (ii) uses an advanced system architecture. As a result, it simplifies how the components communicate at runtime by reusing already established communication channels using the Chrome DevTools Protocol. We facilitated usability inspection and validation methods in an iterative, user-centered design approach to build the demonstrated debugging utility. We will exhibit the results of these iterations and briefly introduce the future of the presented debugging solution for RxJS.
 
 # Common Configuration
 lang: en-US
