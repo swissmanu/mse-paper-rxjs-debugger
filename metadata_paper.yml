@@ -3,9 +3,9 @@ title: Debugging Support for Reactive Programming
 subtitle: User-Centered Development of a Debugger for RxJS
 keywords:
   - reactive programming
-  - debugging
-  - empirical software engineering
+  - reactive debugging
   - human interaction design
+  - user centered design
 
 # Abstract
 #abstract: |
