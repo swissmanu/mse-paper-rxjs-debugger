@@ -10,7 +10,7 @@
 
 # Cognitive Walkthrough
 
-The cognitive walkthrough report follows the guide by Wharton et al. [@Wharton_Rieman_Clayton_Polson_1994].
+The cognitive walkthrough report formally follows the guide by Wharton et al. [@Wharton_Rieman_Clayton_Polson_1994]. Further, the report refers to "operator log points" as "probes." This is because we called the log point concept differently during the proof of concept phase and later transitioned to the more intuitive name.
 
 ## Persona "Frank Flow" {#sec:persona}
 
@@ -92,12 +92,6 @@ source code of Problem 1 from our previous experiment is available.
 Further, an internet browser (e.g. Mozilla Firefox or Google Chrome) is
 present.
 
-### Remarks
-
-The cognitive walkthrough protocol refers to "operator log points" as
-"probes". We called the log point concept differently during the
-proof of concept phase and transitioned to the more intuitive name
-later.
 
 ## Walkthrough
 
