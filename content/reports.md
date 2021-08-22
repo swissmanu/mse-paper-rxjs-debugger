@@ -269,9 +269,29 @@ Interpret the live trace of emitted values and life cycle events in the
 Monitor".](./content/figures/walkthrough-screenshots/step8.png){#fig:walkthrough-screesnhot-step-8
 width="\\columnwidth"}
 
+
+\pagebreak
+
+## Failure Stories
+
+This is a summary of all failure stories identified during the cognitive walkthrough.
+
+| Step                          | Failure Story                                                |
+| ----------------------------- | ------------------------------------------------------------ |
+| Open Code Actions             | The user might know code actions for providing options to refactor a piece of code or quick fixes for code linting problems. It is questionable if he will expect functionality to inspect parts of a data flow graph here. |
+| Create Probe for Operator     | The "Observables" list is part of the debugging view of Visual Studio Code. The user will not get any feedback that his action "Probe Observable\..." was successful without changing the view manually to debugging and expanding the "Observables" panel in the lower left. |
+| Open Observable Probe Monitor | The user might not be aware that the "Observable Probe Monitor" view is hidden within the command palette. Hence, they might feel lost after adding the observable probe in the previous step. |
+| Open Observable Probe Monitor | The user might get confused by the "Observable Probe Monitor" being blank by default. |
+| Interact with Application     | The user might not be aware that he is expected to interact with "Problem 1" in the default browser in order to get live feedback in the "Observable Probe Monitor". |
+| Interact with Application     | The default browser might overlay Visual Studio Code and the "Observable Probe Monitor" view. This is why the user might miss the live trace of values and life cycle events displayed in the "Observable Probe Monitor". |
+
+
+
 \blandscape
 
 # Usability Test Issues
+
+This are all usability issues identified during the usability test sessions.
 
 | Subject(s)     | Phase                 | Task              | Problem                                                      |
 | -------------- | --------------------- | ----------------- | ------------------------------------------------------------ |
