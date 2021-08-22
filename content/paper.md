@@ -204,7 +204,7 @@ Even though we validated the UX concepts of the new RxJS debugger twice during i
 
 ## Features
 
-We designed *RxJS Debugging for vscode* to be an open-source project. In the following, we present three highlights from its on Github publicly accessible feature back log^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/rxjs-debugging-for-vscode/issues?q=is%3Aopen+is%3Aissue+label%3Afeature%2Cimprovement)].
+We designed *RxJS Debugging for vscode* to be an open-source project. In the following, we present three highlights from its on Github publicly accessible feature backlog^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/rxjs-debugging-for-vscode/issues?q=is%3Aopen+is%3Aissue+label%3Afeature%2Cimprovement)].
 
 ### Visualizer Component
 
@@ -221,6 +221,7 @@ Once there is a way to record, store and replay telemetry data, omniscient [@Pot
 
 # Conclusion {#sec:conclusion}
 
-- Wrap things up
-- Highlight the main contribution, again.
+In this paper, we presented a novel RP debugger for RxJS that fully integrates with vscode. *RxJS Debugging for vscode* provides operator log points ready to software engineers' hands and makes manual print statements as debugging utilities obsolete. We developed the debugger using a UCD process facilitating UX inspection and validation methods. As a result, we discovered and resolved four critical usability issues through a usability test with two participants. Furthermore, we refined a previously proposed system architecture [@Banken_Meijer_Gousios_2018] by reusing the CDP connection of vscodes JavaScript debugger for communication.
+
+We recommended two empirical studies to validate the importance of "readiness-to-hand" [@Alabor_Stolze_2020] and the efficiency of the demonstrated debugging utilities for future research. Finally, we presented three highlight features from *RxJS Debugging for vscode*' open-source project, including a visualizer for data-flow graphs and plans for sophisticated telemetry data usage.
 
