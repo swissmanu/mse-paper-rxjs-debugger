@@ -85,8 +85,8 @@ observables more closely.
 ### Environment
 
 Visual Studio Code with enabled TypeScript support is installed. The
-prototype of our RxJS debugging extension is installed as well. The
-source code of Problem 1 from our previous experiment is available.
+prototype of the RxJS debugging extension is installed as well. The
+source code of "Problem 1" [@Alabor_Stolze_2020] is present.
 Further, an internet browser (e.g. Mozilla Firefox or Google Chrome) is
 present.
 
