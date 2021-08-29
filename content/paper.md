@@ -117,27 +117,27 @@ The technical architecture of *RxJS Debugging for vscode* is a refined version o
 content/figures/architecture.tex
 ```
 
-JavaScript virtual machines like V8 (Google Chrome, Node.js) or SpiderMonkey (Mozilla Firefox) implement (a subset of) the Chrome DevTools Protocol (CDP)^[[https://chromedevtools.github.io/devtools-protocol/](https://chromedevtools.github.io/devtools-protocol/)]. Debugging utilities use CDP to connect and debug JavaScript programs. vscode ships with *js-debug*, a control-flow-oriented JavaScript debugger relying on CDP. Where RxFiddle by Banken et al. uses WebSockets to exchange relevant data, we leverage on the CDP connection, established by the generic JavaScript debugger, instead[^4]. The result is a robust, less complex system because we do not need to maintain any additional side channel for RP debugging communication. This approach contributes to our solution in two ways: (i) Technically, we do not need to care for "where" the RP program the user wants to debug is running (e.g., locally in a browser or in a Node.js process on a remote computer). The generic JavaScript debugger takes care of this already. (ii) UX-wise, the software engineer does not need to decide "how" they want to debug their program (i.e., traditionally control-flow-oriented or RP, data-flow-oriented). Instead, they start debugging using familiar commands, and RP-specific debugging capabilities are available once relevant.
+JavaScript virtual machines (VM) like V8 (Google Chrome, Node.js) or SpiderMonkey (Mozilla Firefox) implement (a subset of) the Chrome DevTools Protocol (CDP)^[[https://chromedevtools.github.io/devtools-protocol/](https://chromedevtools.github.io/devtools-protocol/)]. Debugging utilities use CDP to connect and debug JavaScript programs. vscode ships with *js-debug*, a control-flow-oriented JavaScript debugger relying on CDP. Where RxFiddle by Banken et al. uses WebSockets to exchange relevant data, we leverage on the CDP connection, established by the generic JavaScript debugger, instead[^4]. The result is a robust, less complex system because we do not need to maintain any additional side channel for RP debugging communication. This approach contributes to our solution in two ways: (i) Technically, we do not need to care for "where" the RP program the user wants to debug is running (e.g., locally in a browser or in a Node.js process on a remote computer). The generic JavaScript debugger takes care of this already. (ii) UX-wise, the software engineer does not need to decide "how" they want to debug their program (i.e., traditionally control-flow-oriented or RP, data-flow-oriented). Instead, they start debugging using familiar commands, and RP-specific debugging capabilities are available once relevant.
 
 [^4]: We contributed the possibility for CDP connection-reuse to js-debug as part of our work on the RxJS RP debugging extension: **WARNING: This link might reveal the author(s) identity/identities** [https://github.com/microsoft/vscode-js-debug/pull/964](https://github.com/microsoft/vscode-js-debug/pull/964)
 
 # Usability: Inspection and Validation {#sec:ux}
 
-We followed a User-Centered Design (UCD) approach in three iterations to conceptualize and implement our debugging utility. After sketching a rough (i) proof of concept (POC), we performed a cognitive walkthrough to validate our idea of replacing manual print statements with operator log points. The resulting data helped us to build a (ii) prototype of the extension. Next, we used this prototype to conduct a moderated remote usability test with three subjects. This allowed us to uncover pitfalls in the UX concept and find bugs early in the development process. Finally, we used the results of these sessions for further refinement. We finalized the (iii) first minor version of the RxJS RP debugger, which we released to the Visual Studio Marketplace in May 2021.
+We followed a User-Centered Design (UCD) approach in three iterations to conceptualize and implement our debugging utility. After sketching a rough proof of concept (POC) in the first step, we performed a cognitive walkthrough to validate our idea of replacing manual print statements with operator log points. The resulting data helped us to build a prototype of the extension. Next, we used this prototype to conduct a moderated remote usability test with three subjects. This allowed us to uncover pitfalls in the UX concept and find bugs early in the development process. Finally, we used the results of these sessions for further refinement. We finalized the first minor version of the RxJS RP debugger, which we released to the Visual Studio Marketplace in May 2021.
 
-We reused the objects for testing created by Alabor et al. [@Alabor_Stolze_2020] for their observational study for both the cognitive walkthrough and the remote usability test.
+We used the test cases created by Alabor et al. [@Alabor_Stolze_2020] for both the cognitive walkthrough and the remote usability test.
 
 ## Cognitive Walkthrough
 
 We concluded the first iteration of our development process with a POC demonstrating the basic concept of operator log points for vscode.
 
-Looking for an informal, expert-driven usability inspection method [@Nielsen_1994], we found the cognitive walkthrough [@Wharton_Rieman_Clayton_Polson_1994] to be the perfect fit in the early stage of development. Therefore, we prepared the persona of *Frank Flow*, the profile of a typical user of the RP debugger. Next, we designed the action sequence for the walkthrough (Table [2](#tbl:cognitive-walkthrough)) based on the debugging process by Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] and Franks potential workflow to debug the *Problem 1* web application by Alabor et al.
+Looking for an informal, expert-driven usability inspection method [@Nielsen_1994], we found the cognitive walkthrough [@Wharton_Rieman_Clayton_Polson_1994] to be the perfect fit in this early stage of development. We prepared the profile of a typical user for the RP debugger as input to the walkthrough. Furthermore, we created the walkthroughs action sequence (Table [2](#tbl:cognitive-walkthrough) based on the debugging process by Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] and the users debugging workflow for the *Problem 1* web application by Alabor et al.
 
 ```{.include}
 content/tables/steps-cognitive-walkthrough.tex
 ```
 
-We successfully identified six major usability issues during the later walkthrough steps, as summarized in Table [3](#tbl:cognitive-walkthrough-issues). The full walkthrough report, including the persona description of Frank Flow, is available on Github^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-paper-rxjs-debugger/releases)].
+The cognitive walkthrough revealed six major usability issues, as summarized in Table [3](#tbl:cognitive-walkthrough-issues). The full walkthrough report, including the user description, is available on Github^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-paper-rxjs-debugger/releases)].
 
 ```{.include}
 content/tables/issues-cognitive-walkthrough.tex
@@ -151,11 +151,13 @@ After the initial validation using the cognitive walkthrough, we were ready to t
 
 ### Study Design
 
-"Think aloud" tests for systems with a high functionality saturation benefit from at least five test subjects or more [@Nielsen_Participants_1994]. The feature spectrum of the RP debugger prototype was small, which is why we decided to work with a subject population of three individuals. Participants, recruited via Twitter, were required to have worked with RxJS during the past year and use vscode as their primary IDE. We sent out a PDF containing a short briefing and a prototype description a week before the actual test session. The briefing contained information about software requirements (Zoom, Node.js, npm/Yarn, and vscode) and details on what the subjects might encounter during their test session. Here, we emphasized the importance of "think aloud" [@Boren_Ramey_2000; @Norgaard_Hornbaek_2006], the practice of continuously verbalizing thoughts without reasoning about them.
+"Think aloud" tests for high functionality systems benefit from at least five test subjects or more [@Nielsen_Participants_1994]. The feature spectrum of the RP debugger prototype was small, hence the probability of finding major usability issues without a large subject population sufficient high enough. This is why we decided to work with three individual subjects.
+
+Participants, recruited via Twitter, were required to have worked with RxJS during the past year and use vscode as their primary IDE. We sent out a PDF containing a short briefing and a prototype description a week before the actual test session. The briefing contained information about software requirements (Zoom, Node.js, npm/Yarn, and vscode) and details on what the subjects might encounter during their test session. Here, we emphasized the importance of "think aloud" [@Boren_Ramey_2000; @Norgaard_Hornbaek_2006], the practice of continuously verbalizing thoughts without reasoning about them.
 
 ### Study Execution
 
-At the start of a test session, we provided each participant with a ZIP file^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-pa2-usability-test)] containing the *Problem 2* web application by Alabor et al. and the packaged version of the debugger extension prototype^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-pa2-spike-vscode)] for vscode. While the subject prepared their development environment, we started the video, screen, and audio recording with their consent. Also, we gave a short introduction to the code base they just received.
+At the start of a test session, we provided each participant with a ZIP file^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-pa2-usability-test)] containing the *Problem 2* web application by Alabor et al. and the packaged version of the debugger extension prototype^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-pa2-spike-vscode)] for vscode. While the subject prepared their development environment, we started the video, screen, and audio recording with their consent. Also, we gave a scripted introduction to the code base they just received.
 
 Once the participants had everything set up, they worked for 25 minutes, resolving any bugs in the provided web application.
 
@@ -169,8 +171,7 @@ content/tables/issues-usability-test.tex
 
 ## Application of Results
 
-The results from the cognitive walkthrough and the usability tests were essential input on developing the RxJS RP debugger presented in Section [4](#sec:implementation). E.g., both the POC and the prototype had an extra view for displaying life cycle events. We classified this concept during the walkthrough as prone to confuse the user. This suspicion was confirmed later during the usability test with real subjects. Because of this, we replaced the detached view with an inline display of life cycle events directly in the source code editor. Another example of an improvement based on the validation results is how the extension surfaces operator log point suggestions: Subjects were unaware that suggested log points are available via the code action menu, even though this is an established UX pattern in vscode. Therefore, we removed the suggestions from this menu and introduced the diamond-shaped indicator icon.
-
+The results from the cognitive walkthrough and the usability tests were used to refine and complete the development of the RxJS RP debugger presented in Section [4](#sec:implementation). E.g., both the POC and the prototype had an extra view for displaying life cycle events. We classified this concept during the walkthrough as prone to confuse the user, but did not change anything for the prototype yet. The usability tests with real subjects confirmed our suspicion though. Because of this, changed the UI for the final, current version. A second example of an improvement is how the debugger suggests operator log point: Subjects were unaware that suggested log points are available via the code action menu, even though this is an established UX pattern in vscode. Therefore, we removed the suggestions from this menu and introduced the diamond-shaped indicator icon which is always visible.
 
 # Threats to Validity {#sec:threats_to_validity}
 
@@ -178,7 +179,7 @@ The results of the usability test are subject to the following threats and limit
 
 ## Internal Validity
 
-We performed the usability test in an uncontrolled, remote environment, and all participants used their own computers and software installations. The downside of this was the early failure of one subject, which could not get the prototype extension running on their system, hence not participating in the test. Even though we could have prevented this situation in a controlled lab environment, we consciously decided on a remote environment because of its more straightforward setup. Nevertheless, we accepted the risk of reduced validity and reproducibility.
+We performed the usability test in an uncontrolled, remote environment, and all participants used their own computers and software installations. The downside of this is the early failure of one subject, which could not get the prototype extension running on their system, hence not participating in the test. Even though we could have prevented this situation in a controlled lab environment, we consciously decided to take this risk and in turn get more realistic results from users working in the context of their accustomed development environment.
 
 ## External Validity
 
@@ -186,7 +187,7 @@ Due to the circumstance that one study participant could not set up the prototyp
 
 ## Construct Validity
 
-We carefully moderated the test session once a test subject fell silent for more than 10 seconds and missed to "think aloud". Even though the participants told us that "speaking to themselves" creates an unfamiliar environment for them (software engineers are usually not used to "speak to themselves" when working on a problem), we expect the moderation techniques used [@Boren_Ramey_2000] to minimize any influences on the results.
+We carefully moderated the test session once a test subject fell silent for more than 10 seconds and missed to "think aloud". Even though the participants told us that "speaking to themselves" creates an unfamiliar environment for them, we expect the moderation techniques used [@Boren_Ramey_2000] to minimize any influences on the results.
 
 # Future Work {#sec:future_work}
 
@@ -194,9 +195,9 @@ There are several ways how future work might contribute to the efforts presented
 
 ## Research
 
-As of writing this paper, *RxJS Debugging for vscode* is available in version v0.1.2, allowing to debug RxJS applications running in Node.js. Once v1.0.0^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/rxjs-debugging-for-vscode/milestone/2)] introduces support for debugging programs running in a browser, we see the necessity for two new empirical studies: (i) An observational study to answer the question, if "readiness-to-hand" is indeed of uttermost importance when it comes to effective RP debugging utilities [@Alabor_Stolze_2020]. Further, (ii) we propose to test the effectiveness of the presented RP debugger for RxJS compared to traditional debugging utilities like manual print statements and control-flow-oriented debuggers.
+We presented operator log points for debugging RP programs and the development process that led to them. This process ensured that the proposed solution satisfies the user's need to debug RxJS programs without manual print statements. Version 0.1.2 of *RxJS Debugging for vscode* can debug RxJS programs running in the Node.js JavaScript VM. The planned major release 1.0.0^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/rxjs-debugging-for-vscode/milestone/2)] will generalize this solution further and brings operator log points to RxJS applications running in web browsers.
 
-Even though we validated the UX concepts of the new RxJS debugger twice during its development, more usability testing would potentially provide hints on how the UX could be improved further.
+We see the opportunity for a comprehensive field test on how software engineers use the novel RP debugger once its next iteration is available. Usage statistics provided through the planned analytics reporting module might prove helpful in these regards.
 
 ## Features
 
@@ -208,16 +209,16 @@ We designed *RxJS Debugging for vscode* to be an open-source project. In the fol
 
 ### Record and Replay
 
-A software engineer can record telemetry data of a running RP program and replay that data independently as many times as they wish later [@OCallahan_Jones_Froyd_Huey_Noll_Partush_2017]. Such a function would allow two things: During debugging, the engineer can rerun a recorded failure scenario without depending on external systems like remote APIs. Further, recorded data might be used for regression testing to verify that a modified program still works as expected [@Perez_Nilsson_2017] additionally.
+A software engineer can record telemetry data of a running RP program and replay that data independently as many times as they wish later [@OCallahan_Jones_Froyd_Huey_Noll_Partush_2017]. Such a function would allow two things: During debugging, the engineer can rerun a recorded failure scenario without depending on external systems like remote APIs. Further, recorded data might be used for regression testing to verify that a modified program still works as expected [@Perez_Nilsson_2017].
 
 ### Time Travel Debugging
 
-Once there is a way to record, store and replay telemetry data, omniscient [@Pothier_Tanter_2009], or "time travel" debugging is a possible next step. Software engineers can manually step through recorded data and observe how individual system parts react toward the stimuli. Contrary to regular control-flow-oriented debuggers, time travel debuggers can not only step forward but backward in time as well. This is because they do not rely on a currently running program.
+Contrary to regular control-flow-oriented debuggers, omniscient [@Pothier_Tanter_2009], or *time travel* debuggers can not only step forward but also backward in time. This is because they rely on recorded data rather than a currently running program. Once there is a way to record, store and replay debugging data as suggested before, time travel debugging is a possible next step. Software engineers can then manually navigate through recorded data and observe how individual system parts react to the stimuli.
 
 
 # Conclusion {#sec:conclusion}
 
-In this paper, we presented a novel RP debugger for RxJS that fully integrates with vscode. *RxJS Debugging for vscode* provides operator log points ready to software engineers' hands and makes manual print statements as debugging utilities obsolete. We developed the debugger using a UCD process facilitating UX inspection and validation methods. As a result, we discovered and resolved four critical usability issues through a usability test with two participants. Furthermore, we refined a previously proposed system architecture [@Banken_Meijer_Gousios_2018] by reusing the CDP connection of vscodes JavaScript debugger for communication.
+In this paper, we presented a novel RP debugger for RxJS that fully integrates with vscode. *RxJS Debugging for vscode* provides operator log points ready to software engineers' hands and makes manual print statements as debugging utilities obsolete. We developed the debugger using a UCD process facilitating UX inspection and validation methods. As a result, we discovered and resolved four critical usability issues through a usability test with two participants. Furthermore, the debugger's system architecture reuses the CDP connection of vscode's JavaScript debugger to reduce overall system complexity.
 
-We recommended two empirical studies to validate the importance of "readiness-to-hand" [@Alabor_Stolze_2020] and the efficiency of the demonstrated debugging utilities for future research. Finally, we presented three highlight features from *RxJS Debugging for vscode*' open-source project, including a visualizer for data-flow graphs and plans for sophisticated telemetry data usage.
+We presented an outlook for further research and proposed a field test on how software engineers integrate the proposed RxJS debugger into their daily routine. Finally, we highlighted three useful feature extensions to *RxJS Debugging for vscode*.
 
