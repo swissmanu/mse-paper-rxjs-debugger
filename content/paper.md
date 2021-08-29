@@ -109,6 +109,10 @@ Once finished debugging, the software engineer stops the program. Contrary to ma
 
 ![*RxJS Debugging for vscode* used to debug code from Listing [2](#lst:rp). A diamond icon indicates operator log points: A grey outline represents a suggested log point (Line 7), a filled, red diamond an enabled log point (Line 8). The source code editor shows life cycle events at the end of the respective line (Line 8, "Unsubscribe"). Log points are managed by hovering the respective icon and selecting the appropriate action.](./content/figures/operator-log-points.png)
 
+## Suggesting a Log Point
+
+Automated operator log point suggestions become possible because the extension parses the currently edited source code continuously using TypeScript^[TypeScript is a strongly typed programming language that compiles to JavaScript [https://www.typescriptlang.org/](https://www.typescriptlang.org/)]. The resulting AST contains type information for every token parsed. Based on this information, we search for RxJS operator functions and use the parsers position data to annotate relevant source code with an icon.
+
 ## Architecture
 
 The technical architecture of *RxJS Debugging for vscode* (see Figure [4](#fig:architecture)) is a refined version of the system proposed by Banken et al. [@Banken_Meijer_Gousios_2018].
@@ -118,12 +122,6 @@ content/figures/architecture.tex
 ```
 
 JavaScript virtual machines (VM) like V8 (used in Google Chrome or Node.js) or SpiderMonkey (used in Mozilla Firefox) implement (a subset of) the Chrome DevTools Protocol (CDP)^[[https://chromedevtools.github.io/devtools-protocol/](https://chromedevtools.github.io/devtools-protocol/)]. Debugging tools like vscode's built-in JavaScript debugger use CDP to connect and debug JavaScript programs. RxFiddle by Banken et al. uses WebSockets to exchange relevant data. We leverage the CDP connection established by the vscode's JavaScript debugger instead. The result is a simpler, more robust system because we do not need to maintain an additional channel for debugger communication.
-
-## Implementation
-
-Automated operator log point suggestions become possible because the extension parses the currently edited source code continuously using TypeScript^[TypeScript is a strongly typed programming language that compiles to JavaScript [https://www.typescriptlang.org/](https://www.typescriptlang.org/)]. The resulting AST contains type information for every token parsed. Based on this information, we search for RxJS operator functions and use the parsers position data to annotate relevant source code with an icon.
-
-Internally, we keep track of every enabled operator log point. Once the engineer starts the JavaScript debugger and the extension establishes the connection to the Telemetry component via CDP, the extension sends all enabled log points to the runtime process. Thus, the Telemetry component collects and transmits life cycle events from operators with an enabled log point from this point on.
 
 
 # Usability: Inspection and Validation {#sec:ux}
