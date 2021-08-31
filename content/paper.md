@@ -196,30 +196,25 @@ We carefully moderated the test session once test subjects fell silent for more 
 
 # Future Work {#sec:future_work}
 
-There are several ways how future work can contribute to the efforts presented in this paper. We grouped them into two categories for a better overview: *Research* and *Features*.
+There are several ways how future work can contribute to the efforts presented in this paper.
 
-## Research
+## Field Test
 
-We demonstrated operator log points for debugging RxJS RP programs and the development process that led to them. This process ensured that the proposed solution satisfies the user's need to debug RxJS programs without manual print statements. Version 0.1.2 of *RxJS Debugging for vscode* can debug RxJS programs running in the Node.js JavaScript VM. The planned major release 1.0.0^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/rxjs-debugging-for-vscode/milestone/2)] will generalize this solution further and brings operator log points to RxJS applications running in web browsers.
+The current version 0.1.2 of *RxJS Debugging for vscode* can debug RxJS programs running in the Node.js JavaScript VM. The planned major release 1.0.0^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/rxjs-debugging-for-vscode/milestone/2)] will generalize this solution further and brings operator log points to RxJS applications running in web browsers. Thus, we expect installations of the debugger to increase further since more software engineers can benefit from its features.
 
-We see the opportunity for a comprehensive field test on how software engineers use the novel RP debugger once its next iteration is available. Usage statistics provided through the planned analytics reporting module will prove helpful in these regards.
+We see the opportunity for a comprehensive field test on how engineers use the novel RP debugger once its next iteration is available. Usage statistics provided through the planned analytics reporting module will prove helpful in these regards.
 
-## Features
-
-We designed *RxJS Debugging for vscode* to be an open-source project. In the following, we present three highlights from its on Github publicly accessible feature backlog^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/rxjs-debugging-for-vscode/issues?q=is%3Aopen+is%3Aissue+label%3Afeature%2Cimprovement)].
-
-### Visualizer Component
+## Visualizer Component^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/rxjs-debugging-for-vscode/issues/50)]
 
 *RxFiddle* by Banken et al. [@Banken_Meijer_Gousios_2018] proposed visualization functionalities for data-flow graphs described with RxJS observables. The debugging utility we presented in this paper might benefit from the integration of such a visualizer. A graphical representation of an observable graph could help novice engineers understand RxJS concepts better; experienced engineers might benefit from a new angle on the composition of multiple observables when debugging.
 
-### Record and Replay
+## Record and Replay^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/rxjs-debugging-for-vscode/issues/51)]
 
 A software engineer can record the behavior of a RP program and replay that data independently as many times as they wish later [@OCallahan_Jones_Froyd_Huey_Noll_Partush_2017]. Such a function would allow two things: During debugging, the engineer can rerun a recorded failure scenario without depending on external systems like remote APIs. Further, recorded data might be used for regression testing to verify that a modified program still works as expected [@Perez_Nilsson_2017].
 
-### Time Travel Debugging
+## Time Travel Debugging^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/rxjs-debugging-for-vscode/issues/62)]
 
 Contrary to regular control-flow-oriented debuggers, omniscient [@Pothier_Tanter_2009], or *time travel* debuggers can not only step forward but also backward in time. This is because they rely on recorded data rather than a currently running program. Once there is a way to record, store and replay debugging data as suggested before, time travel debugging is a possible next step. Software engineers can then manually navigate through recorded data and observe how individual system parts react to the stimuli.
-
 
 # Conclusion {#sec:conclusion}
 
