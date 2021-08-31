@@ -287,7 +287,7 @@ This is a summary of all failure stories identified during the cognitive walkthr
 
 These are all usability issues identified during the usability test sessions.
 
-| Subject(s)     | Phase                 | Task              | Problem                                                      |
+| Participant(s) | Phase                 | Task              | Problem                                                      |
 | -------------- | --------------------- | ----------------- | ------------------------------------------------------------ |
 | P2, P3         | Instrument Hypothesis | Environment Setup | Subject starts the application in debugging mode, even though they have started it before already. |
 | P2, P3         | Instrument Hypothesis | Manage Log Points | Subject unable to find log point list in debugging view. |
