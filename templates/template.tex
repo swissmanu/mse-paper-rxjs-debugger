@@ -83,18 +83,9 @@ $endif$
 
 $if(listings)$
 \usepackage{listings}
-$endif$
-$if(lhs)$
-\lstnewenvironment{code}{\lstset{language=Typescript,basicstyle=\small\ttfamily}}{}
-$endif$
-$if(highlighting-macros)$
-$highlighting-macros$
-$endif$
-%%% END Extract from Pandoc Default Template ======================================
-
 
 \lstdefinelanguage{Typescript}{
-	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, const, let, if, in, while, do, else, case, break},
+	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, for, var, const, let, if, in, while, do, else, case, break},
 	keywordstyle=\color{blue}\bfseries,
 	commentstyle=\color{olive}\ttfamily,
 	stringstyle=\color{brown}\ttfamily,
@@ -107,7 +98,7 @@ $endif$
 }
 \lstset{
 	language=TypeScript,
-	tabsize=2,
+	tabsize=1,
 	numbers=left,
 	numberstyle=\tiny,
 	numbersep=1.2em,
@@ -117,11 +108,20 @@ $endif$
 	xleftmargin=1.5em,
 	framexleftmargin=0em,
 	frame=single,
-	aboveskip=\bigskipamount,
-	belowskip=\bigskipamount,
+	aboveskip=\smallskipamount,
+	belowskip=\smallskipamount,
 	flexiblecolumns=true,
-	floatplacement=h
+	floatplacement=b
 }
+
+$endif$
+% $if(lhs)$
+% \lstnewenvironment{code}{\lstset{language=Typescript,basicstyle=\small\ttfamily}}{}
+% $endif$
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+%%% END Extract from Pandoc Default Template ======================================
 
 
 $if(copyright)$

@@ -32,7 +32,12 @@ Before we do a deep-dive on the functionality of operator log points in Section 
 
 A primary characteristic of RP is the paradigm shift away from imperatively formulated, control-flow-oriented code (see Listing [1](#lst:imperative)) over to declarative, data-flow-focused source code [@Salvaneschi_Mezini_2016]. Instead of instructing the computer how to do what, i.e., one step after another, we use RP abstractions to describe the transformation of a continuous flow of data.
 
-```{caption="Basic example of imperative-style/control-flow-oriented programming in JavaScript: Multiply integers between 0 and 4 for every value that is smaller than 4 and call reportValue with the result." label=imperative .Typescript}
+```{
+  caption="Basic example of imperative-style/control-flow-oriented programming in JavaScript: Multiply integers between 0 and 4 for every value that is smaller than 4 and call reportValue with the result."
+  label=imperative
+  float=t
+  .Typescript
+}
 import reportValue from './reporter';
 
 for (let i = 0; i < 5; i++) {
@@ -44,20 +49,30 @@ for (let i = 0; i < 5; i++) {
 
 RxJS abstracts reactive sources with *Observables*. An observable generates five types of life cycle events during its life: Once a consumer (i) *subscribes* to an observable, the observable starts to (ii) *emit* values, (iii) *completes* (e.g., when a network request has been completed), fails with an (iv) *error*, or may get (v) *unsubscribed*. Engineers use *Operators* to transform these events on their way through the data-flow graph. An operator modifies values, composes other observables, or changes how life cycle events get forwarded (e.g., catch an error and emit an empty value instead). Listing [2](#lst:rp) shows an example of a source observable, two operators, and one consumer.
 
-```{caption="Basic RP example implemented with RxJS in JavaScript: Generate a data-flow of integers from 0 to 4, skip values equal or larger then 4, multiply these values by 2 and call reportValue with each resulting value." label=rp .Typescript}
+```{
+  caption="Basic RP example implemented with RxJS in JavaScript: Generate a data-flow of integers from 0 to 4, skip values equal or larger then 4, multiply these values by 2 and call reportValue with each resulting value."
+  label=rp
+  float=t
+  .Typescript
+}
 import reportValue from './reporter';
 import { of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
-of(0, 1, 2, 3, 4).pipe( // Observable with integers 0..4
+of(0, 1, 2, 3, 4).pipe( // Observable with ints 0..4
   filter(i => i < 4),   // Operator omitting 4
-  map(i => i * 2),      // Operator multiplying by 2      
+  map(i => i * 2),      // Operator multiplying by 2
 ).subscribe(reportValue)
 ```
 
-Traditional debuggers reach their limitations when facing data-flow-oriented code: While we can navigate through the successive iterations of the *for* loop in Listing [1](#lst:imperative) using the step controls of the debugger, this is not possible for the transformations described in Listing [2](#lst:rp). Assuming we set a breakpoint within the lambda function passed to *filter* on Line 6, stepping over to the next statement will not lead to the lambda of *map* on Line 7 as one might expect. Instead, the debugger will continue in the internal implementations of *filter*, part of the RxJS RP runtime environment. With a deeper understanding of the difference between control- and data-flow-oriented programming, this might look plausible. However, previous research [@Salvaneschi_Mezini_2016; @Banken_Meijer_Gousios_2018; @Alabor_Stolze_2020] revealed that software engineers expect different behavior from the debugging tools they have at hand. As a direct consequence, engineers fall back to the problematic debugging technique of adding manual print statements, as exemplified in Listing [3](#lst:rp-print).
+Traditional debuggers reach their limitations when facing data-flow-oriented code: While we can navigate through the successive iterations of the *for* loop in Listing [1](#lst:imperative) using the step controls of the debugger, this is not possible for the transformations described in Listing [2](#lst:rp). Assuming we set a breakpoint within the lambda function passed to *filter* on Line 6, stepping over to the next statement will not lead to the lambda of *map* on Line 7 as one might expect. Instead, the debugger will continue in the internal implementations of *filter*, part of the RxJS RP runtime environment. With a deeper understanding of the difference between control- and data-flow-oriented programming, this might look plausible. However, previous research [@Salvaneschi_Mezini_2016; @Banken_Meijer_Gousios_2018; @Alabor_Stolze_2020] revealed that software engineers expect different behavior from the debugging tools they have at hand. As a direct consequence, engineers fall back to the problematic debugging technique of adding manual print statements, as exemplified in Listing [3](#lst:rp-print) on the next page.
 
-```{caption="Manually added print statements on Lines 6, 8 and 10 to debug a data-flow implemented with RxJS in JavaScript." label=rp-print .Typescript}
+```{
+  caption="Manually added print statements on Lines 6, 8 and 10 to debug a data-flow implemented with RxJS in JavaScript."
+  label=rp-print
+  float=t
+  .Typescript
+}
 import reportValue from './reporter';
 import { of } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
