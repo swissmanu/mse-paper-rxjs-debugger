@@ -1,16 +1,16 @@
 # Introduction
 
-When software engineers look at the source code of an existing application, they want to learn about how the program was implemented technically. They do this either because they want to get themselves acquainted with a new code base they never worked with before (e.g., during onboarding of a new team member) or, more often, because someone reported an unexpected application behavior (e.g., the program crashed). Inspecting source code at runtime is commonly known as "debugging" [@IEEE_Glossary]. Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] formalized an iterative process model (see Figure [1](#fig:debugging-process)) by dividing the broader task of debugging into three concrete steps: The engineer uses (i) gathered context information to build a hypothesis on what the problem at hand might be. They then (ii) instrument the program using appropriate techniques to prove their hypothesis. Eventually, they (iii) test the instrumented program. If the outcome proves the hypothesis to be correct, the process ends. Otherwise, the engineer uses gained insight as input for the next iteration.
+When software engineers look at the source code of an existing application, they want to understand how the program was implemented technically. They do this either because they want to get themselves acquainted with a new code base they never worked with before (e.g., during onboarding of a new team member) or, more often, because someone reported an unexpected application behavior (e.g., the program crashed). Inspecting source code at runtime is commonly known as "debugging" [@IEEE_Glossary]. Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013] formalized an iterative process model (see Figure [1](#fig:debugging-process)) by dividing the broader task of debugging into three steps: The engineer uses (i) gathered context information to build a hypothesis on what the problem at hand might be. They then (ii) instrument the program using appropriate techniques to prove their hypothesis. Eventually, they (iii) test the instrumented program. If the outcome proves the hypothesis to be correct, the process ends. Otherwise, the engineer uses gained insight as input for the next iteration.
 
 ```{.include}
 content/figures/debugging-process.tex
 ```
 
-The most basic debugging technique for instrumentation and testing is manually adding print statements to the source code: They generate execution logs when placed across the program's code and allow to reconstruct its runtime behavior. Once the number of generated log entries increases, the required amount of work to analyze the logs gets out of hand quickly. This is why specialized debugging utilities provide tools to interact with a program at runtime: After interrupting program execution with a breakpoint, they allow engineers to inspect stack frames, inspect and modify variables, step through successive source code statements, or resume program execution eventually. Furthermore, log points are a specialization of breakpoints; Rather than interrupting the program, they display the value of a specified variable. These utilities work best with imperative or control-flow-oriented programming languages since they interact with statements and stack frames of the debugged program.
+The most basic debugging technique for instrumentation and testing is manually adding print statements to the source code: They generate execution logs when placed across the program's code and allow to reconstruct its runtime behavior. However, the number of generated log entries increases, the required amount of work to analyze the logs gets out of hand quickly. This is why specialized debugging utilities provide tools to interact with a program at runtime: After interrupting program execution with a breakpoint, they allow engineers to inspect stack frames, inspect and modify variables, step through successive source code statements, or resume program execution eventually. Furthermore, log points are a specialization of breakpoints; Rather than interrupting the program, they print the value of a specified variable. These utilities work best with imperative or control-flow-oriented programming languages since they interact with statements and stack frames of the debugged program.
 
 Modern IDEs enable software engineers to debug programs, no matter what programming language they are implemented with, using one generalized user interface (UI). The result is a unified user experience (UX) where debugging support is only a click away.
 
-However, by integrating control-flow-oriented debugging utilities into their workflows, software engineers face a new problem when working with reactive programming (RP). Salvaneschi et al. described this shortcoming of traditional debuggers when confronted with RP in their paper and coined the concept of *RP Debugging* [@Salvaneschi_Mezini_2016]. Later, Banken et al. [@Banken_Meijer_Gousios_2018] proposed a solution for debugging RxJS RP programs in an external visualizer utility.
+However, by integrating control-flow-oriented debugging utilities into their workflows, software engineers face a new problem when working with reactive programming (RP). Salvaneschi et al. described this shortcoming of traditional debuggers when confronted with RP and coined the concept of *RP Debugging* [@Salvaneschi_Mezini_2016]. Later, Banken et al. [@Banken_Meijer_Gousios_2018] proposed a solution for debugging RxJS RP programs in an external visualizer utility.
 
 Alabor et al. [@Alabor_Stolze_2020] examined the RP debugging habits of software engineers in an observational study. They replicated the observation by Salvaneschi et al. and observed that even engineers aware of RP debugging tools did not use them. Instead, these engineers used manual print statements.
 
@@ -26,7 +26,7 @@ Within this paper, we are going to present two contributions to the field of RxJ
 
 \vspace{3mm}
 
-Before we do a deep-dive on the functionality of operator log points in Section [4](#sec:implementation), we present an example for the primary challenge of RP debugging in Section [2](#sec:challenge) and discuss related work in Section [3](#sec:background). Next, we give an overview of performed usability inspections and validations in Section [5](#sec:ux). Finally, we consider threats to validity regarding the usability tests in Section [6](#sec:threats_to_validity), introduce topics for future work in Section [7](#sec:future_work), and finish with our conclusion in Section [8](#sec:conclusion).
+Before we do a deep-dive on the functionality of operator log points in Section [4](#sec:implementation), we present an example for the primary challenge of RP debugging in Section [2](#sec:challenge) and discuss related work in Section [3](#sec:background). Next, we give an overview of performed usability inspections and validations in Section [5](#sec:ux). Finally, we consider threats to validity regarding the usability tests in Section [6](#sec:threats_to_validity) and introduce topics for future work in Section [7](#sec:future_work).
 
 # RP Debugging: The Hard Way {#sec:challenge}
 
@@ -42,20 +42,20 @@ for (let i = 0; i < 5; i++) {
 }
 ```
 
-RxJS abstracts reactive sources with *Observables*. Once a sink, called consumer *subscribes* the source, the source starts to *emit* values, *completes* (e.g., when a network request has completed), fails with an *error*, or may get *unsubscribed* from the consumer. These five life cycle events, propagated through the data-flow graph, can be transformed using *Operators*. An operator might modify values, compose other observables, or change how life cycle events get forwarded. Listing [2](#lst:rp) shows an example of a source observable, two operators, and one consumer.
+RxJS abstracts reactive sources with *Observables*. An observable generates five types of life cycle events during its life: Once a consumer (i) *subscribes* to an observable, the observable starts to (ii) *emit* values, (iii) *completes* (e.g., when a network request has been completed), fails with an (iv) *error*, or may get (v) *unsubscribed*. Engineers use *Operators* to transform these events on their way through the data-flow graph. An operator modifies values, composes other observables, or changes how life cycle events get forwarded (e.g., catch an error and emit an empty value instead). Listing [2](#lst:rp) shows an example of a source observable, two operators, and one consumer.
 
 ```{caption="Basic RP example implemented with RxJS in JavaScript: Generate a data-flow of integers from 0 to 4, skip values equal or larger then 4, multiply these values by 2 and call reportValue with each resulting value." label=rp .Typescript}
 import reportValue from './reporter';
 import { of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
-of(0, 1, 2, 3, 4).pipe( // Flow of integers 0..4
-  filter(i => i < 4),   // Omit 4
-  map(i => i * 2),      // Multiply with 2
+of(0, 1, 2, 3, 4).pipe( // Observable of integers 0..4
+  filter(i => i < 4),   // Operator omitting 4
+  map(i => i * 2),      // Operator multiplying with 2      
 ).subscribe(reportValue)
 ```
 
-Traditional debuggers reach their limitations when facing data-flow-oriented code: While we can navigate through the successive iterations of the *for* loop in Listing [1](#lst:imperative) using the step controls, this is not possible for the transformations described in Listing [2](#lst:rp). Assuming we set a breakpoint within the lambda function passed to *filter* on Line 6, stepping over to the next statement will not lead to the lambda of *map* on Line 7 as one might expect. Instead, the debugger will continue in the internal implementations of *filter*, part of the RxJS RP runtime environment. With a deeper understanding of the difference between control- and data-flow-oriented programming, this might look plausible. However, previous research [@Salvaneschi_Mezini_2016; @Banken_Meijer_Gousios_2018; @Alabor_Stolze_2020] revealed that software engineers expect different behavior from the debugging tools they have at hand. As a direct consequence, engineers fall back to the problematic debugging technique of adding manual print statements, as exemplified in Listing [3](#lst:rp-print).
+Traditional debuggers reach their limitations when facing data-flow-oriented code: While we can navigate through the successive iterations of the *for* loop in Listing [1](#lst:imperative) using the step controls of the debugger, this is not possible for the transformations described in Listing [2](#lst:rp). Assuming we set a breakpoint within the lambda function passed to *filter* on Line 6, stepping over to the next statement will not lead to the lambda of *map* on Line 7 as one might expect. Instead, the debugger will continue in the internal implementations of *filter*, part of the RxJS RP runtime environment. With a deeper understanding of the difference between control- and data-flow-oriented programming, this might look plausible. However, previous research [@Salvaneschi_Mezini_2016; @Banken_Meijer_Gousios_2018; @Alabor_Stolze_2020] revealed that software engineers expect different behavior from the debugging tools they have at hand. As a direct consequence, engineers fall back to the problematic debugging technique of adding manual print statements, as exemplified in Listing [3](#lst:rp-print).
 
 ```{caption="Manually added print statements on Lines 6, 8 and 10 to debug a data-flow implemented with RxJS in JavaScript." label=rp-print .Typescript}
 import reportValue from './reporter';
@@ -74,7 +74,7 @@ of(0, 1, 2, 3, 4).pipe(
 
 # Related Work {#sec:background}
 
-Salvaneschi et al. [@Salvaneschi_Mezini_2016] identified the divergence between a control-flow-oriented debugger's expected and actual behavior as one of their key motivations for RP debugging. The stack-based runtime model of control-flow-oriented debuggers does not match the software engineers' data-flow-oriented mental model of the program they are debugging. Because the debugger has a "lack of abstraction," it cannot interpret high-level RP abstractions and works on the low-level implementations of the RP runtime environment instead. Salvaneschi et al. proposed the first specialized RP debugging solution for RP programs implemented with REScala [@Salvaneschi_Hintz_Mezini_2014], a RP runtime for the Scala programming language. Integrated with the Eclipse IDE, the utility provides a wide range of RP debugging functionalities like the visualization of data-flow graphs and the information that traverses through them. Reactive breakpoints allow further to interrupt program execution once a graph node reevaluates its value.
+Salvaneschi et al. [@Salvaneschi_Mezini_2016] identified the divergence between a control-flow-oriented debugger's expected and actual behavior as one of their key motivations for RP debugging. The stack-based runtime model of control-flow-oriented debuggers does not match the software engineers' data-flow-oriented mental model of the program they are debugging. Because the debugger has a "lack of abstraction," it cannot interpret high-level RP abstractions and works on the low-level implementations of the RP runtime environment instead. Salvaneschi et al. proposed the first specialized RP debugging solution for RP programs implemented with REScala [@Salvaneschi_Hintz_Mezini_2014], a RP runtime for the Scala programming language. Integrated with the Eclipse IDE, the utility provides a wide range of RP debugging functionalities like the visualization of data-flow graphs and the information that traverses through them. Reactive breakpoints allow to interrupt program execution once a graph node reevaluates its value.
 
 Since then, RP has gained more traction across various fields of software engineering. With a shared vision on how to surface RP abstractions on API level, *ReactiveX*^[[http://reactivex.io/](http://reactivex.io/)] consolidated numerous projects under one open-source organization. Together, its members provide RP runtime extensions for many of today's mainstream programming languages like Java, C#, and Swift. For the development of JavaScript-based applications, software engineers can rely on RxJS^[[https://rxjs.dev](https://rxjs.dev)]. Angular by Google is one of the more popular adopters of this library and uses RxJS to model asynchronous operations like fetching data in web frontend applications.
 
@@ -88,14 +88,14 @@ Banken et al. provided a debugger in the form of an isolated visualizer: *RxFidd
 
 [^1]: Marble diagrams are a visualization technique used throughout the ReactiveX community to describe the behavior of a node in a data-flow graph graphically. A marble represents a value emitted by a graph node. Marbles are arranged on a thread from left to right, indicating the point in time when a life cycle event happened. See [https://rxmarbles.com/](https://rxmarbles.com/) for more examples.
 
-Both Salvaneschi et al. and Banken et al. suggested technical architectures for RP debugging systems. Both suggestions can be summarized as distributed systems consisting of two main components: The (i) RP runtime environment is instrumented to produce debugging-relevant events (e.g., value emitted or graph node created). These events get processed by the (ii) debugger, which provides a UI to eventually inspect the RP program's state.
+Both Salvaneschi et al. and Banken et al. suggested technical architectures for RP debugging systems. Both suggestions can be summarized as distributed systems consisting of two main components: The (i) RP runtime environment is instrumented to produce debugging-relevant events (e.g., value emitted or graph node created). These events get processed by the (ii) debugger, which provides a UI to inspect the RP program's state.
 
 Another two years after Banken et al. published their work, Alabor et al. [@Alabor_Stolze_2020] examined the state of RxJS RP debugging. Software engineers still struggled to use appropriate tools to debug RxJS programs according to the interviews they conducted. The authors performed an observational study and found instances of engineers who knew about RP-specific debugging tools but abstained from using them during the experiment. They credited this circumstance to the fact that the IDEs of their subjects did not provide suitable RP debugging utilities ready-to-hand.
 
 Alabor et al. conclude that knowing the correct RP debugging utility (e.g., *RxFiddle*) is not enough. The barrier to using such utilities must be minimized. I.e., RP debugging utilities must be fully integrated into the IDE to live up to their full potential, so using them is ideally only an engineer's keypress away and adheres to accustomed, known UX patterns further.
 
 
-# Ready-to-Hand: An RxJS Debugger {#sec:implementation}
+# An RxJS Debugger Ready-to-Hand {#sec:implementation}
 
 We translated these findings into the central principle for the design of our RP debugger for RxJS: *Ready-to-hand*. Software engineers should always have the proper debugging tool available, no matter what program they are currently working on. Further, this tool should integrate with the engineer's workflow seamlessly.
 
@@ -128,7 +128,7 @@ JavaScript virtual machines (VM) like V8 (used in Google Chrome or Node.js) or S
 
 # Usability: Inspection and Validation {#sec:ux}
 
-We followed a User-Centered Design (UCD) [@Kling_1977] approach in three iterations to conceptualize and implement our debugging utility. After sketching a rough proof of concept (POC) in the first step, we performed a cognitive walkthrough [@Wharton_Rieman_Clayton_Polson_1994] to validate our idea of replacing manual print statements with operator log points. The resulting data helped us to build a prototype of the extension. Next, we used this prototype to conduct a moderated remote usability test with three subjects. This allowed us to uncover pitfalls in the UX concept and find misconceptions early in the development process. Finally, we used the results of these sessions for further refinement. We finalized the first minor version of the RxJS RP debugger, which we released to the Visual Studio Marketplace in May 2021.
+We followed a User-Centered Design (UCD) [@Goodwin_2009] approach in three iterations to conceptualize and implement our debugging utility. After sketching a rough proof of concept (POC) in the first step, we performed a cognitive walkthrough [@Wharton_Rieman_Clayton_Polson_1994] to validate our idea of replacing manual print statements with operator log points. The resulting data helped us to build a prototype of the extension. Next, we used this prototype to conduct a moderated remote usability test with three subjects. This allowed us to uncover pitfalls in the UX concept and find misconceptions early in the development process. Finally, we used the results of these sessions for further refinement. We finalized the first minor version of the RxJS RP debugger, which we released to the Visual Studio Marketplace in May 2021.
 
 We used the test cases created by Alabor et al. [@Alabor_Stolze_2020] for both the cognitive walkthrough and the remote usability test.
 
@@ -152,11 +152,11 @@ content/tables/issues-cognitive-walkthrough.tex
 
 ## Moderated Remote Usability Test
 
-After the initial validation using the cognitive walkthrough, we were ready to test the refined prototype with real users.
+After the initial validation using the cognitive walkthrough, we completed the development of the refined prototype, ready to test with real users.
 
 ### Study Design
 
-"Think aloud" tests for high functionality systems benefit from at least five test subjects or more [@Nielsen_Participants_1994]. The feature spectrum of the RP debugger prototype was small, hence the probability of finding major usability issues with an even smaller subject population is sufficient high enough. We decided to work with three individual subjects for our study.
+"Think aloud" tests for high functionality systems benefit from at least five test subjects or more [@Nielsen_Participants_1994]. The feature spectrum of the RP debugger prototype is small; hence the probability of finding major usability issues with a smaller subject population is high. Therefore, we decided to work with three individual subjects for our study.
 
 Participants, recruited via Twitter, were required to have worked with RxJS during the past year and use vscode as their primary IDE. We sent out a PDF containing a short briefing and a prototype description a week before the actual test session. The briefing contained information about software requirements (Zoom, Node.js, npm/Yarn, and vscode) and details on what the subjects might encounter during their test session. Here, we emphasized the importance of "think aloud" [@Boren_Ramey_2000; @Norgaard_Hornbaek_2006], the practice of continuously verbalizing thoughts without reasoning about them.
 
@@ -164,7 +164,7 @@ Participants, recruited via Twitter, were required to have worked with RxJS duri
 
 At the start of a test session, we provided each participant with a ZIP file^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-pa2-usability-test)] containing the *Problem 2* web application by Alabor et al. and the packaged version of the debugger extension prototype^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-pa2-spike-vscode)] for vscode. While the subject prepared their development environment, we started the video, screen, and audio recording with their consent. Also, we gave a scripted introduction to the code base they just received.
 
-Once the participants had everything set up, they worked for 25 minutes, resolving any bugs in the provided web application.
+The participants had 25 minutes to resolve as many bugs as possible. Rather than tracking each subject's success rate of fixed defects, we emphasized detecting usability issues in their workflow instead.
 
 ### Study Evaluation
 
@@ -176,7 +176,7 @@ content/tables/issues-usability-test.tex
 
 ## Application of Results
 
-We applied the results from the cognitive walkthrough and the usability tests to refine and complete the development of the RxJS RP debugger presented in Section [4](#sec:implementation). For example, both the POC and the prototype had an extra view for displaying life cycle events. We classified this concept during the walkthrough as prone to confuse the user but did not change the prototype yet. The usability tests with real subjects confirmed our suspicion, however. Because of this, we changed the UI for the final, current version. Another example of an improvement is how the debugger suggests operator log points: The subjects were unaware that suggested log points were available via the code action menu, even though this is an established UX pattern in vscode. Therefore, we removed the suggestions from this menu and introduced the diamond-shaped indicator icon, which is always visible.
+We applied the results from the cognitive walkthrough and the usability tests to refine and complete the RxJS RP debugger presented in Section [4](#sec:implementation). For example, both the proof of concept and the prototype had an extra view for displaying life cycle events, visually decoupling cause and effect during the debugging session from each other. We classified this circumstance as prone to confuse the user during the walkthrough but did not change the prototype yet. The usability tests with real subjects confirmed our suspicion, however. Because of this, we changed the UI for the final, current version and introduced the inline display for life cycle events in the code editor. Another example of an improvement is how the debugger suggests operator log points: The subjects were unaware that suggested log points were available via the code action menu, even though this is an established UX pattern in vscode. Therefore, we removed the suggestions from this menu and introduced the diamond-shaped indicator icon, which is always visible.
 
 # Threats to Validity {#sec:threats_to_validity}
 
