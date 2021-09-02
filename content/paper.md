@@ -49,9 +49,9 @@ import reportValue from './reporter';
 import { of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
-of(0, 1, 2, 3, 4).pipe( // Observable of integers 0..4
+of(0, 1, 2, 3, 4).pipe( // Observable with integers 0..4
   filter(i => i < 4),   // Operator omitting 4
-  map(i => i * 2),      // Operator multiplying with 2      
+  map(i => i * 2),      // Operator multiplying by 2      
 ).subscribe(reportValue)
 ```
 
@@ -164,7 +164,7 @@ Participants, recruited via Twitter, were required to have worked with RxJS duri
 
 At the start of a test session, we provided each participant with a ZIP file^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-pa2-usability-test)] containing the *Problem 2* web application by Alabor et al. and the packaged version of the debugger extension prototype^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-pa2-spike-vscode)] for vscode. While the subject prepared their development environment, we started the video, screen, and audio recording with their consent. Also, we gave a scripted introduction to the code base they just received.
 
-The participants had 25 minutes to resolve as many bugs as possible. Rather than tracking each subject's success rate of fixed defects, we emphasized detecting usability issues in their workflow instead.
+The participants had 25 minutes to resolve as many bugs as possible using the debugger prototype. Rather than tracking each subject's success rate of fixed defects, we emphasized detecting usability issues in their workflow instead.
 
 ### Study Evaluation
 
@@ -176,7 +176,7 @@ content/tables/issues-usability-test.tex
 
 ## Application of Results
 
-We applied the results from the cognitive walkthrough and the usability tests to refine and complete the RxJS RP debugger presented in Section [4](#sec:implementation). For example, both the proof of concept and the prototype had an extra view for displaying life cycle events, visually decoupling cause and effect during the debugging session from each other. We classified this circumstance as prone to confuse the user during the walkthrough but did not change the prototype yet. The usability tests with real subjects confirmed our suspicion, however. Because of this, we changed the UI for the final, current version and introduced the inline display for life cycle events in the code editor. Another example of an improvement is how the debugger suggests operator log points: The subjects were unaware that suggested log points were available via the code action menu, even though this is an established UX pattern in vscode. Therefore, we removed the suggestions from this menu and introduced the diamond-shaped indicator icon, which is always visible.
+We applied the results from the cognitive walkthrough and the usability tests to refine and complete the RxJS RP debugger presented in Section [4](#sec:implementation). For example, both the POC and the prototype had an extra view for displaying the output of a log point, visually disconnecting them from each other. We classified this circumstance as prone to confuse the user during the walkthrough but did not change the prototype yet. The usability tests with real subjects confirmed our suspicion, however. Because of this, we changed the UI for the final, current version and introduced the inline display for log point output directly in the code editor. Another example of an improvement is how the debugger suggests operator log points: The subjects were unaware that suggested log points were available via the code action menu, even though this is an established UX pattern in vscode. Therefore, we removed the suggestions from this menu and introduced the diamond-shaped indicator icon, which is always visible.
 
 # Threats to Validity {#sec:threats_to_validity}
 
