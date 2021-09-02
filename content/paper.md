@@ -126,7 +126,7 @@ content/figures/architecture.tex
 JavaScript virtual machines (VM) like V8 (used in Google Chrome or Node.js) or SpiderMonkey (used in Mozilla Firefox) implement the Chrome DevTools Protocol (CDP)^[[https://chromedevtools.github.io/devtools-protocol/](https://chromedevtools.github.io/devtools-protocol/)]. Debugging tools like vscode's built-in JavaScript debugger use CDP to connect and debug JavaScript programs. RxFiddle by Banken et al. [@Banken_Meijer_Gousios_2018] uses WebSockets to exchange relevant data. We leverage the CDP connection established by the vscode's JavaScript debugger, making the system more robust since we do not need to maintain an additional channel for debugger communication.
 
 
-# Usability: Inspection and Validation {#sec:ux}
+# Usability Inspection and Validation {#sec:ux}
 
 We followed a User-Centered Design (UCD) [@Goodwin_2009] approach in three iterations to conceptualize and implement our debugging utility. After sketching a rough proof of concept (POC) in the first step, we performed a cognitive walkthrough [@Wharton_Rieman_Clayton_Polson_1994] to validate our idea of replacing manual print statements with operator log points. The resulting data helped us to build a prototype of the extension. Next, we used this prototype to conduct a moderated remote usability test with three subjects. This allowed us to uncover pitfalls in the UX concept and find misconceptions early in the development process. Finally, we used the results of these sessions for further refinement. We finalized the first minor version of the RxJS RP debugger, which we released to the Visual Studio Marketplace in May 2021.
 
