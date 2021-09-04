@@ -17,6 +17,13 @@ header-includes:
   \newcommand{\elandscape}{\end{landscape}}
     ```
 
+# Ensures that TOC is on its own page after the title:
+include-before:
+- |
+  ```{=latex}
+  \pagebreak
+  ```
+
 # author:
 #   - Manuel Alabor
 #   - Markus Stolze

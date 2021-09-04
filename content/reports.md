@@ -1,16 +1,21 @@
-> This report complements the research paper "Debugging Support
-> for Reactive Programming: User-Centered Development of a Debugger for
-> RxJS". The report compiles all usability validation results
-> collected during the development of the presented RxJS debugging
-> extension.
->
-> The main research paper is available on Github:
->
-> **WARNING: This link might reveal the author(s) identity/identities:** [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-paper-rxjs-debugger).
+\pagebreak
+# Introduction
+
+This report complements the research paper "Debugging Support
+for Reactive Programming: User-Centered Development of a Debugger for
+RxJS". The report compiles all usability validation results
+collected during the development of the presented RxJS debugging
+extension.
+
+The main research paper is available on Github:
+
+**WARNING: This link might reveal the author(s) identity/identities:** [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-paper-rxjs-debugger).
+
+\pagebreak
 
 # Cognitive Walkthrough
 
-The cognitive walkthrough report formally follows the guide by Wharton et al. [@Wharton_Rieman_Clayton_Polson_1994]. Further, the report refers to "operator log points" as "probes." This is because we called the log point concept differently during the proof of concept phase and later transitioned to the more intuitive name.
+The cognitive walkthrough report formally follows the guide by Wharton et al. [@Wharton_Rieman_Clayton_Polson_1994]. Further, the report refers to "operator log points" as "probes." This is because we called the log point concept differently during the proof of concept phase and later transitioned to the more intuitive name, based on usability test results.
 
 ## Persona "Frank Flow" {#sec:persona}
 
@@ -264,7 +269,7 @@ Monitor".](./content/figures/walkthrough-screenshots/step8.png){#fig:walkthrough
 width="\\columnwidth"}
 
 
-\pagebreak
+\blandscape
 
 ## Failure Stories
 
@@ -279,11 +284,13 @@ This is a summary of all failure stories identified during the cognitive walkthr
 | Interact with Application     | The user might not be aware that he is expected to interact with "Problem 1" in the default browser in order to get live feedback in the "Observable Probe Monitor". |
 | Interact with Application     | The default browser might overlay Visual Studio Code and the "Observable Probe Monitor" view. This is why the user might miss the live trace of values and life cycle events displayed in the "Observable Probe Monitor". |
 
-
+\elandscape
 
 \blandscape
 
-# Usability Test Issues
+# Usability Test
+
+## Observed Issues
 
 These are all usability issues identified during the usability test sessions.
 

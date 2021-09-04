@@ -46,6 +46,7 @@ build_reports_pdf:
 	@pandoc \
     --lua-filter=lib/lua-filters/include-files/include-files.lua \
     --metadata-file=./metadata_reports.yml \
+    --toc \
     -f markdown+raw_tex \
     --citeproc \
     --standalone \
