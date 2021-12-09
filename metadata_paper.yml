@@ -25,7 +25,6 @@ documentclass: acmart
 classoption:
   # - nonacm # Hide ACM publication specifics
   - sigconf
-  - screen
   - review
   - anonymous
   # - authordraft # Watermark
@@ -51,9 +50,9 @@ copyrightyear: "2022"
 # acmSubmissionID: splashws20reblsmain-p3-p
 # acmISBN: 978-1-4503-8188-8/20/11
 acmConference:
-  short: ICSE 2022
-  name: The 44th International Conference on Software Engineering
-  date: May 21–29, 2022
-  venue: Pittsburgh, PA, USA
+  short: ISSTA 2022
+  name: ACM SIGSOFT International Symposium on Software Testing and Analysis
+  date: 18-22 July, 2022
+  venue: Daejeon, South Korea
 # acmBooktitle: Proceedings of the 7th ACM SIGPLAN International Workshop on Reactive and Event-Based Languages and Systems (REBLS '20), November 16, 2020, Virtual, USA
 
