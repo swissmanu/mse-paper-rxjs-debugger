@@ -22,7 +22,7 @@ Within this paper, we are going to present two contributions to the field of RxJ
 
 1. *Operator log points* are a novel utility for debugging RxJS programs. They make manual print statements obsolete by providing specialized log points for RxJS applications.\vspace{1mm}
 
-2. *RxJS Debugging for Visual Studio Code* is an extension for Microsoft Visual Studio Code^[[https://code.visualstudio.com](https://code.visualstudio.com)] (vscode) providing operator log points ready-to-hand. Software engineers can debug RxJS programs without learning new UX patterns or additional setup effort.
+2. **Using *RxJS Debugging for Visual Studio Code*, an extension for Microsoft Visual Studio Code^[[https://code.visualstudio.com](https://code.visualstudio.com)] (vscode), we provide a proof by existence for the feasibility of a ready-to-hand RxJS debugging utility. Software engineers can debug RxJS programs without learning new UX patterns or additional setup effort.**
 
 \vspace{3mm}
 
@@ -215,7 +215,7 @@ There are several ways how future work can contribute to the efforts presented i
 
 ## Field Test
 
-The current version 0.1.2 of *RxJS Debugging for vscode* can debug RxJS programs running in the Node.js JavaScript VM. The planned major release 1.0.0^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/rxjs-debugging-for-vscode/milestone/2)] will generalize this solution further and brings operator log points to RxJS applications running in web browsers. Thus, we expect installations of the debugger to increase further since more software engineers can benefit from its features.
+Version 0.1.2 of *RxJS Debugging for vscode* can debug RxJS programs running in the Node.js JavaScript VM. The major release 1.0.0^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/rxjs-debugging-for-vscode/milestone/2)] generalizes this solution further and brings operator log points to RxJS applications running in web browsers. Thus, we expect installations of the debugger to increase further since more software engineers can benefit from its features.
 
 We see the opportunity for a comprehensive field test on how engineers use the novel RP debugger once its next iteration is available. Usage statistics provided through the planned analytics reporting module will prove helpful in these regards.
 
@@ -233,7 +233,6 @@ Contrary to regular control-flow-oriented debuggers, omniscient [@Pothier_Tanter
 
 # Conclusion {#sec:conclusion}
 
-In this paper, we presented a novel RP debugger for RxJS that fully integrates with vscode. *RxJS Debugging for vscode* provides operator log points ready to software engineers' hands and makes manual print statements as debugging utility obsolete. We developed the debugger using a UCD process facilitating UX inspection and validation methods. As a result, we discovered and resolved four critical usability issues through a usability test with two participants. Furthermore, the debugger's system architecture reuses the CDP connection of vscode's JavaScript debugger to reduce overall system complexity.
+**In this paper, we presented a novel RP debugger for RxJS that fully integrates with vscode. With *RxJS Debugging for vscode*, we proof the feasibility of a ready-to-hand RP debugging utility by its existence. We developed the debugger using a UCD process facilitating UX inspection and validation methods, thereby ensured that operator log points do replace manual print statements in software engineers' daily workflow. While doing so, we discovered and resolved four critical usability issues through a usability test with two participants.** Furthermore, the debugger's system architecture reuses the CDP connection of vscode's JavaScript debugger to reduce overall system complexity.
 
 We presented an outlook for further research and proposed a field test on how software engineers integrate the proposed RxJS debugger into their daily routine. Finally, we highlighted three useful feature extensions to *RxJS Debugging for vscode*.
-
