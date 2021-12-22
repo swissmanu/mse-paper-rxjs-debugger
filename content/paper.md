@@ -10,7 +10,7 @@ The most basic debugging technique for instrumentation and testing is manually a
 
 Modern IDEs enable software engineers to debug programs, no matter what programming language they are implemented with, using one generalized user interface (UI). The result is a unified user experience (UX) where debugging support is only a click away.
 
-However, by integrating control-flow-oriented debugging utilities into their workflows, software engineers face a new problem when working with reactive programming (RP). Salvaneschi et al. [@Salvaneschi_Mezini_2016] described this shortcoming of traditional debuggers when confronted with RP and coined the concept of *RP Debugging*. Later, Banken et al. [@Banken_Meijer_Gousios_2018] proposed a solution for debugging RxJS RP programs in an external visualizer utility.
+However, by adopting control-flow-oriented debugging utilities into their workflows, software engineers face a new problem when working with reactive programming (RP). Salvaneschi et al. [@Salvaneschi_Mezini_2016] described this shortcoming of traditional debuggers when confronted with RP and coined the concept of *RP Debugging*. Later, Banken et al. [@Banken_Meijer_Gousios_2018] proposed a solution for debugging RxJS RP programs in an external visualizer utility.
 
 Alabor et al. [@Alabor_Stolze_2020] examined the RP debugging habits of software engineers in an observational study. They replicated the observation by Salvaneschi et al. and observed that even engineers aware of RP debugging tools did not use them. Instead, these engineers used manual print statements.
 
@@ -91,7 +91,7 @@ of(0, 1, 2, 3, 4).pipe(
 
 Salvaneschi et al. [@Salvaneschi_Mezini_2016] identified the divergence between a control-flow-oriented debugger's expected and actual behavior as one of their key motivations for RP debugging. The stack-based runtime model of control-flow-oriented debuggers does not match the software engineers' data-flow-oriented mental model of the program they are debugging. Because the debugger has a "lack of abstraction," it cannot interpret high-level RP abstractions and works on the low-level implementations of the RP runtime extension instead. Salvaneschi et al. proposed *Reactive Inspector* [@Salvaneschi_Hintz_Mezini_2014], the first specialized RP debugging solution for RP programs implemented with REScala, an RP extension for the Scala programming language. Integrated with the Eclipse IDE, the utility provides a wide range of RP debugging functionalities like the visualization of data-flow graphs and the information that traverses through them. Reactive breakpoints allow to interrupt program execution once a graph node reevaluates its value.
 
-Since then, RP has gained more traction across various fields of software engineering. With a shared vision on how to surface RP abstractions on API level, *ReactiveX*^[[http://reactivex.io/](http://reactivex.io/)] consolidated numerous projects under one open-source organization. Together, its members provide RP extensions for many of today's mainstream programming languages like Java, C#, and Swift. For the development of JavaScript-based applications, software engineers can rely on RxJS^[[https://rxjs.dev](https://rxjs.dev)]. Angular by Google is one of the more popular adopters of this library and uses RxJS to model asynchronous operations like fetching data in web frontend applications.
+Since then, RP has gained more traction across various fields of software engineering. With a shared vision on how to surface RP abstractions at the API level, *ReactiveX*^[[http://reactivex.io/](http://reactivex.io/)] consolidated numerous projects under one open-source organization. Together, its members provide RP extensions for many of today's mainstream programming languages like Java, C#, and Swift. For the development of JavaScript-based applications, software engineers can rely on RxJS^[[https://rxjs.dev](https://rxjs.dev)]. Angular by Google is one of the more popular adopters of this library and uses RxJS to model asynchronous operations like fetching data in web frontend applications.
 
 Two years after Salvaneschi et al. proposed RP Debugging, Banken et al. [@Banken_Meijer_Gousios_2018] showed that debugging RxJS-based RP programs is quite similar to REScala-based ones. They were able to categorize the debugging motivations of their study participants into four main, overarching themes. These directly correlate with the debugging issues identified by Salvaneschi et al. earlier, as we show in Table [1](#tbl:salvaneschi-vs-banken).
 
@@ -116,7 +116,7 @@ We translated these findings into the central principle for the design of our RP
 
 ## Operator Log Points
 
-Operator log points combine the concept of log points as known from control-flow-oriented debuggers with live *probes*, formerly proposed by McDirmid [@McDirmid_2013]^[As a matter of fact, operator log points were originally called *operator probes*, but got renamed after initial confusion with our test users.]. They display life cycle events produced by an RxJS operator directly within the source code editor.
+Operator log points combine the concept of log points as known from control-flow-oriented debuggers with live *probes*, formerly proposed by McDirmid [@McDirmid_2013]^[As a matter of fact, operator log points were originally called *operator probes*, but got renamed after initial confusion with our test users.] for RP programs. They display life cycle events produced by an RxJS operator directly within the source code editor.
 
 Possible operator log points are suggested ready-to-hand through an icon annotation within the code editor, next to the respective operator. While the software engineer instruments the source code to prove their debugging hypothesis, they can enable a log point by hovering the mouse pointer over its associated annotation and selecting the *Add Operator Log Point* action (see Figure [2](#fig:operator-log-points)). When ready to test their hypothesis, the engineer starts the RxJS program using the built-in JavaScript debugger; no extra effort is required. Once the program is running, each enabled operator log point displays the life cycle events together with the source code that produced them. Engineers are free to enable or disable additional log points during the debugging session; the life cycle event display will adapt accordingly.
 
@@ -143,7 +143,9 @@ JavaScript virtual machines (VM) like V8 (used in Google Chrome or Node.js) or S
 
 # Usability Inspection and Validation {#sec:ux}
 
-We followed a User-Centered Design (UCD) [@Goodwin_2009] approach in three iterations to conceptualize and implement our debugging utility. After sketching a rough proof of concept (PoC) in the first step, we performed a cognitive walkthrough [@Wharton_Rieman_Clayton_Polson_1994] to validate our idea of replacing manual print statements with operator log points. The resulting data helped us to build a prototype of the extension. Next, we used this prototype to conduct a moderated remote usability test with three subjects. This allowed us to uncover pitfalls in the UX concept and find misconceptions early in the development process. Finally, we used the results of these sessions for further refinement. We completed the first minor version of the RxJS RP debugger, which we released to the Visual Studio Marketplace in May 2021^[**WARNING: This link might reveal the author(s) identity/identities** [https://marketplace.visualstudio.com/ANONYMOUS](https://marketplace.visualstudio.com/items?itemName=manuelalabor.rxjs-debugging-for-vs-code)].
+We followed a User-Centered Design (UCD) [@Goodwin_2009] approach in three iterations to conceptualize and implement our debugging utility. The relevant methods we applied helped us to keep our efforts aligned with our main goal: To establish a debugging utility that is ready to hand and does not requiry any  extra learning or setup procedures. 
+
+After sketching a rough proof of concept (PoC) in the first step, we performed a cognitive walkthrough [@Wharton_Rieman_Clayton_Polson_1994] to validate our idea of replacing manual print statements with operator log points. The resulting data helped us to build a prototype of the extension. Next, we used this prototype to conduct a moderated remote usability test with three subjects. This allowed us to uncover pitfalls in the UX concept and find misconceptions early in the development process. Finally, we used the results of these sessions for further refinement. We completed the first minor version of the RxJS RP debugger, which we released to the Visual Studio Marketplace in May 2021^[**WARNING: This link might reveal the author(s) identity/identities** [https://marketplace.visualstudio.com/ANONYMOUS](https://marketplace.visualstudio.com/items?itemName=manuelalabor.rxjs-debugging-for-vs-code)].
 
 We used the test cases created by Alabor et al. [@Alabor_Stolze_2020] for both the cognitive walkthrough and the remote usability test.
 
@@ -189,9 +191,16 @@ One participant could not get the prototype extension up and running on their sy
 content/tables/issues-usability-test.tex
 ```
 
-## Application of Results
+## Utilization
+
+### Application of Results
 
 We applied the results from the cognitive walkthrough and the usability tests to refine and complete the RxJS RP debugger presented in Section [4](#sec:implementation). For example, both the PoC and the prototype had an extra view for displaying the output of a log point, visually disconnecting them from each other. We classified this circumstance as prone to confuse the user during the walkthrough but did not change the prototype yet. The usability tests with real subjects confirmed our suspicion, however. Because of this, we changed the UI for the final, current version and introduced the inline display for log point output directly in the code editor. Another example of an improvement is how the debugger suggests operator log points: The subjects were unaware that suggested log points were available via the code action menu, even though this is an established UX pattern in vscode. Therefore, we removed the suggestions from this menu and introduced the diamond-shaped indicator icon, which is always visible.
+
+### Concept Verification
+
+The applied inspection and verification methods, in combination with the practical implementation of the debugger, deliver the existence proof for the feasibility of a ready-to-hand RP debugging utility. Even though the usability test revealed four major usability issues, we successfully verified that operator log points resolve the problems previously identified by Alabor et al. [@Alabor_Stolze_2020].
+
 
 # Threats to Validity {#sec:threats_to_validity}
 
@@ -233,6 +242,4 @@ Contrary to regular control-flow-oriented debuggers, omniscient [@Pothier_Tanter
 
 # Conclusion {#sec:conclusion}
 
-In this paper, we presented a novel RP debugger for RxJS that fully integrates with vscode. With *RxJS Debugging for vscode*, we proof the feasibility of a ready-to-hand RP debugging utility by its existence. We developed the debugger using a UCD process facilitating UX inspection and validation methods, thereby ensured that operator log points do replace manual print statements in software engineers' daily workflow. While doing so, we discovered and resolved four critical usability issues through a usability test with two participants. Furthermore, the debugger's system architecture reuses the CDP connection of vscode's JavaScript debugger to reduce overall system complexity.
-
-We presented an outlook for further research and proposed a field test on how software engineers integrate the proposed RxJS debugger into their daily routine. Finally, we highlighted three useful feature extensions to *RxJS Debugging for vscode*.
+In this paper, we presented a novel RP debugger for RxJS that fully integrates with vscode. With *RxJS Debugging for vscode*, we demonstrated how operator log points replace manual print statements as a debugging utility for RP programs. We developed the debugger using a UCD process facilitating UX inspection and validation methods, which allowed us to identify and resolve four major usability issues. In addition, we successfully verified that the proposed utility fulfills the requirement of readiness-to-hand, i.e., that it integrates seamlessly with software engineers' daily workflows and does not require additional learning or setup effort.
