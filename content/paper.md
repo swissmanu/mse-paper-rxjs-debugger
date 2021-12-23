@@ -145,7 +145,7 @@ JavaScript virtual machines (VM) like V8 (used in Google Chrome or Node.js) or S
 
 We followed a User-Centered Design (UCD) [@Goodwin_2009] approach in three iterations to conceptualize and implement our debugging utility. The relevant methods we applied helped us to keep our efforts aligned with our main goal: To establish a debugging utility that is ready to hand and does not requiry any  extra learning or setup procedures. 
 
-After sketching a rough proof of concept (PoC) in the first step, we performed a cognitive walkthrough [@Wharton_Rieman_Clayton_Polson_1994] to validate our idea of replacing manual print statements with operator log points. The resulting data helped us to build a prototype of the extension. Next, we used this prototype to conduct a moderated remote usability test with three subjects. This allowed us to uncover pitfalls in the UX concept and find misconceptions early in the development process. Finally, we used the results of these sessions for further refinement. We completed the first minor version of the RxJS RP debugger, which we released to the Visual Studio Marketplace in May 2021^[**WARNING: This link might reveal the author(s) identity/identities** [https://marketplace.visualstudio.com/ANONYMOUS](https://marketplace.visualstudio.com/items?itemName=manuelalabor.rxjs-debugging-for-vs-code)].
+After sketching a rough proof of concept (PoC) in the first step, we performed a cognitive walkthrough [@Wharton_Rieman_Clayton_Polson_1994] to validate our idea of replacing manual print statements with operator log points. The resulting data helped us to build a prototype of the extension. Next, we used this prototype to conduct a moderated remote usability test with three subjects. This allowed us to uncover pitfalls in the UX concept and find misconceptions early in the development process. Finally, we used the results of these sessions for further refinement. We completed the first minor version of the RxJS RP debugger, which we released to the Visual Studio Marketplace in May 2021^[An anonymized copy of the extensions Marketplace page is available in the supplementary material.].
 
 We used the test cases created by Alabor et al. [@Alabor_Stolze_2020] for both the cognitive walkthrough and the remote usability test.
 
@@ -159,7 +159,7 @@ Looking for an informal, expert-driven usability inspection method [@Nielsen_199
 content/tables/steps-cognitive-walkthrough.tex
 ```
 
-The cognitive walkthrough revealed six usability issues, as summarized in Table [3](#tbl:cognitive-walkthrough-issues). The full inspection report, including the complete user profile, is available on Github^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-paper-rxjs-debugger/releases)].
+The cognitive walkthrough revealed six usability issues, as summarized in Table [3](#tbl:cognitive-walkthrough-issues). The full inspection report, including the complete user profile, is available on Github^[The report is available in the supplementary material.].
 
 ```{.include}
 content/tables/issues-cognitive-walkthrough.tex
@@ -179,13 +179,13 @@ Participants, recruited via Twitter, were required to have worked with RxJS duri
 
 ### Study Execution
 
-At the start of a test session, we provided each participant with a ZIP file^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-pa2-usability-test)] containing the *Problem 2* web application by Alabor et al. [@Alabor_Stolze_2020] and the packaged version of the debugger extension prototype^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-pa2-spike-vscode)]. While the subject prepared their development environment, we started the video, screen, and audio recording with their consent. Also, we gave a scripted introduction to the code base they just received.
+At the start of a test session, we provided each participant with a ZIP file^[*This link might reveal the author(s) identity/identities [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-pa2-usability-test)*] containing the *Problem 2* web application by Alabor et al. [@Alabor_Stolze_2020] and the packaged version of the debugger extension prototype^[*This link might reveal the author(s) identity/identities [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-pa2-spike-vscode)*]. While the subject prepared their development environment, we started the video, screen, and audio recording with their consent. Also, we gave a scripted introduction to the code base they just received.
 
 The participants had 25 minutes to resolve as many bugs as possible using the debugger prototype. Rather than tracking each subject's success rate of fixed defects, we emphasized detecting usability issues in their workflow instead.
 
 ### Study Evaluation
 
-One participant could not get the prototype extension up and running on their system, which means we had only two valid data sets for further evaluation after study execution. We categorized the observed usability issues by debugging process phase (i.e., gather context, instrument hypothesis, and test hypothesis) and task (e.g., "Setup Environment", "Manage Log Points", or "Interpret Log"). From a total of 10 issues, we observed four being a problem for both remaining study subjects. Thus we prioritized them as "major". The full usability issue report is available on Github^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-paper-rxjs-debugger/releases)]. Table [4](#tbl:issues-usability-test) presents the four major issues.
+One participant could not get the prototype extension up and running on their system, which means we had only two valid data sets for further evaluation after study execution. We categorized the observed usability issues by debugging process phase (i.e., gather context, instrument hypothesis, and test hypothesis) and task (e.g., "Setup Environment", "Manage Log Points", or "Interpret Log"). From a total of 10 issues, we observed four being a problem for both remaining study subjects. Thus we prioritized them as "major". The full usability issue report is available on Github^[The report is available in the supplementary material.]. Table [4](#tbl:issues-usability-test) presents the four major issues.
 
 ```{.include}
 content/tables/issues-usability-test.tex
@@ -224,19 +224,19 @@ There are several ways how future work can contribute to the efforts presented i
 
 ## Field Test
 
-Version 0.1.2 of *RxJS Debugging for vscode* can debug RxJS programs running in the Node.js JavaScript VM. The major release 1.0.0^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/rxjs-debugging-for-vscode/milestone/2)] generalizes this solution further and brings operator log points to RxJS applications running in web browsers. Thus, we expect installations of the debugger to increase further since more software engineers can benefit from its features.
+Version 0.1.2 of *RxJS Debugging for vscode* can debug RxJS programs running in the Node.js JavaScript VM. The major release 1.0.0 generalizes this solution further and brings operator log points to RxJS applications running in web browsers. Thus, we expect installations of the debugger to increase further since more software engineers can benefit from its features.
 
 We see the opportunity for a comprehensive field test on how engineers use the novel RP debugger once its next iteration is available. Usage statistics provided through the planned analytics reporting module will prove helpful in these regards.
 
-## Visualizer Component^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/rxjs-debugging-for-vscode/issues/50)]
+## Visualizer Component
 
 Banken et al. [@Banken_Meijer_Gousios_2018] proposed visualization techniques for RxJS data-flow graphs in *RxFiddle*. The debugging utility we presented in this paper benefits from the integration of such a visualizer. The graphical representation of an observable graph helps novice engineers to understand RxJS concepts better, and experienced engineers get a new angle on the composition of multiple observables when debugging.
 
-## Record and Replay^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/rxjs-debugging-for-vscode/issues/51)]
+## Record and Replay
 
 A software engineer can record the behavior of a RP program and replay that data independently as many times as they wish later [@OCallahan_Jones_Froyd_Huey_Noll_Partush_2017]. Such a function would allow two things: During debugging, the engineer can rerun a recorded failure scenario without depending on external systems like remote APIs. Further, recorded data might be used for regression testing to verify that a modified program still works as expected [@Perez_Nilsson_2017].
 
-## Time Travel Debugging^[**WARNING: This link might reveal the author(s) identity/identities** [https://github.com/ANONYMOUS](https://github.com/swissmanu/rxjs-debugging-for-vscode/issues/62)]
+## Time Travel Debugging
 
 Contrary to regular control-flow-oriented debuggers, omniscient [@Pothier_Tanter_2009], or *time travel* debuggers cannot only step forward but also backward in time. This is because they rely on recorded data rather than a currently running program. Once there is a way to record, store and replay debugging data as suggested before, time travel debugging is a possible next step. Software engineers can then manually navigate through recorded data and observe how individual system parts react to the stimuli.
 
