@@ -17,29 +17,34 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Extract Version from Tag
+        if: ${{ github.ref != 'refs/heads/main' }}
+        run: echo "VERSION=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+      - name: Extract Version from Commit
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: echo "VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
       - name: Build PDFs
         uses: docker://ghcr.io/swissmanu/pandoc:latest
         with:
           args: make
 
+      - name: Add Version to PDF filename
+        run: |
+          sudo mv out/paper.pdf out/paper-${{ env.VERSION }}.pdf
+          sudo mv out/supplementary-material.pdf out/supplementary-material-${{ env.VERSION }}.pdf
+
       # This step runs only on the main branch:
-      - uses: actions/upload-artifact@v2
+      - name: Upload Snapshot PDFs
+        uses: actions/upload-artifact@v2
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           name: snapshot
           path: out/*.pdf
+          retention-days: 10
 
       # Following Steps run only on version tags:
-      # - name: Extract Version from Tag
-      #   id: get_version
-      #   if: ${{ github.ref != 'refs/heads/main' }}
-      #   run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-      # - name: Add Version to PDF filename
-      #   if: ${{ github.ref != 'refs/heads/main' }}
-      #   run: |
-      #     mv out/paper.pdf out/paper-${{ steps.get_version.outputs.VERSION }}.pdf
-      #     mv out/reports.pdf out/reports-${{ steps.get_version.outputs.VERSION }}.pdf
-      - name: Release
+      - name: Add PDFs to GitHub Release
         if: ${{ github.ref != 'refs/heads/main' }}
         uses: softprops/action-gh-release@v1
         with:
