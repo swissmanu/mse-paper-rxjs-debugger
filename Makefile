@@ -2,10 +2,10 @@
 paper_source = content/paper.md
 paper_filename = paper
 
-reports_source = content/reports.md
-reports_filename = reports
+reports_source = content/supplementary-material.md
+reports_filename = supplementary-material
 
-.PHONY: default clean build build_paper_pdf build_paper_html
+.PHONY: default clean build build_paper_pdf build_paper_html build_reports_supplementarymaterial
 
 default: clean build
 
@@ -14,7 +14,7 @@ clean:
 	@rm -rf ./out
 	@mkdir ./out
 
-build: build_paper_pdf build_reports_pdf
+build: build_paper_pdf build_reports_supplementarymaterial
 
 build_paper_pdf:
 	@echo "Build out/${paper_filename}.pdf"
@@ -41,11 +41,11 @@ build_paper_html:
 		--output=out/${paper_filename}.html \
 		${paper_source}
 
-build_reports_pdf:
+build_reports_supplementarymaterial:
 	@echo "Build out/${reports_filename}.pdf"
 	@pandoc \
     --lua-filter=lib/lua-filters/include-files/include-files.lua \
-    --metadata-file=./metadata_reports.yml \
+    --metadata-file=./metadata_supplementary-material.yml \
     --toc \
     -f markdown+raw_tex \
     --citeproc \

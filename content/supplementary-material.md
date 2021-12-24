@@ -1,15 +1,10 @@
 \pagebreak
+
 # Introduction
 
-This report complements the research paper "Debugging Support
-for Reactive Programming: User-Centered Development of a Debugger for
-RxJS". The report compiles all usability validation results
-collected during the development of the presented RxJS debugging
-extension.
-
-The main research paper is available on Github:
-
-**WARNING: This link might reveal the author(s) identity/identities:** [https://github.com/ANONYMOUS](https://github.com/swissmanu/mse-paper-rxjs-debugger).
+This document complements the research paper "Debugging Support
+for Reactive Programming: Feasibility of a Ready-to-hand Debugger for RxJS"
+during the double-blind review process.
 
 \pagebreak
 
@@ -310,3 +305,10 @@ These are all usability issues identified during the usability test sessions.
 \elandscape
 
 \pagebreak
+
+# Marketplace Presence
+
+The next page shows an excerpt of the Visual Studio Marketplace presence of the "RxJS Debugging for Visual Studio Code"
+extension as of 2021-12-23.
+
+\includepdf[pages=-]{content/pdfs/marketplace.pdf}
