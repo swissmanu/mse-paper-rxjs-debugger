@@ -6,7 +6,7 @@ When software engineers look at the source code of an existing application, they
 content/figures/debugging-process.tex
 ```
 
-The most basic debugging technique for instrumentation and testing is manually adding print statements to the source code: They generate execution logs when placed across the program's code and allow to reconstruct its runtime behavior. However, the number of generated log entries increases, the required amount of work to analyze the logs gets out of hand quickly. This is why specialized debugging utilities provide tools to interact with a program at runtime: After interrupting program execution with a breakpoint, they allow engineers to inspect stack frames, inspect and modify variables, step through successive source code statements, or resume program execution eventually. Furthermore, log points are a specialization of breakpoints; Rather than interrupting the program, they print the value of a specified variable. These utilities work best with imperative or control-flow-oriented programming languages since they interact with statements and stack frames of the debugged program.
+The most basic debugging technique for instrumentation and testing is manually adding print statements to the source code: They generate execution logs when placed across the program's code and allow to reconstruct its runtime behavior. However, the number of generated log entries increases, the required amount of work to analyze the logs gets out of hand quickly. This is why specialized debugging utilities provide tools to interact with a program at runtime: After interrupting program execution with a breakpoint, they allow engineers to inspect stack frames, inspect and modify variables, step through successive source code statements, or resume program execution eventually. These utilities work best with imperative or control-flow-oriented programming languages since they interact with statements and stack frames of the debugged program.
 
 Modern IDEs enable software engineers to debug programs, no matter what programming language they are implemented with, using one generalized user interface (UI). The result is a unified user experience (UX) where debugging support is only a click away.
 
@@ -16,13 +16,13 @@ Alabor et al. [@Alabor_Stolze_2020] examined the RP debugging habits of software
 
 \vspace{3mm}
 
-Within this paper, we are going to present two contributions to the field of RxJS RP debugging:
+Within this paper, we are going to present two contributions to the field of RP debugging:
 
 \vspace{1mm}
 
-1. *Operator log points* are a novel utility for debugging RxJS programs. They make manual print statements obsolete by providing specialized log points for RxJS applications.\vspace{1mm}
+1. *Operator log points* are a novel utility for debugging RP programs. They make manual print statements obsolete by providing specialized log points for RP applications.\vspace{1mm}
 
-2. Using *RxJS Debugging for Visual Studio Code*, an extension for Microsoft Visual Studio Code^[[https://code.visualstudio.com](https://code.visualstudio.com)] (vscode), we provide a proof by existence for the feasibility of a ready-to-hand RxJS debugging utility. Software engineers can debug RxJS programs without learning new UX patterns or additional setup effort.
+2. By implementing operator log points in *RxJS Debugging for Visual Studio Code*, an extension for Microsoft Visual Studio Code^[[https://code.visualstudio.com](https://code.visualstudio.com)] (vscode), we provide a proof by existence for the feasibility of a ready-to-hand RP debugging utility. Software engineers can debug RxJS programs without learning new UX patterns or additional setup effort.
 
 \vspace{3mm}
 
@@ -30,7 +30,7 @@ Before we do a deep-dive on the functionality of operator log points in Section 
 
 # RP Debugging: The Hard Way {#sec:challenge}
 
-A primary characteristic of RP is the paradigm shift away from imperatively formulated, control-flow-oriented code (see Listing [1](#lst:imperative)) over to declarative, data-flow-focused source code [@Salvaneschi_Mezini_2016]. Instead of instructing the computer how to do what, i.e., one step after another, we use RP abstractions to describe the transformation of a continuous flow of data.
+A primary characteristic of RP is the paradigm shift away from imperatively formulated, control-flow-oriented code (see Listing [1](#lst:imperative)) to declarative, data-flow-focused source code [@Salvaneschi_Mezini_2016]. Instead of instructing the computer how to do what, i.e., one step after another, we use RP abstractions to describe the transformation of a continuous flow of data.
 
 ```{
   caption="Basic example of imperative-style/control-flow-oriented programming in JavaScript: Multiply integers between 0 and 4 for every value that is smaller than 4 and call reportValue with the result."
@@ -107,7 +107,7 @@ Both Salvaneschi et al. and Banken et al. suggested technical architectures for 
 
 Another two years after Banken et al. published their work, Alabor et al. [@Alabor_Stolze_2020] examined the state of RxJS RP debugging. Software engineers still struggled to use appropriate tools to debug RxJS programs according to the interviews they conducted. The authors performed an observational study and found instances of engineers who knew about RP-specific debugging tools but abstained from using them during the experiment. They credited this circumstance to the fact that the IDEs of their subjects did not provide suitable RP debugging utilities ready-to-hand.
 
-Alabor et al. conclude that knowing the correct RP debugging utility (e.g., *RxFiddle*) is not enough. The barrier to using such utilities must be minimized. I.e., RP debugging utilities must be fully integrated into the IDE to live up to their full potential, so using them is ideally only an engineer's keypress away and adheres to accustomed, known UX patterns further.
+Alabor et al. conclude that knowing the correct RP debugging utility (e.g., *RxFiddle*) is not enough. The barrier to using such utilities must be minimized. I.e., RP debugging utilities must be fully integrated into the IDE to live up to their full potential, so using them is ideally only an engineer's keypress away and adheres to accustomed, known UX patterns.
 
 
 # An RxJS Debugger Ready-to-Hand {#sec:implementation}
@@ -153,7 +153,7 @@ We used the test cases created by Alabor et al. [@Alabor_Stolze_2020] for both t
 
 We concluded the first iteration of our development process with a PoC demonstrating the basic concept of operator log points.
 
-Looking for an informal, expert-driven usability inspection method [@Nielsen_1994], we found the cognitive walkthrough [@Wharton_Rieman_Clayton_Polson_1994] to be the perfect fit in this early stage of development. We prepared the profile of a typical user for the RP debugger as input to the inspection. Based on this profile and the debugging process by Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013], we created the action sequence available in Table [2](#tbl:cognitive-walkthrough). We performed the walkthrough using the *Problem 1* web application by Alabor et al. [@Alabor_Stolze_2020].
+Looking for an informal, expert-driven usability inspection method [@Nielsen_1994], we found the cognitive walkthrough [@Wharton_Rieman_Clayton_Polson_1994] to be a good fit in this early stage of development. We prepared the profile of a typical user for the RP debugger as input to the inspection. Based on this profile and the debugging process by Layman et al. [@Layman_Diep_Nagappan_Singer_Deline_Venolia_2013], we created the action sequence available in Table [2](#tbl:cognitive-walkthrough). We performed the walkthrough using the *Problem 1* web application by Alabor et al. [@Alabor_Stolze_2020].
 
 ```{.include}
 content/tables/steps-cognitive-walkthrough.tex
@@ -242,4 +242,4 @@ Contrary to regular control-flow-oriented debuggers, omniscient [@Pothier_Tanter
 
 # Conclusion {#sec:conclusion}
 
-In this paper, we presented a novel RP debugger for RxJS that fully integrates with vscode. With *RxJS Debugging for vscode*, we demonstrated how operator log points replace manual print statements as a debugging utility for RP programs. We developed the debugger using a UCD process facilitating UX inspection and validation methods, which allowed us to identify and resolve four major usability issues. In addition, we successfully verified that the proposed utility fulfills the requirement of readiness-to-hand, i.e., that it integrates seamlessly with software engineers' daily workflows and does not require additional learning or setup effort.
+We presented *operator log points* as a novel debugging utility for programs implemented using reactive programming in this paper. With *RxJS Debugging for vscode*, we demonstrated how operator log points replace manual print statements for RxJS-based programs. We developed the debugger using a user-centered design process facilitating usability inspection and validation methods, which allowed us to identify and resolve four major usability issues. In addition, we successfully verified that the proposed utility fulfills the requirement of readiness-to-hand, i.e., that it integrates seamlessly with software engineers' daily workflows and does not require additional learning or setup effort.
