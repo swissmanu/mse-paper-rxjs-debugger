@@ -112,7 +112,7 @@ Alabor et al. conclude that knowing the correct RP debugging utility (e.g., *RxF
 
 # An RxJS Debugger Ready-to-Hand {#sec:implementation}
 
-We translated these findings into the central principle for the design of our RP debugger for RxJS: *Ready-to-hand*. Software engineers should always have the proper debugging tool available, no matter what program they are currently working on. Further, this tool should integrate with the engineer's workflow seamlessly.
+We translated these findings into the central principle for the design of our RP debugger for RxJS: *Ready-to-hand*. Software engineers should always have the proper debugging tool available, no matter what programming paradigm they are currently working with. Further, this tool should integrate with the engineer's workflow seamlessly.
 
 ## Operator Log Points
 
