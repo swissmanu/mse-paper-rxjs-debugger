@@ -23,10 +23,10 @@ documentclass: acmart
 
 # acmart Configuration
 classoption:
-  # - nonacm # Hide ACM publication specifics
+  - nonacm # Hide ACM publication specifics
   - sigconf
-  - review
-  - anonymous
+  # - review
+  # - anonymous
   # - authordraft # Watermark
 
 author:
@@ -45,8 +45,8 @@ author:
 copyright: acmlicensed
 #acmPrice: "15.00"
 # acmDOI: 10.1145/3427763.3428313
-acmYear: "2022"
-copyrightyear: "2022"
+acmYear: '2022'
+copyrightyear: '2022'
 # acmSubmissionID: splashws20reblsmain-p3-p
 # acmISBN: 978-1-4503-8188-8/20/11
 acmConference:

@@ -3,8 +3,7 @@
 # Introduction
 
 This document complements the research paper "Debugging Support
-for Reactive Programming: Feasibility of a Ready-to-hand Debugger for RxJS"
-during the double-blind review process.
+for Reactive Programming: Feasibility of a Ready-to-hand Debugger for RxJS".
 
 \pagebreak
 
@@ -16,13 +15,13 @@ The cognitive walkthrough report formally follows the guide by Wharton et al. [@
 
 ### Profile
 
--   Age: 29 years
+- Age: 29 years
 
--   Gender: Male
+- Gender: Male
 
--   Education: BSc in Computer Science
+- Education: BSc in Computer Science
 
--   Occupation: Frontend Software Engineer at ReactiBank
+- Occupation: Frontend Software Engineer at ReactiBank
 
 Frank started to work for ReactiBank 2 years ago as a frontend software
 engineer. As part of a small, interdisciplinary team of 7 people, Frank'
@@ -45,18 +44,18 @@ who have experience in RxJS for a longer time.
 
 ### Goals
 
--   Make complex business domains simple and easy to use for everyone
+- Make complex business domains simple and easy to use for everyone
 
--   Build beautiful, responsive and easy-to-use user interfaces
+- Build beautiful, responsive and easy-to-use user interfaces
 
--   Be a fully productive member of the team
+- Be a fully productive member of the team
 
--   Understand RxJS in complex setups better and deepen knowledge on it
+- Understand RxJS in complex setups better and deepen knowledge on it
 
 ### Frustrations
 
--   Known debugging utilities seem unfit to provide answers regarding RP
-    code
+- Known debugging utilities seem unfit to provide answers regarding RP
+  code
 
 ## Setup
 
@@ -90,20 +89,19 @@ source code of "Problem 1" [@Alabor_Stolze_2020] is present.
 Further, an internet browser (e.g. Mozilla Firefox or Google Chrome) is
 present.
 
-
 ## Walkthrough
 
 ### Open File
 
 Open `index.ts` in Visual Studio Code.
 
--   Visual Studio Code: Shows contents of `index.ts` file.
+- Visual Studio Code: Shows contents of `index.ts` file.
 
--   Success story:
+- Success story:
 
-    -   We can expect the user to open `index.ts` since he already
-        suspects a problem within this file as stated in the original
-        task.
+  - We can expect the user to open `index.ts` since he already
+    suspects a problem within this file as stated in the original
+    task.
 
 ![Visual Studio Code after opening the `index.ts`
 file.](./content/figures/walkthrough-screenshots/step1.png){#fig:walkthrough-screesnhot-step-1
@@ -113,13 +111,13 @@ width="\\columnwidth"}
 
 Move cursor the `flatMap` operator on Line 18.
 
--   Visual Studio Code: Shows code actions icon in front of Line 18.
+- Visual Studio Code: Shows code actions icon in front of Line 18.
 
--   Success story:
+- Success story:
 
-    -   The original task clearly describes the hypothesis regarding
-        this line/piece of source code. Hence, navigating here seems the
-        natural course of action for the user.
+  - The original task clearly describes the hypothesis regarding
+    this line/piece of source code. Hence, navigating here seems the
+    natural course of action for the user.
 
 ![Visual Studio Code after navigating cursor to the `flatMap` operator
 on
@@ -130,16 +128,16 @@ width="\\columnwidth"}
 
 Open the code actions menu by clicking the yellow light bulb icon.
 
--   Visual Studio Code: Shows available code actions.
+- Visual Studio Code: Shows available code actions.
 
--   Failure story:
+- Failure story:
 
-    -   Will the user know that the correct action is available?
+  - Will the user know that the correct action is available?
 
-        -   The user might know code actions for providing options to
-            refactor a piece of code or quick fixes for code linting
-            problems. It is questionable if he will expect functionality
-            to inspect parts of a data flow graph here.
+    - The user might know code actions for providing options to
+      refactor a piece of code or quick fixes for code linting
+      problems. It is questionable if he will expect functionality
+      to inspect parts of a data flow graph here.
 
 ![Visual Studio Code indicating available code actions on Line 18 using
 a yellow light bulb
@@ -150,40 +148,40 @@ width="\\columnwidth"}
 
 Select "Probe Observable\..." code action from the related menu.
 
--   Visual Studio Code: Adds `flatMap` operator on Line 18 to
-    "Observables" list in debugging view.
+- Visual Studio Code: Adds `flatMap` operator on Line 18 to
+  "Observables" list in debugging view.
 
--   Failure story:
+- Failure story:
 
-    -   If the correct action is taken, will the user see that things
-        are going ok?
+  - If the correct action is taken, will the user see that things
+    are going ok?
 
-        -   The "Observables" list is part of the debugging view of
-            Visual Studio Code. The user will not get any feedback that
-            his action "Probe Observable\..." was successful without
-            changing the view manually to debugging and expanding the
-            "Observables" panel in the lower left.
+    - The "Observables" list is part of the debugging view of
+      Visual Studio Code. The user will not get any feedback that
+      his action "Probe Observable\..." was successful without
+      changing the view manually to debugging and expanding the
+      "Observables" panel in the lower left.
 
 ### Open Observable Probe Monitor
 
 Open the "Observable Probe Monitor" view using command palette.
 
--   Visual Studio Code: Shows empty "Observable Probe Monitor" view
+- Visual Studio Code: Shows empty "Observable Probe Monitor" view
 
--   Failure story:
+- Failure story:
 
-    -   Will the user know that the correct action is available?
+  - Will the user know that the correct action is available?
 
-        -   The user might not be aware that the "Observable Probe
-            Monitor" view is hidden within the command palette. Hence,
-            they might feel lost after adding the observable probe in
-            the previous step.
+    - The user might not be aware that the "Observable Probe
+      Monitor" view is hidden within the command palette. Hence,
+      they might feel lost after adding the observable probe in
+      the previous step.
 
-    -   If the correct action is taken, will the user see that things
-        are going ok?
+  - If the correct action is taken, will the user see that things
+    are going ok?
 
-        -   The user might get confused by the "Observable Probe
-            Monitor" being blank by default.
+    - The user might get confused by the "Observable Probe
+      Monitor" being blank by default.
 
 ![Visual Studio Codes command palette menu showing the "Observable Probe
 Monitor"
@@ -199,16 +197,16 @@ width="\\columnwidth"}
 
 Execute "Problem 1" launch configuration
 
--   Visual Studio Code: Opens default browser showing "Problem 1"
+- Visual Studio Code: Opens default browser showing "Problem 1"
 
--   Default Browser: Shows "Problem 1" UI
+- Default Browser: Shows "Problem 1" UI
 
--   Success story:
+- Success story:
 
-    -   The users previous experience with Visual Studio Code launch
-        configuration allows assuming this the natural course of action
-        in order to prepare himself for further inspection of the
-        application.
+  - The users previous experience with Visual Studio Code launch
+    configuration allows assuming this the natural course of action
+    in order to prepare himself for further inspection of the
+    application.
 
 ![Visual Studio Code showing the debugging view after launching
 "Problem 1".](./content/figures/walkthrough-screenshots/step6.png){#fig:walkthrough-screesnhot-step-6
@@ -218,26 +216,26 @@ width="\\columnwidth"}
 
 Interact with "Problem 1" in the default browser.
 
--   Visual Studio Code: "Observable Probe Monitor" provides live
-    telemetry information about values and life cycle events produced by
-    the `flatMap` operator.
+- Visual Studio Code: "Observable Probe Monitor" provides live
+  telemetry information about values and life cycle events produced by
+  the `flatMap` operator.
 
--   Failure story:
+- Failure story:
 
-    -   Will the user know that the correct action will achieve the
-        desired effect?
+  - Will the user know that the correct action will achieve the
+    desired effect?
 
-        -   The user might not be aware that he is expected to interact
-            with "Problem 1" in the default browser in order to get live
-            feedback in the "Observable Probe Monitor".
+    - The user might not be aware that he is expected to interact
+      with "Problem 1" in the default browser in order to get live
+      feedback in the "Observable Probe Monitor".
 
-    -   If the correct action is taken, will the user see that things
-        are going ok?
+  - If the correct action is taken, will the user see that things
+    are going ok?
 
-        -   The default browser might overlay Visual Studio Code and the
-            "Observable Probe Monitor" view. This is why the user might
-            miss the live trace of values and life cycle events
-            displayed in the "Observable Probe Monitor".
+    - The default browser might overlay Visual Studio Code and the
+      "Observable Probe Monitor" view. This is why the user might
+      miss the live trace of values and life cycle events
+      displayed in the "Observable Probe Monitor".
 
 ![Google Chrome displaying the user interface of "Problem 1" ready to
 receive
@@ -249,20 +247,19 @@ width="\\columnwidth"}
 Interpret the live trace of emitted values and life cycle events in the
 "Observable Probe Monitor" view
 
--   Visual Studio Code: Provides detail information to a traced item
+- Visual Studio Code: Provides detail information to a traced item
 
--   Success story:
+- Success story:
 
-    -   The original task states that the user is interested in more
-        close information regarding the `flatMap` operator. Since the
-        "Observable Probe Monitor" provide such information in
-        real-time, we can expect the user to use this information
-        accordingly.
+  - The original task states that the user is interested in more
+    close information regarding the `flatMap` operator. Since the
+    "Observable Probe Monitor" provide such information in
+    real-time, we can expect the user to use this information
+    accordingly.
 
 ![Visual Studio Code showing live telemetry in the "Observable Probe
 Monitor".](./content/figures/walkthrough-screenshots/step8.png){#fig:walkthrough-screesnhot-step-8
 width="\\columnwidth"}
-
 
 \blandscape
 
@@ -270,14 +267,14 @@ width="\\columnwidth"}
 
 This is a summary of all failure stories identified during the cognitive walkthrough.
 
-| Step                          | Failure Story                                                |
-| ----------------------------- | ------------------------------------------------------------ |
-| Open Code Actions             | The user might know code actions for providing options to refactor a piece of code or quick fixes for code linting problems. It is questionable if he will expect functionality to inspect parts of a data flow graph here. |
+| Step                          | Failure Story                                                                                                                                                                                                                                                                 |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Open Code Actions             | The user might know code actions for providing options to refactor a piece of code or quick fixes for code linting problems. It is questionable if he will expect functionality to inspect parts of a data flow graph here.                                                   |
 | Create Probe for Operator     | The "Observables" list is part of the debugging view of Visual Studio Code. The user will not get any feedback that his action "Probe Observable\..." was successful without changing the view manually to debugging and expanding the "Observables" panel in the lower left. |
-| Open Observable Probe Monitor | The user might not be aware that the "Observable Probe Monitor" view is hidden within the command palette. Hence, they might feel lost after adding the observable probe in the previous step. |
-| Open Observable Probe Monitor | The user might get confused by the "Observable Probe Monitor" being blank by default. |
-| Interact with Application     | The user might not be aware that he is expected to interact with "Problem 1" in the default browser in order to get live feedback in the "Observable Probe Monitor". |
-| Interact with Application     | The default browser might overlay Visual Studio Code and the "Observable Probe Monitor" view. This is why the user might miss the live trace of values and life cycle events displayed in the "Observable Probe Monitor". |
+| Open Observable Probe Monitor | The user might not be aware that the "Observable Probe Monitor" view is hidden within the command palette. Hence, they might feel lost after adding the observable probe in the previous step.                                                                                |
+| Open Observable Probe Monitor | The user might get confused by the "Observable Probe Monitor" being blank by default.                                                                                                                                                                                         |
+| Interact with Application     | The user might not be aware that he is expected to interact with "Problem 1" in the default browser in order to get live feedback in the "Observable Probe Monitor".                                                                                                          |
+| Interact with Application     | The default browser might overlay Visual Studio Code and the "Observable Probe Monitor" view. This is why the user might miss the live trace of values and life cycle events displayed in the "Observable Probe Monitor".                                                     |
 
 \elandscape
 
@@ -289,18 +286,18 @@ This is a summary of all failure stories identified during the cognitive walkthr
 
 These are all usability issues identified during the usability test sessions.
 
-| Participant(s) | Phase                 | Task              | Problem                                                      |
-| -------------- | --------------------- | ----------------- | ------------------------------------------------------------ |
-| P2, P3         | Instrument Hypothesis | Environment Setup | Subject starts the application in debugging mode, even though they have started it before already. |
-| P2, P3         | Instrument Hypothesis | Manage Log Points | Subject unable to find log point list in debugging view. |
-| P2             | Instrument Hypothesis | Manage Log Points | Subject unable to identify already defined log points.   |
-| P2             | Instrument Hypothesis | Interpret Log     | Subject cannot find "Clear" button to clear the log before starting a new debugging iteration. |
-| P3             | Instrument Hypothesis | Manage Log Points | Subject cannot add log point to an observable.           |
-| P3             | Instrument Hypothesis | Manage Log Points | Subject cannot add log point by clicking the editors gutter.<br />*(Regular break points are added here)* |
-| P2, P3         | Test Hypothesis       | Interpret Log     | Subject has difficulties to make a connection from a log point to the generated log entry. |
-| P2, P3         | Test Hypothesis       | Interpret Log     | Subject interprets logged value as the "input" of the instrumented operator. |
-| P2             | Test Hypothesis       | Interpret Log     | Subject is overwhelmed by multiple log entries generated by multiple log points. |
-| P3             | Test Hypothesis       | Interpret Log     | Subject does not see log entries when running the unit test suite. |
+| Participant(s) | Phase                 | Task              | Problem                                                                                                   |
+| -------------- | --------------------- | ----------------- | --------------------------------------------------------------------------------------------------------- |
+| P2, P3         | Instrument Hypothesis | Environment Setup | Subject starts the application in debugging mode, even though they have started it before already.        |
+| P2, P3         | Instrument Hypothesis | Manage Log Points | Subject unable to find log point list in debugging view.                                                  |
+| P2             | Instrument Hypothesis | Manage Log Points | Subject unable to identify already defined log points.                                                    |
+| P2             | Instrument Hypothesis | Interpret Log     | Subject cannot find "Clear" button to clear the log before starting a new debugging iteration.            |
+| P3             | Instrument Hypothesis | Manage Log Points | Subject cannot add log point to an observable.                                                            |
+| P3             | Instrument Hypothesis | Manage Log Points | Subject cannot add log point by clicking the editors gutter.<br />_(Regular break points are added here)_ |
+| P2, P3         | Test Hypothesis       | Interpret Log     | Subject has difficulties to make a connection from a log point to the generated log entry.                |
+| P2, P3         | Test Hypothesis       | Interpret Log     | Subject interprets logged value as the "input" of the instrumented operator.                              |
+| P2             | Test Hypothesis       | Interpret Log     | Subject is overwhelmed by multiple log entries generated by multiple log points.                          |
+| P3             | Test Hypothesis       | Interpret Log     | Subject does not see log entries when running the unit test suite.                                        |
 
 \elandscape
 
